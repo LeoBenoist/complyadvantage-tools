@@ -1,5 +1,6 @@
 .env
 ./venv/
 cache/*/
-results/*.xlsx
 results/*.json
+*.xlsx
+*.csv
