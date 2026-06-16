@@ -39,7 +39,6 @@ CUSTOMER_IS_CREDITOR_TYPES = {"CARD_IN", "IP_IN", "SDD_OUT"}
 
 CARD_COLUMN_MAPPING: dict[str, str] = {
     "Id opération": "transaction.external_identifier",
-    "Date d’opération": "transaction.occurred_at.timestamp", # IMPORTANT should be ’ and not '
     "Message": "transaction.monetary_transaction.reference_text",
     # "Devise locale":                "transaction.monetary_transaction.local_value.currency",
     "Méthode": "transaction.monetary_transaction.payment_channel",
@@ -62,7 +61,7 @@ CARD_COLUMN_MAPPING: dict[str, str] = {
     # "Contexte":                     "transaction.monetary_transaction.payment_channel",
     # Authorization stage
     # "Statut":                       "transaction.monetary_transaction.card_payment.payment_stages_info.authorization.state",
-    "Date d’autorisation": "transaction.monetary_transaction.card_payment.payment_stages_info.authorization.timestamp",
+    # "Date d’autorisation": "transaction.monetary_transaction.card_payment.payment_stages_info.authorization.timestamp",
     # "Cause erreur autorisation":    "transaction.monetary_transaction.card_payment.payment_stages_info.authorization.response.reason_code",
     # "Id autorisation":              "transaction.monetary_transaction.card_payment.payment_stages_info.authorization.identifier",
     # "Montant autorisation":         "transaction.monetary_transaction.card_payment.payment_stages_info.authorization.value.amount",
@@ -88,6 +87,10 @@ CARD_MULTI_TARGET_MAPPING: dict[str, list[str]] = {
     "Nom marchand autorisation": [
         "transaction.monetary_transaction.card_payment.merchant.details.name",
         "transaction.monetary_transaction.card_payment.merchant.details.counterparty.external_identifier"
+    ],
+    "Date d’opération": [# IMPORTANT should be ’ and not '
+        "transaction.occurred_at.timestamp",
+        "transaction.monetary_transaction.card_payment.payment_stages_info.authorization.timestamp",
     ],
 }
 # Note: card holder name (Identité débiteur / Identité créditeur) is mapped conditionally
@@ -228,6 +231,7 @@ CONTEXTE_PAYMENT_CHANNEL: dict[str, str] = {
     "QuasiCash": "OTHER",
     "AtmWithdrawal": "ATM",
     "PreAuthorization": "OTHER",
+    "CashAdvance": "OTHER",
 }
 
 CARD_PREFIX_COLUMNS = [
@@ -390,7 +394,7 @@ CARD_OP_TYPES = {"CARD_OUT", "CARD_IN"}
 
 def detect_source_type(df: pd.DataFrame) -> str:
     """Return 'card' if the data looks like card transactions, else 'bank'."""
-    if "Id carte" in df.columns:
+    if "Id carte" in df.columns and df["Id carte"].notna().any():
         return "card"
     if "Type d’opération" in df.columns:
         op_types = set(df["Type d’opération"].dropna().unique())
@@ -442,6 +446,14 @@ def convert_card(df: pd.DataFrame, prefix: str = "") -> pd.DataFrame:
         if len(invalid):
             raise ValueError(f"Unexpected 'Type d\'opération' value(s): {list(invalid)}")
 
+    # Skip rows where Identité créditeur is empty
+    if "Identité créditeur" in df.columns:
+        before = len(df)
+        df = df[df["Identité créditeur"].notna() & (df["Identité créditeur"].astype(str).str.strip() != "")].copy()
+        dropped = before - len(df)
+        if dropped:
+            print(f"Skipped {dropped} row(s) with empty 'Identité créditeur'.", file=sys.stderr)
+
     all_mapped = set(CARD_COLUMN_MAPPING) | set(CARD_MULTI_TARGET_MAPPING)
     missing = [col for col in all_mapped if col not in df.columns]
     if missing:
@@ -455,6 +467,17 @@ def convert_card(df: pd.DataFrame, prefix: str = "") -> pd.DataFrame:
         if src_col in df.columns:
             for target in targets:
                 result[target] = df[src_col]
+
+    # Merchant name fallback: if "Nom marchand autorisation" is empty, use "Nom marchand compensation"
+    merchant_name_col = "transaction.monetary_transaction.card_payment.merchant.details.name"
+    merchant_cp_col = "transaction.monetary_transaction.card_payment.merchant.details.counterparty.external_identifier"
+    if "Nom marchand compensation" in df.columns:
+        fallback = df["Nom marchand compensation"]
+        for col in (merchant_name_col, merchant_cp_col):
+            if col not in result.columns:
+                result[col] = fallback
+            else:
+                result[col] = result[col].where(result[col].notna() & (result[col] != ""), fallback)
 
     for src_col, tgt_col in CARD_COLUMN_MAPPING.items():
         if src_col in df.columns:
