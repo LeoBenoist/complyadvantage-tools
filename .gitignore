@@ -4,3 +4,4 @@ cache/*/
 results/*.json
 *.xlsx
 *.csv
+__pycache__

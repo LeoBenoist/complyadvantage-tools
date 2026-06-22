@@ -93,8 +93,6 @@ CARD_MULTI_TARGET_MAPPING: dict[str, list[str]] = {
         "transaction.monetary_transaction.card_payment.payment_stages_info.authorization.timestamp",
     ],
 }
-# Note: card holder name (Identité débiteur / Identité créditeur) is mapped conditionally
-# in convert_card based on Type d’opération (CARD_OUT vs CARD_IN).
 
 CARD_OUTPUT_COLUMNS: list[str] = [
     "transaction.classification",
@@ -426,7 +424,8 @@ def _apply_common_post_processing(result: pd.DataFrame, df: pd.DataFrame, prefix
     if prefix:
         for col in prefix_cols:
             if col in result.columns:
-                result[col] = prefix + "-" + result[col].astype(str)
+                mid = "ct-" if col.endswith("counterparty.external_identifier") else ""
+                result[col] = prefix + "-" + mid + result[col].astype(str)
 
     for col in result.columns:
         if col.endswith(".timestamp"):
@@ -585,11 +584,15 @@ def convert_bank(df: pd.DataFrame, prefix: str = "") -> pd.DataFrame:
             df["Type d’opération"].map(TYPE_TO_PAYMENT_CHANNEL)
         )
 
-    # Bank payment state from Statut
+    # Bank payment state from Statut; default to BOOKED when empty
+    state_col = "transaction.monetary_transaction.bank_payment.state"
     if "Statut" in df.columns:
-        result["transaction.monetary_transaction.bank_payment.state"] = (
-            df["Statut"].map(STATUT_TO_STATE)
-        )
+        result[state_col] = df["Statut"].map(STATUT_TO_STATE)
+    if state_col not in result.columns:
+        result[state_col] = "BOOKED"
+    else:
+        empty_state = result[state_col].isna() | (result[state_col].astype(str).str.strip() == "")
+        result.loc[empty_state, state_col] = "BOOKED"
 
     # Customer / counterparty assignment.
     #
@@ -650,7 +653,7 @@ def convert_bank(df: pd.DataFrame, prefix: str = "") -> pd.DataFrame:
 
         # Counterparty = debtor side — use name as ID (prefix applied in post-processing)
         if deb_name_col in df.columns:
-            result.loc[customer_is_creditor, "transaction.monetary_transaction.bank_payment.debtor.counterparty.external_identifier"] = "ct-"+df.loc[customer_is_creditor, deb_name_col]
+            result.loc[customer_is_creditor, "transaction.monetary_transaction.bank_payment.debtor.counterparty.external_identifier"] = df.loc[customer_is_creditor, deb_name_col]
             result.loc[customer_is_creditor, "transaction.monetary_transaction.bank_payment.debtor.name"] = df.loc[customer_is_creditor, deb_name_col]
 
     # --- customer is DEBTOR, counterparty is creditor ---
@@ -665,7 +668,7 @@ def convert_bank(df: pd.DataFrame, prefix: str = "") -> pd.DataFrame:
 
         # Counterparty = creditor side — use name as ID (prefix applied in post-processing)
         if cred_name_col in df.columns:
-            result.loc[customer_is_debtor, "transaction.monetary_transaction.bank_payment.creditor.counterparty.external_identifier"] = "ct-"+df.loc[customer_is_debtor, cred_name_col]
+            result.loc[customer_is_debtor, "transaction.monetary_transaction.bank_payment.creditor.counterparty.external_identifier"] = df.loc[customer_is_debtor, cred_name_col]
             result.loc[customer_is_debtor, "transaction.monetary_transaction.bank_payment.creditor.name"] = df.loc[customer_is_debtor, cred_name_col]
 
     # --- P2P: no real external counterparty ---
@@ -679,18 +682,48 @@ def convert_bank(df: pd.DataFrame, prefix: str = "") -> pd.DataFrame:
         if p2p_cred.any():
             n = int(p2p_cred.sum())
             customer_names = result.loc[p2p_cred, "customer[1].person.full_name"]
-            result.loc[p2p_cred, "transaction.monetary_transaction.bank_payment.debtor.name"] = customer_names.values
-            result.loc[p2p_cred, "transaction.monetary_transaction.bank_payment.debtor.counterparty.external_identifier"] = "ct-"+customer_names.values
+            result["transaction.monetary_transaction.bank_payment.debtor.name"] = result["transaction.monetary_transaction.bank_payment.debtor.name"].astype(object)
+            result["transaction.monetary_transaction.bank_payment.debtor.counterparty.external_identifier"] = result["transaction.monetary_transaction.bank_payment.debtor.counterparty.external_identifier"].astype(object)
+            result.loc[p2p_cred, "transaction.monetary_transaction.bank_payment.debtor.name"] = customer_names.to_numpy(dtype=object)
+            result.loc[p2p_cred, "transaction.monetary_transaction.bank_payment.debtor.counterparty.external_identifier"] = customer_names.to_numpy(dtype=object)
 
 
         p2p_deb = is_p2p & customer_is_debtor
         if p2p_deb.any():
             n = int(p2p_deb.sum())
             customer_names = result.loc[p2p_deb, "customer[1].person.full_name"]
-            result.loc[p2p_deb, "transaction.monetary_transaction.bank_payment.creditor.name"] = customer_names.values
-            result.loc[p2p_deb, "transaction.monetary_transaction.bank_payment.creditor.counterparty.external_identifier"] = "ct-"+customer_names.values
+            result["transaction.monetary_transaction.bank_payment.creditor.name"] = result["transaction.monetary_transaction.bank_payment.creditor.name"].astype(object)
+            result["transaction.monetary_transaction.bank_payment.creditor.counterparty.external_identifier"] = result["transaction.monetary_transaction.bank_payment.creditor.counterparty.external_identifier"].astype(object)
+            result.loc[p2p_deb, "transaction.monetary_transaction.bank_payment.creditor.name"] = customer_names.to_numpy(dtype=object)
+            result.loc[p2p_deb, "transaction.monetary_transaction.bank_payment.creditor.counterparty.external_identifier"] = customer_names.to_numpy(dtype=object)
 
     _apply_common_post_processing(result, df, prefix, BANK_PREFIX_COLUMNS)
+
+    # Remove rows that don't have at least one non-empty counterparty.external_identifier
+    # and at least one non-empty customer.external_identifier
+    counterparty_cols = [c for c in result.columns if "counterparty.external_identifier" in c]
+    customer_cols = [c for c in result.columns if "customer.external_identifier" in c]
+
+    def _any_nonempty(cols):
+        if not cols:
+            return pd.Series(False, index=result.index)
+        filled = pd.concat(
+            [result[c].notna() & (result[c].astype(str).str.strip() != "") for c in cols],
+            axis=1,
+        )
+        return filled.any(axis=1)
+
+    has_counterparty = _any_nonempty(counterparty_cols)
+    has_customer = _any_nonempty(customer_cols)
+
+    remove_mask = ~has_counterparty | ~has_customer
+    removed = int(remove_mask.sum())
+    if removed:
+        print(
+            f"Removed {removed} row(s) missing a counterparty.external_identifier or customer.external_identifier.",
+            file=sys.stderr,
+        )
+        result = result[~remove_mask]
 
     populated = [col for col in BANK_OUTPUT_COLUMNS if col in result.columns and result[col].notna().any()]
     return result[populated]
