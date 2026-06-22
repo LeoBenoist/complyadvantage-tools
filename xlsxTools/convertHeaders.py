@@ -23,10 +23,10 @@ import pandas as pd
 # ---------------------------------------------------------------------------
 
 # Types where the FDJ customer is the DEBTOR (sends money / pays)
-CUSTOMER_IS_DEBTOR_TYPES = {"CARD_OUT", "IP_OUT", "SDD_IN"}
+CUSTOMER_IS_DEBTOR_TYPES = {"CARD_OUT", "IP_OUT", "SDD_IN", "TopUp_OUT"}
 
 # Types where the FDJ customer is the CREDITOR (receives money)
-CUSTOMER_IS_CREDITOR_TYPES = {"CARD_IN", "IP_IN", "SDD_OUT"}
+CUSTOMER_IS_CREDITOR_TYPES = {"CARD_IN", "IP_IN", "SDD_OUT", "TopUp_IN"}
 
 # P2P role is ambiguous — resolved per-row via the Direction column:
 #   Direction = "Credit" → customer is DEBTOR   (RETRAIT: customer sends to PDV)
@@ -63,6 +63,7 @@ CARD_COLUMN_MAPPING: dict[str, str] = {
     # "Statut":                       "transaction.monetary_transaction.card_payment.payment_stages_info.authorization.state",
     # "Date d’autorisation": "transaction.monetary_transaction.card_payment.payment_stages_info.authorization.timestamp",
     # "Cause erreur autorisation":    "transaction.monetary_transaction.card_payment.payment_stages_info.authorization.response.reason_code",
+    "Cause de l’erreur":    "transaction.monetary_transaction.card_payment.payment_stages_info.authorization.response.reason_code",
     # "Id autorisation":              "transaction.monetary_transaction.card_payment.payment_stages_info.authorization.identifier",
     # "Montant autorisation":         "transaction.monetary_transaction.card_payment.payment_stages_info.authorization.value.amount",
     # Settlement stage
@@ -232,6 +233,11 @@ CONTEXTE_PAYMENT_CHANNEL: dict[str, str] = {
     "CashAdvance": "OTHER",
 }
 
+CARD_STATUT_TO_AUTH_STATE: dict[str, str] = {
+    "Completed": "APPROVED",
+    "Rejected": "DECLINED",
+}
+
 CARD_PREFIX_COLUMNS = [
     "transaction.external_identifier",
     "transaction.monetary_transaction.card_payment.card_holder.details.customer.external_identifier",
@@ -387,7 +393,7 @@ BANK_PREFIX_COLUMNS = [
 # Source-type detection
 # ---------------------------------------------------------------------------
 
-CARD_OP_TYPES = {"CARD_OUT", "CARD_IN"}
+CARD_OP_TYPES = {"CARD_OUT", "CARD_IN", "TopUp_IN", "TopUp_OUT"}
 
 
 def detect_source_type(df: pd.DataFrame) -> str:
@@ -482,6 +488,16 @@ def convert_card(df: pd.DataFrame, prefix: str = "") -> pd.DataFrame:
         if src_col in df.columns:
             result[tgt_col] = df[src_col]
 
+    if "Statut" in df.columns:
+        result["transaction.monetary_transaction.card_payment.payment_stages_info.authorization.state"] = (
+            df["Statut"].map(CARD_STATUT_TO_AUTH_STATE)
+        )
+
+    if "Type d’opération" in df.columns:
+        result["transaction.monetary_transaction.card_payment.card_payment_type"] = (
+            df["Type d’opération"].map({"TopUp_IN": "TOP_UP", "TopUp_OUT": "TOP_UP"})
+        )
+
     if "Contexte" in df.columns:
         unknown = [v for v in df["Contexte"].dropna().unique() if v not in CONTEXTE_PAYMENT_CHANNEL]
         if unknown:
@@ -529,11 +545,34 @@ def convert_card(df: pd.DataFrame, prefix: str = "") -> pd.DataFrame:
             lambda v: str(int(v)).zfill(4) if pd.notna(v) else v
         )
 
-    # CARD_IN: customer receives money → amount is negative
-    if is_card_in.any():
-        for col in result.columns:
-            if col.endswith(".amount"):
-                result.loc[is_card_in, col] = -result.loc[is_card_in, col]
+    # Card fingerprint: strip non-alphanumeric chars; fill empty with random value
+    fp_col = "transaction.monetary_transaction.card_payment.card.fingerprint"
+    result[fp_col] = (
+        result[fp_col].fillna("") if fp_col in result.columns else pd.Series("", index=result.index)
+    ).astype(str).str.replace(r"[^a-zA-Z0-9]", "", regex=True)
+    empty_fp = result[fp_col].str.strip() == ""
+    result.loc[empty_fp, fp_col] = [uuid.uuid4().hex for _ in range(int(empty_fp.sum()))]
+
+    # TopUp: redirect merchant fields to issuer fields (post-prefix so counterparty IDs are already prefixed)
+    if "Type d’opération" in df.columns:
+        is_topup = df["Type d’opération"].isin({"TopUp_IN", "TopUp_OUT"})
+        if is_topup.any():
+            m_pre = "transaction.monetary_transaction.card_payment.merchant."
+            i_pre = "transaction.monetary_transaction.card_payment.issuer."
+            for col in list(result.columns):
+                if col.startswith(m_pre):
+                    suffix = col[len(m_pre):]
+                    if suffix.startswith("details."):
+                        result.loc[is_topup, i_pre + suffix] = result.loc[is_topup, col]
+                    result.loc[is_topup, col] = None
+
+    # CARD_IN only: customer receives money → amount is negative
+    if "Type d’opération" in df.columns:
+        only_card_in = df["Type d’opération"] == "CARD_IN"
+        if only_card_in.any():
+            for col in result.columns:
+                if col.endswith(".amount"):
+                    result.loc[only_card_in, col] = -result.loc[only_card_in, col]
 
     populated = [col for col in CARD_OUTPUT_COLUMNS if col in result.columns and result[col].notna().any()]
     return result[populated]
