@@ -502,24 +502,23 @@ def convert_card(df: pd.DataFrame, prefix: str = "") -> pd.DataFrame:
         is_card_out = pd.Series(True, index=df.index)
         is_card_in = pd.Series(False, index=df.index)
 
-    # For each direction: set card holder name AND the three customer identity fields
-    # from the customer's name. The prefix mechanism in post-processing will turn these
-    # into "{prefix}-{customer_name}", giving a deterministic, human-readable customer ID.
     card_holder_name_col = "transaction.monetary_transaction.card_payment.card_holder.details.name"
 
-    def _set_card_customer(mask: pd.Series, name_src_col: str) -> None:
+    def _set_card_customer(mask: pd.Series, name_src_col: str, id_src_col: str) -> None:
         if name_src_col not in df.columns or not mask.any():
             return
         names = df.loc[mask, name_src_col]
         result.loc[mask, card_holder_name_col] = names
         result.loc[mask, "customer[1].person.full_name"] = names
-        result.loc[mask, "customer[1].external_identifier"] = names
-        result.loc[mask, "transaction.customer_external_identifier"] = names
         result.loc[mask, "transaction.monetary_transaction.card_payment.card_holder.details.name"] = names
-        result.loc[mask, "transaction.monetary_transaction.card_payment.card_holder.details.customer.external_identifier"] = names
+        if id_src_col in df.columns:
+            ids = df.loc[mask, id_src_col]
+            result.loc[mask, "customer[1].external_identifier"] = ids
+            result.loc[mask, "transaction.customer_external_identifier"] = ids
+            result.loc[mask, "transaction.monetary_transaction.card_payment.card_holder.details.customer.external_identifier"] = ids
 
-    _set_card_customer(is_card_out, "Identité débiteur")
-    _set_card_customer(is_card_in, "Identité créditeur")
+    _set_card_customer(is_card_out, "Identité débiteur", "Id compte débiteur")
+    _set_card_customer(is_card_in, "Identité créditeur", "Id compte créditeur")
 
     _apply_common_post_processing(result, df, prefix, CARD_PREFIX_COLUMNS)
 
@@ -637,19 +636,21 @@ def convert_bank(df: pd.DataFrame, prefix: str = "") -> pd.DataFrame:
         )
 
     # --- customer is CREDITOR, counterparty is debtor ---
-    # Customer ID is built from the customer's name; the prefix mechanism in post-processing
-    # will produce the final "{prefix}-{customer_name}" identifier.
     cred_name_col = "Identité créditeur"
     deb_name_col = "Identité débiteur"
+    cred_id_col = "Id compte créditeur"
+    deb_id_col = "Id compte débiteur"
 
     if customer_is_creditor.any():
         if cred_name_col in df.columns:
             names = df.loc[customer_is_creditor, cred_name_col]
             result.loc[customer_is_creditor, "customer[1].person.full_name"] = names
-            result.loc[customer_is_creditor, "customer[1].external_identifier"] = names
-            result.loc[customer_is_creditor, "transaction.customer_external_identifier"] = names
-            result.loc[customer_is_creditor, "transaction.monetary_transaction.bank_payment.creditor.customer.external_identifier"] = names
             result.loc[customer_is_creditor, "transaction.monetary_transaction.bank_payment.creditor.name"] = names
+        if cred_id_col in df.columns:
+            ids = df.loc[customer_is_creditor, cred_id_col]
+            result.loc[customer_is_creditor, "customer[1].external_identifier"] = ids
+            result.loc[customer_is_creditor, "transaction.customer_external_identifier"] = ids
+            result.loc[customer_is_creditor, "transaction.monetary_transaction.bank_payment.creditor.customer.external_identifier"] = ids
 
         # Counterparty = debtor side — use name as ID (prefix applied in post-processing)
         if deb_name_col in df.columns:
@@ -661,10 +662,12 @@ def convert_bank(df: pd.DataFrame, prefix: str = "") -> pd.DataFrame:
         if deb_name_col in df.columns:
             names = df.loc[customer_is_debtor, deb_name_col]
             result.loc[customer_is_debtor, "customer[1].person.full_name"] = names
-            result.loc[customer_is_debtor, "customer[1].external_identifier"] = names
-            result.loc[customer_is_debtor, "transaction.customer_external_identifier"] = names
-            result.loc[customer_is_debtor, "transaction.monetary_transaction.bank_payment.debtor.customer.external_identifier"] = names
             result.loc[customer_is_debtor, "transaction.monetary_transaction.bank_payment.debtor.name"] = names
+        if deb_id_col in df.columns:
+            ids = df.loc[customer_is_debtor, deb_id_col]
+            result.loc[customer_is_debtor, "customer[1].external_identifier"] = ids
+            result.loc[customer_is_debtor, "transaction.customer_external_identifier"] = ids
+            result.loc[customer_is_debtor, "transaction.monetary_transaction.bank_payment.debtor.customer.external_identifier"] = ids
 
         # Counterparty = creditor side — use name as ID (prefix applied in post-processing)
         if cred_name_col in df.columns:
@@ -680,20 +683,27 @@ def convert_bank(df: pd.DataFrame, prefix: str = "") -> pd.DataFrame:
 
         p2p_cred = is_p2p & customer_is_creditor
         if p2p_cred.any():
-            n = int(p2p_cred.sum())
             customer_names = result.loc[p2p_cred, "customer[1].person.full_name"]
-            result["transaction.monetary_transaction.bank_payment.debtor.name"] = result["transaction.monetary_transaction.bank_payment.debtor.name"].astype(object)
-            result["transaction.monetary_transaction.bank_payment.debtor.counterparty.external_identifier"] = result["transaction.monetary_transaction.bank_payment.debtor.counterparty.external_identifier"].astype(object)
+            for col in (
+                "transaction.monetary_transaction.bank_payment.debtor.name",
+                "transaction.monetary_transaction.bank_payment.debtor.counterparty.external_identifier",
+            ):
+                if col not in result.columns:
+                    result[col] = None
+                result[col] = result[col].astype(object)
             result.loc[p2p_cred, "transaction.monetary_transaction.bank_payment.debtor.name"] = customer_names.to_numpy(dtype=object)
             result.loc[p2p_cred, "transaction.monetary_transaction.bank_payment.debtor.counterparty.external_identifier"] = customer_names.to_numpy(dtype=object)
 
-
         p2p_deb = is_p2p & customer_is_debtor
         if p2p_deb.any():
-            n = int(p2p_deb.sum())
             customer_names = result.loc[p2p_deb, "customer[1].person.full_name"]
-            result["transaction.monetary_transaction.bank_payment.creditor.name"] = result["transaction.monetary_transaction.bank_payment.creditor.name"].astype(object)
-            result["transaction.monetary_transaction.bank_payment.creditor.counterparty.external_identifier"] = result["transaction.monetary_transaction.bank_payment.creditor.counterparty.external_identifier"].astype(object)
+            for col in (
+                "transaction.monetary_transaction.bank_payment.creditor.name",
+                "transaction.monetary_transaction.bank_payment.creditor.counterparty.external_identifier",
+            ):
+                if col not in result.columns:
+                    result[col] = None
+                result[col] = result[col].astype(object)
             result.loc[p2p_deb, "transaction.monetary_transaction.bank_payment.creditor.name"] = customer_names.to_numpy(dtype=object)
             result.loc[p2p_deb, "transaction.monetary_transaction.bank_payment.creditor.counterparty.external_identifier"] = customer_names.to_numpy(dtype=object)
 
