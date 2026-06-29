@@ -42,7 +42,7 @@ CARD_COLUMN_MAPPING: dict[str, str] = {
     "Message": "transaction.monetary_transaction.reference_text",
     # "Devise locale":                "transaction.monetary_transaction.local_value.currency",
     "Méthode": "transaction.monetary_transaction.payment_channel",
-    " Solde après opération": "transaction.monetary_transaction.customer_account_balance.current_balance.amount",
+    # " Solde après opération": "transaction.monetary_transaction.customer_account_balance.current_balance.amount",
     # "Libellé 1":                    "transaction.custom_field[1].string_value",
     # "Libellé 2":                    "transaction.custom_field[2].string_value",
     # Card
@@ -256,7 +256,7 @@ BANK_COLUMN_MAPPING: dict[str, str] = {
     "Date d’opération": "transaction.occurred_at.timestamp",
     # "Mandate Id": "transaction.monetary_transaction.bank_payment.mandate_identifier",
     # "Id interbancaire": "transaction.monetary_transaction.bank_payment.end_to_end_identifier",
-    "Référence": "transaction.monetary_transaction.bank_payment.remittance_information",
+    # "Référence": "transaction.monetary_transaction.bank_payment.remittance_information",
 }
 
 # Type d’opération → payment_scheme
@@ -798,9 +798,18 @@ def convert(
     print(f"Source format: {source_type.upper()}", file=sys.stderr)
 
     if source_type == "card":
-        return convert_card(df, prefix=prefix), "card"
+        result = convert_card(df, prefix=prefix)
     else:
-        return convert_bank(df, prefix=prefix), "bank"
+        result = convert_bank(df, prefix=prefix)
+
+    ext_id_col = "transaction.external_identifier"
+    if ext_id_col in result.columns:
+        dupes = result.duplicated(subset=[ext_id_col], keep="first")
+        if dupes.any():
+            print(f"Removed {int(dupes.sum())} duplicate(s) on '{ext_id_col}' (kept first).", file=sys.stderr)
+            result = result[~dupes]
+
+    return result, source_type
 
 
 # ---------------------------------------------------------------------------
