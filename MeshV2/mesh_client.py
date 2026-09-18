@@ -6,6 +6,8 @@ import getpass
 import pandas as pd
 import os
 import hashlib
+import calendar
+from datetime import datetime, date
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -201,26 +203,51 @@ def get_open_case_workflows_url_string():
     return "&".join(result)
 
 def get_all_cases():
-    page_number, page_size, consolidated_cases = 1, 100, []
+    consolidated_cases = []
     open_stages = get_open_case_workflows_url_string()
-    while True:
-        endpoint = f"{CASES_ENDPOINT}?page_number={page_number}&page_size={page_size}&created_at_from=2025-01-01T22%3A00%3A00.000Z&created_at_to=2026-12-31T21%3A59%3A59.999Z&sort=CREATED_AT&{open_stages}"
-        print(f"Fetching cases: {endpoint}")
-        cases_response = send_request("GET", endpoint)
-        cases = cases_response.get("cases", []) if cases_response else []
-        if not cases:
-            break
-        for case in cases:
-            if case.get("type") not in ("CUSTOMER_ONBOARDING", "CUSTOMER_MONITORING", "CUSTOMER_SCREENING"):
-                continue
-            customer_identifier = case.get("customer", {}).get("identifier")
-            customer_detail = get_customer_details(customer_identifier) if customer_identifier else {}
-            consolidated_cases.append({
-                "case": case,
-                "alerts": get_case_alerts(case["identifier"]),
-                "customer_detail": customer_detail,
-            })
-        page_number += 1
+    page_size = 100
+
+    now = datetime.utcnow()
+    year, month = 2023, 1
+
+    while (year, month) <= (now.year, now.month):
+        first_day = date(year, month, 1)
+        last_day = date(year, month, calendar.monthrange(year, month)[1])
+        from_str = first_day.strftime("%Y-%m-%dT00:00:00.000Z")
+        to_str = last_day.strftime("%Y-%m-%dT23:59:59.999Z")
+
+        page_number = 1
+        print(f"Fetching cases for {year}-{month:02d}...")
+        while True:
+            endpoint = (
+                f"{CASES_ENDPOINT}?page_number={page_number}&page_size={page_size}"
+                f"&created_at_from={from_str}&created_at_to={to_str}"
+                f"&sort=CREATED_AT&{open_stages}"
+            )
+            print(f"  Page {page_number}: {endpoint}")
+            cases_response = send_request("GET", endpoint)
+            cases = cases_response.get("cases", []) if cases_response else []
+            if not cases:
+                break
+            for case in cases:
+                if case.get("type") not in ("CUSTOMER_ONBOARDING", "CUSTOMER_MONITORING", "CUSTOMER_SCREENING"):
+                    continue
+                customer_identifier = case.get("customer", {}).get("identifier")
+                customer_detail = get_customer_details(customer_identifier) if customer_identifier else {}
+                consolidated_cases.append({
+                    "case": case,
+                    "alerts": get_case_alerts(case["identifier"]),
+                    "customer_detail": customer_detail,
+                })
+            page_number += 1
+            if len(cases) < page_size:
+                break
+
+        month += 1
+        if month > 12:
+            month = 1
+            year += 1
+
     return consolidated_cases
 
 
