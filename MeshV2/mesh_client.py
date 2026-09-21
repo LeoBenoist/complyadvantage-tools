@@ -7,6 +7,7 @@ import pandas as pd
 import os
 import hashlib
 import calendar
+from collections import deque
 from datetime import datetime, date
 from dotenv import load_dotenv
 
@@ -31,6 +32,10 @@ default_realm = os.getenv("REALM", "complyadvantage")
 default_account_name = os.getenv("ACCOUNT_NAME", "Customer Account")
 search_key = os.getenv("SEARCH_KEY", "default")
 global_token = os.getenv("TOKEN", "default")
+
+# Rate tracking — sliding window of live request timestamps (last 60 s)
+_request_timestamps: deque = deque()
+_RATE_LIMIT_WARN = 200  # requests per minute
 
 def get_cache_filename(method, endpoint, json_payload=None):
     path, _, query = endpoint.partition('?')
@@ -85,7 +90,21 @@ def send_request(method, endpoint, json_payload=None):
 
     return response_data
 
+def _check_rate():
+    while True:
+        now = time.monotonic()
+        while _request_timestamps and _request_timestamps[0] < now - 60:
+            _request_timestamps.popleft()
+        if len(_request_timestamps) < _RATE_LIMIT_WARN:
+            break
+        wait = 60 - (now - _request_timestamps[0])
+        print(f"\033[33mWARNING: rate limit reached ({_RATE_LIMIT_WARN} req/min) — throttling for {wait:.1f}s\033[0m", flush=True)
+        time.sleep(wait)
+    _request_timestamps.append(time.monotonic())
+
+
 def _send_live_request(method, endpoint, json_payload=None):
+    _check_rate()
     url = BASE_URL + endpoint
     headers = {"accept": "application/json"}
     if global_token:
@@ -208,13 +227,16 @@ def get_all_cases():
     page_size = 100
 
     now = datetime.utcnow()
-    year, month = 2023, 1
+    year, month = 2014, 1
 
     while (year, month) <= (now.year, now.month):
         first_day = date(year, month, 1)
         last_day = date(year, month, calendar.monthrange(year, month)[1])
         from_str = first_day.strftime("%Y-%m-%dT00:00:00.000Z")
         to_str = last_day.strftime("%Y-%m-%dT23:59:59.999Z")
+
+        # if year == 2024:
+        #     break
 
         page_number = 1
         print(f"Fetching cases for {year}-{month:02d}...")
