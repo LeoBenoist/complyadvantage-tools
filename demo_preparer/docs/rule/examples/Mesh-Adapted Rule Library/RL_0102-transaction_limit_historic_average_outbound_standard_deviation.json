@@ -1,0 +1,228 @@
+{
+  "name": "[OUT>AVG] [RL_0102] Transaction Limit | Historic Average | Outbound | Standard Deviation",
+  "description": "The customer's outbound transaction of {{Min_Outbound_Tx_Value}} {{Base_Currency}} exceeded their {{Average_Outbound_Tx_Value}} {{Base_Currency}} average outbound transaction amount by more than the set number of standard deviations. \n\n[Applicable since the customer had more than the set number of previous outbound transactions to calculate the average from, and since the transaction was at least the set minimum outbound transaction value. The average excludes the evaluated transaction and was calculated over the customer's all oubound transactions over the most recent 2 years.]",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["TRANSACTION"]
+      },
+      "specification": {
+        "and": [
+          {
+            "not_equals": [
+              {
+                "type": "field",
+                "value": "transaction.monetary_details.base_value.iso_3_currency_code",
+                "datatype": "string",
+                "default": "CURRENCY_CODE"
+              },
+              {
+                "type": "constant",
+                "name": "Base_Currency",
+                "value": "CURRENCY_CODE",
+                "datatype": "string"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "value": "transaction.monetary_details.direction",
+                "default": "NO_VALUE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than_or_equals": [
+              {
+                "value": "transaction.monetary_details.base_value.amount",
+                "default": "0",
+                "datatype": "number",
+                "type": "field"
+              },
+              {
+                "value": "Min_Outbound_Tx_Value",
+                "name": "Min_Outbound_Tx_Value",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "aggregate": "average",
+                  "window": 730,
+                  "window_unit": "calendar_day",
+                  "target_field": "transaction.monetary_details.base_value.amount",
+                  "include_current_record": false,
+                  "exclude_current_day": false,
+                  "show_context": false,
+                  "filter_spec": {
+                    "equals": [
+                      {
+                        "value": "transaction.monetary_details.direction",
+                        "default": "NO_VALUE",
+                        "datatype": "string",
+                        "type": "field"
+                      },
+                      {
+                        "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                        "datatype": "string",
+                        "name": null,
+                        "type": "constant"
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "0",
+                "datatype": "number",
+                "name": "Average_Outbound_Tx_Value",
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "aggregate": "count",
+                  "window": 730,
+                  "window_unit": "calendar_day",
+                  "target_field": null,
+                  "include_current_record": false,
+                  "exclude_current_day": false,
+                  "show_context": false,
+                  "filter_spec": {
+                    "equals": [
+                      {
+                        "value": "transaction.monetary_details.direction",
+                        "default": "NO_VALUE",
+                        "datatype": "string",
+                        "type": "field"
+                      },
+                      {
+                        "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                        "datatype": "string",
+                        "name": null,
+                        "type": "constant"
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "Min_Number_Previous_Outbound_Tx",
+                "name": "Min_Number_Previous_Outbound_Tx",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": "transaction.monetary_details.base_value.amount",
+                "default": "0",
+                "datatype": "number",
+                "type": "field"
+              },
+              {
+                "add": [
+                  {
+                    "value": {
+                      "aggregate": "average",
+                      "window": 730,
+                      "window_unit": "calendar_day",
+                      "target_field": "transaction.monetary_details.base_value.amount",
+                      "include_current_record": false,
+                      "exclude_current_day": false,
+                      "show_context": false,
+                      "filter_spec": {
+                        "equals": [
+                          {
+                            "value": "transaction.monetary_details.direction",
+                            "default": "NO_VALUE",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      },
+                      "grouping_fields": ["transaction.customer_identifier.id"],
+                      "type": "scalar"
+                    },
+                    "type": "aggregation"
+                  },
+                  {
+                    "multiply": [
+                      {
+                        "type": "aggregation",
+                        "value": {
+                          "aggregate": "std_dev",
+                          "exclude_current_day": false,
+                          "filter_spec": {
+                            "equals": [
+                              {
+                                "value": "transaction.monetary_details.direction",
+                                "default": "NO_VALUE",
+                                "datatype": "string",
+                                "type": "field"
+                              },
+                              {
+                                "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                                "datatype": "string",
+                                "name": null,
+                                "type": "constant"
+                              }
+                            ]
+                          },
+                          "grouping_fields": ["transaction.customer_identifier.id"],
+                          "include_current_record": false,
+                          "target_field": "transaction.monetary_details.base_value.amount",
+                          "type": "scalar",
+                          "uuid": null,
+                          "window": 730,
+                          "window_unit": "calendar_day"
+                        }
+                      },
+                      {
+                        "type": "segment_parameter",
+                        "value": "Standard_Deviation_Multiplier",
+                        "name": "Standard_Deviation_Multiplier",
+                        "format": "number"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

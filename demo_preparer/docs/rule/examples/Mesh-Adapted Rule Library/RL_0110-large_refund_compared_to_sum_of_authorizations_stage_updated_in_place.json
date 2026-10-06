@@ -1,0 +1,270 @@
+{
+  "name": "[CREF>SUM] [RL_0110] Large Refund Compared to Sum of Authorizations [Stage Updated In Place]",
+  "description": "The customer's refund of {{Large_Refund_Limit}} {{Base_Currency}} has exceeded a set factor times their {{Sum_of_Authorizations}} {{Base_Currency}} sum of authorizations over the last 30 days. \n\n[Applicable since the customer had more than the minimum number of authorizations within the 30 days.]",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["TRANSACTION"]
+      },
+      "specification": {
+        "and": [
+          {
+            "not_equals": [
+              {
+                "type": "field",
+                "value": "transaction.monetary_details.base_value.iso_3_currency_code",
+                "datatype": "string",
+                "default": "CURRENCY_CODE"
+              },
+              {
+                "type": "constant",
+                "name": "Base_Currency",
+                "value": "CURRENCY_CODE",
+                "datatype": "string"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "value": "transaction.type",
+                "default": "NO_VALUE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "TRANSACTION_TYPE_CARD_PAYMENT",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "value": "transaction.monetary_details.card_payment.card_payment_type",
+                "default": "NO_VALUE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "CARD_PAYMENT_TYPE_REFUND",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "type": "field",
+                "value": "transaction.monetary_details.base_value.amount",
+                "datatype": "number",
+                "default": "0"
+              },
+              {
+                "type": "segment_parameter",
+                "value": "Large_Refund_Limit",
+                "name": "Large_Refund_Limit",
+                "format": "number"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "type": "aggregation",
+                "value": {
+                  "aggregate": "count",
+                  "exclude_current_day": false,
+                  "filter_spec": {
+                    "and": [
+                      {
+                        "equals": [
+                          {
+                            "value": "transaction.type",
+                            "default": "NO_VALUE",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "TRANSACTION_TYPE_CARD_PAYMENT",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      },
+                      {
+                        "any_of": [
+                          {
+                            "value": "transaction.monetary_details.card_payment.payment_stages_info.authorization.state",
+                            "default": "NO_VALUE",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "name": "Committable_Authorization_States",
+                            "values": ["AUTHORIZATION_STATE_APPROVED", "AUTHORIZATION_STATE_PENDING"],
+                            "datatype": "string",
+                            "type": "constant_list"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "include_current_record": true,
+                  "target_field": null,
+                  "type": "scalar",
+                  "uuid": null,
+                  "window": 30,
+                  "window_unit": "calendar_day"
+                }
+              },
+              {
+                "type": "segment_parameter",
+                "value": "Min_Number_of_Authorizations",
+                "name": "Min_Number_of_Authorizations",
+                "format": "number"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "type": "field",
+                "value": "transaction.monetary_details.base_value.amount",
+                "datatype": "number",
+                "default": "0"
+              },
+              {
+                "multiply": [
+                  {
+                    "type": "segment_parameter",
+                    "value": "Refund_Factor",
+                    "name": "Refund_Factor",
+                    "format": "number"
+                  },
+                  {
+                    "type": "aggregation",
+                    "value": {
+                      "aggregate": "sum",
+                      "exclude_current_day": false,
+                      "filter_spec": {
+                        "and": [
+                          {
+                            "equals": [
+                              {
+                                "value": "transaction.type",
+                                "default": "NO_VALUE",
+                                "datatype": "string",
+                                "type": "field"
+                              },
+                              {
+                                "value": "TRANSACTION_TYPE_CARD_PAYMENT",
+                                "datatype": "string",
+                                "name": null,
+                                "type": "constant"
+                              }
+                            ]
+                          },
+                          {
+                            "any_of": [
+                              {
+                                "value": "transaction.monetary_details.card_payment.payment_stages_info.authorization.state",
+                                "default": "NO_VALUE",
+                                "datatype": "string",
+                                "type": "field"
+                              },
+                              {
+                                "name": "Committable_Authorization_States",
+                                "values": ["AUTHORIZATION_STATE_APPROVED", "AUTHORIZATION_STATE_PENDING"],
+                                "datatype": "string",
+                                "type": "constant_list"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "grouping_fields": ["transaction.customer_identifier.id"],
+                      "include_current_record": true,
+                      "target_field": "transaction.monetary_details.base_value.amount",
+                      "type": "scalar",
+                      "uuid": null,
+                      "window": 30,
+                      "window_unit": "calendar_day"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "greater_than_or_equals": [
+              {
+                "type": "aggregation",
+                "value": {
+                  "aggregate": "sum",
+                  "exclude_current_day": false,
+                  "filter_spec": {
+                    "and": [
+                      {
+                        "equals": [
+                          {
+                            "value": "transaction.type",
+                            "default": "NO_VALUE",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "TRANSACTION_TYPE_CARD_PAYMENT",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      },
+                      {
+                        "any_of": [
+                          {
+                            "value": "transaction.monetary_details.card_payment.payment_stages_info.authorization.state",
+                            "default": "NO_VALUE",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "name": "Committable_Authorization_States",
+                            "values": ["AUTHORIZATION_STATE_APPROVED", "AUTHORIZATION_STATE_PENDING"],
+                            "datatype": "string",
+                            "type": "constant_list"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "include_current_record": true,
+                  "target_field": "transaction.monetary_details.base_value.amount",
+                  "type": "scalar",
+                  "uuid": null,
+                  "window": 30,
+                  "window_unit": "calendar_day"
+                }
+              },
+              {
+                "type": "constant",
+                "value": "0",
+                "name": "Sum_of_Authorizations",
+                "datatype": "number"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

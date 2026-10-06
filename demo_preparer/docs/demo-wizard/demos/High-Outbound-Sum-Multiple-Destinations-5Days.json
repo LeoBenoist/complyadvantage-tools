@@ -1,0 +1,69 @@
+[
+  {
+    "id": "high_outbound_sum_multi_dest_01",
+    "name": "High Outbound Sum - Multiple Destinations - 5 Days",
+    "description": "A customer sends outbound transactions to more than 3 distinct counterparties within 5 days, each with a unique amount.",
+    "industry": "Finance",
+    "tags": ["Sum", "Outbound", "Multiple Destinations", "Layering"],
+    "data": {
+      "customers": [{ "comet_identifier": "high_outbound_sum_multi_dest_01" }],
+      "scenarios": [
+        {
+          "name": "High Outbound Sum - Multiple Destinations - 5 Days",
+          "specification": {
+            "value": {
+              "segments": [
+                {
+                  "name": "All customers",
+                  "values": {
+                    "d5c137b3-0533-485f-bc68-6b506d5c399a": "3",
+                    "d5c137b3-0533-485f-bc68-6b506dree3fd": "3"
+                  },
+                  "outcome": { "action": "HOLD", "alert_priority": 7 }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "transactions": [
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "high_outbound_sum_multi_dest_01" } },
+              "creditor": { "identifier": { "external_identifier": "counterparty-homd-001", "type": "COUNTERPARTY" } }
+            },
+            "base_value": { "amount": 14250 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "high_outbound_sum_multi_dest_01" } },
+              "creditor": { "identifier": { "external_identifier": "counterparty-homd-002", "type": "COUNTERPARTY" } }
+            },
+            "base_value": { "amount": 9875 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "high_outbound_sum_multi_dest_01" } },
+              "creditor": { "identifier": { "external_identifier": "counterparty-homd-003", "type": "COUNTERPARTY" } }
+            },
+            "base_value": { "amount": 18630 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "high_outbound_sum_multi_dest_01" } },
+              "creditor": { "identifier": { "external_identifier": "counterparty-homd-004", "type": "COUNTERPARTY" } }
+            },
+            "base_value": { "amount": 7440 }
+          }
+        }
+      ]
+    }
+  }
+]

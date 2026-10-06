@@ -1,0 +1,78 @@
+{
+  "name": "[NUMCCO] [RL_0060] High Velocity | Outbound | Counterparty",
+  "description": "This customer sent {{Outbound_Velocity_Limit}} outbound transactions to this counterparty over the last 14 days, exceeding the set velocity limit.",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["CUSTOMER", "COUNTERPARTY"]
+      },
+      "specification": {
+        "and": [
+          {
+            "equals": [
+              {
+                "value": "transaction.monetary_details.direction",
+                "default": "NO_VALUE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "aggregate": "count",
+                  "window": 14,
+                  "window_unit": "calendar_day",
+                  "target_field": null,
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "show_context": true,
+                  "filter_spec": {
+                    "equals": [
+                      {
+                        "value": "transaction.monetary_details.direction",
+                        "default": "NO_VALUE",
+                        "datatype": "string",
+                        "type": "field"
+                      },
+                      {
+                        "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                        "datatype": "string",
+                        "name": null,
+                        "type": "constant"
+                      }
+                    ]
+                  },
+                  "grouping_fields": [
+                    "transaction.customer_identifier.id",
+                    {
+                      "value": "counterparty-id",
+                      "type": "block"
+                    }
+                  ],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "Outbound_Velocity_Limit",
+                "name": "Outbound_Velocity_Limit",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

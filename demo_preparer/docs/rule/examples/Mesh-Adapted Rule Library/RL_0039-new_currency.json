@@ -1,0 +1,98 @@
+{
+  "name": "[NCU] [RL_0039] New Currency",
+  "description": "This was the customer's first transaction using {{Currency}} currency.",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["TRANSACTION"]
+      },
+      "specification": {
+        "and": [
+          {
+            "not_equals": [
+              {
+                "type": "field",
+                "value": "transaction.monetary_details.value.iso_3_currency_code",
+                "datatype": "string",
+                "default": "CURRENCY_CODE"
+              },
+              {
+                "type": "constant",
+                "name": "Currency",
+                "value": "CURRENCY_CODE",
+                "datatype": "string"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "type": "aggregation",
+                "value": {
+                  "aggregate": "count",
+                  "exclude_current_day": false,
+                  "filter_spec": null,
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "include_current_record": true,
+                  "target_field": null,
+                  "type": "scalar",
+                  "uuid": null,
+                  "window": 730,
+                  "window_unit": "calendar_day"
+                }
+              },
+              {
+                "type": "constant",
+                "value": "1",
+                "datatype": "number"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "type": "aggregation",
+                "value": {
+                  "aggregate": "count",
+                  "exclude_current_day": false,
+                  "filter_spec": {
+                    "not_equals": [
+                      {
+                        "type": "field",
+                        "value": "transaction.monetary_details.value.iso_3_currency_code",
+                        "datatype": "string",
+                        "default": "CURRENCY_CODE"
+                      },
+                      {
+                        "type": "constant",
+                        "name": "Currency",
+                        "value": "CURRENCY_CODE",
+                        "datatype": "string"
+                      }
+                    ]
+                  },
+                  "grouping_fields": [
+                    "transaction.customer_identifier.id",
+                    "transaction.monetary_details.value.iso_3_currency_code"
+                  ],
+                  "include_current_record": true,
+                  "target_field": null,
+                  "type": "scalar",
+                  "uuid": null,
+                  "window": 730,
+                  "window_unit": "calendar_day"
+                }
+              },
+              {
+                "type": "constant",
+                "value": "1",
+                "datatype": "number"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

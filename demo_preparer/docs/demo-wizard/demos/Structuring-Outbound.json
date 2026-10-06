@@ -1,0 +1,78 @@
+[
+  {
+    "id": "structuring_outbound_01",
+    "name": "Structuring - Outbound",
+    "description": "A customer sends more than 2 outbound transactions with amounts between 9,950 and 10,000 within 7 days, a classic structuring evasion pattern.",
+    "industry": "Finance",
+    "tags": ["Structuring", "Outbound", "Evasion"],
+    "data": {
+      "customers": [{ "comet_identifier": "structuring_outbound_01" }],
+      "scenarios": [
+        {
+          "name": "Structuring - Outbound",
+          "specification": {
+            "value": {
+              "segments": [
+                {
+                  "name": "All customers",
+                  "values": { "3ac6db4a-7116-4f1d-bb90-eac4ae1bf522": "2" },
+                  "outcome": { "action": "HOLD", "alert_priority": 8 }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "transactions": [
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "structuring_outbound_01" } }
+            },
+            "base_value": { "amount": 9955 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "structuring_outbound_01" } }
+            },
+            "base_value": { "amount": 9972 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "structuring_outbound_01" } }
+            },
+            "base_value": { "amount": 9987 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "structuring_outbound_01" } }
+            },
+            "base_value": { "amount": 9988 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "structuring_outbound_01" } }
+            },
+            "base_value": { "amount": 9990 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "structuring_outbound_01" } }
+            },
+            "base_value": { "amount": 9983 }
+          }
+        }
+      ]
+    }
+  }
+]

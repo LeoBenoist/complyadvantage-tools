@@ -4,7 +4,10 @@
       "Bash(ls:*)",
       "Bash(python3:*)",
       "Bash(/tmp/xlenv/bin/python3:*)",
-      "Bash(pip3 show:*)"
+      "Bash(pip3 show:*)",
+      "WebFetch(domain:docs.mesh.complyadvantage.com)",
+      "WebSearch",
+      "WebFetch(domain:en.wikipedia.org)"
     ]
   }
 }

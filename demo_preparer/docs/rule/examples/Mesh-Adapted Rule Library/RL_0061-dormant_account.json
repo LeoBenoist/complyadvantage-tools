@@ -1,0 +1,70 @@
+{
+  "name": "[DORMANT] [RL_0061] Dormant Account",
+  "description": "The customer transacted for the first time after a dormancy period of at least 180 days.",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["TRANSACTION"]
+      },
+      "specification": {
+        "and": [
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "aggregate": "count",
+                  "window": 730,
+                  "window_unit": "calendar_day",
+                  "target_field": null,
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "show_context": false,
+                  "filter_spec": null,
+                  "grouping_fields": [
+                    "transaction.customer_identifier.id"
+                  ],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "1",
+                "datatype": "number",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "value": {
+                  "aggregate": "count",
+                  "window": 180,
+                  "window_unit": "calendar_day",
+                  "target_field": null,
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "show_context": false,
+                  "filter_spec": null,
+                  "grouping_fields": [
+                    "transaction.customer_identifier.id"
+                  ],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "1",
+                "datatype": "number",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

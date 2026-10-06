@@ -1,0 +1,75 @@
+[
+  {
+    "id": "high_sum_inbound_cp_01",
+    "name": "High Sum - Inbound - Counterparty",
+    "description": "The total inbound amount received from a single counterparty over the last 14 days exceeds 30,000.",
+    "industry": "Finance",
+    "tags": ["Sum", "Inbound", "Counterparty", "High Value"],
+    "data": {
+      "customers": [{ "comet_identifier": "high_sum_inbound_cp_01" }],
+      "scenarios": [
+        {
+          "name": "High Sum - Inbound - Counterparty",
+          "specification": {
+            "value": {
+              "segments": [
+                {
+                  "name": "All customers",
+                  "values": { "117b9ad5-b672-463a-b19d-087f1e3b279c": "30000" },
+                  "outcome": { "action": "HOLD", "alert_priority": 6 }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "transactions": [
+        {
+          "details": {
+            "details": {
+              "creditor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "high_sum_inbound_cp_01" } },
+              "debtor": {
+                "name": "Sebastian Martin",
+                "identifier": {
+                  "external_identifier": "counterparty-hsicp-001",
+                  "type": "COUNTERPARTY"
+                }
+              }
+            },
+            "base_value": { "amount": 12500 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "creditor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "high_sum_inbound_cp_01" } },
+              "debtor": {
+                "name": "Sebastian Martin",
+                "identifier": {
+                  "external_identifier": "counterparty-hsicp-001",
+                  "type": "COUNTERPARTY"
+                }
+              }
+            },
+            "base_value": { "amount": 11800 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "creditor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "high_sum_inbound_cp_01" } },
+              "debtor": {
+                "name": "Sebastian Martin",
+                "identifier": {
+                  "external_identifier": "counterparty-hsicp-001",
+                  "type": "COUNTERPARTY"
+                }
+              }
+            },
+            "base_value": { "amount": 19300 }
+          }
+        }
+      ]
+    }
+  }
+]

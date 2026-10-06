@@ -1,0 +1,74 @@
+{
+  "name": "[SETTLE_1] [RL_0067] Early Settlement",
+  "description": "The customer's loan was settled on {{Actual_Settlement_Date}}, {{Early_Settlement_Days_Threshold}} day(s) before its expected repayment date of {{Expected_Repayment_Date}}, exceeding the early-settlement threshold. [Applicable since both the loan settlement date and the expected repayment date were provided.]",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["TRANSACTION"]
+      },
+      "specification": {
+        "and": [
+          {
+            "not_equals": [
+              {
+                "value": "transaction.product.product_details.loan.settled_at",
+                "default": "1900-01-01T00:00:00+00:00",
+                "datatype": "datetime",
+                "type": "field"
+              },
+              {
+                "value": "1900-01-01T00:00:00+00:00",
+                "datatype": "datetime",
+                "name": "Actual_Settlement_Date",
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "not_equals": [
+              {
+                "value": "transaction.product.product_details.loan.expected_repayment_date",
+                "default": "1900-01-01T00:00:00+00:00",
+                "datatype": "datetime",
+                "type": "field"
+              },
+              {
+                "value": "1900-01-01T00:00:00+00:00",
+                "datatype": "datetime",
+                "name": "Expected_Repayment_Date",
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "subtract": [
+                  {
+                    "value": "transaction.product.product_details.loan.expected_repayment_date",
+                    "default": "1900-01-01",
+                    "datatype": "date",
+                    "type": "field"
+                  },
+                  {
+                    "value": "transaction.product.product_details.loan.settled_at",
+                    "default": "1900-01-01",
+                    "datatype": "date",
+                    "type": "field"
+                  }
+                ]
+              },
+              {
+                "value": "Early_Settlement_Days_Threshold",
+                "name": "Early_Settlement_Days_Threshold",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

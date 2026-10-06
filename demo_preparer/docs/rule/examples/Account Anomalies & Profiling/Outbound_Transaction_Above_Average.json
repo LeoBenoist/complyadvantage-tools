@@ -1,0 +1,116 @@
+{
+  "name": "Outbound Transaction Above Average",
+  "description": "This Customer has made a transaction for {{Current_Transaction_Amount}}, which was more than a set factor times their average of {{Average_Excluding_Current_Transaction}} (excluding the current transaction).",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["TRANSACTION"]
+      },
+      "specification": {
+        "and": [
+          {
+            "equals": [
+              {
+                "value": "transaction.monetary_details.direction",
+                "default": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": "transaction.monetary_details.base_value.amount",
+                "default": "0",
+                "datatype": "number",
+                "type": "field"
+              },
+              {
+                "value": "248c3342-69c8-44dc-b525-2a30b97687d3",
+                "name": "Current_Transaction_Amount",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "count",
+                  "window": 730,
+                  "show_context": true,
+                  "window_unit": "day",
+                  "target_field": null,
+                  "include_current_record": false,
+                  "exclude_current_day": false,
+                  "filter_spec": null,
+                  "grouping_fields": [
+                    "transaction.customer_identifier.id",
+                    "transaction.monetary_details.direction"
+                  ],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "2fdc719d-9541-4c2c-b1a7-6a0d52b9f658",
+                "name": "Number_of_Transactions_Excluding_Current_Transaction",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": "transaction.monetary_details.base_value.amount",
+                "default": "0",
+                "datatype": "number",
+                "type": "field"
+              },
+              {
+                "multiply": [
+                  {
+                    "value": {
+                      "uuid": null,
+                      "aggregate": "average",
+                      "window": 730,
+                      "show_context": true,
+                      "window_unit": "day",
+                      "target_field": "transaction.monetary_details.base_value.amount",
+                      "include_current_record": false,
+                      "exclude_current_day": false,
+                      "filter_spec": null,
+                      "grouping_fields": [
+                        "transaction.customer_identifier.id",
+                        "transaction.monetary_details.direction"
+                      ],
+                      "type": "scalar"
+                    },
+                    "type": "aggregation"
+                  },
+                  {
+                    "value": "b31cac14-205f-454a-9524-56c6b9f1794f",
+                    "name": "Average_Excluding_Current_Transaction",
+                    "format": "number",
+                    "type": "segment_parameter"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

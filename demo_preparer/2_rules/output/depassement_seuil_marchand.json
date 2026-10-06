@@ -1,0 +1,48 @@
+{
+  "name": "Dépassement de seuil marchand (transaction unique)",
+  "description": "Une transaction inbound de {{Montant_Transaction}} a dépassé le seuil de détection configuré pour la catégorie de marchand.",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["TRANSACTION"]
+      },
+      "specification": {
+        "and": [
+          {
+            "equals": [
+              {
+                "value": "transaction.monetary_details.direction",
+                "default": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": "transaction.monetary_details.base_value.amount",
+                "default": "0",
+                "datatype": "number",
+                "type": "field"
+              },
+              {
+                "value": "Seuil_Transaction_Marchand",
+                "name": "Montant_Transaction",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

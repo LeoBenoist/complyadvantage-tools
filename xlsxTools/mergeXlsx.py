@@ -17,7 +17,7 @@ Usage:
 Examples:
   python merge_xlsx.py ./data
   python merge_xlsx.py ./data -o merged.xlsx
-  python merge_xlsx.py ./data -o merged.xlsx --split 50000
+  python merge_xlsx.py ./data -o merged.xlsx --split 300000
 """
 
 import argparse
@@ -26,7 +26,7 @@ from pathlib import Path
 
 import pandas as pd
 
-TIMESTAMP_COL = "transaction.occurred_at.timestamp"
+TIMESTAMP_COL = "case_created_at"
 
 
 def find_xlsx_files(input_dir: Path, recursive: bool) -> list[Path]:

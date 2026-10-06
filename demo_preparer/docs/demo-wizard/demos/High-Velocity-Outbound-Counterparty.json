@@ -1,0 +1,90 @@
+[
+  {
+    "id": "high_velocity_outbound_cp_01",
+    "name": "High Velocity - Outbound - Counterparty",
+    "description": "A customer sends more than 3 outbound transactions to the same counterparty within the last 14 days.",
+    "industry": "Finance",
+    "tags": ["Velocity", "Outbound", "Counterparty"],
+    "data": {
+      "customers": [{ "comet_identifier": "high_velocity_outbound_cp_01" }],
+      "scenarios": [
+        {
+          "name": "High Velocity - Outbound - Counterparty",
+          "specification": {
+            "value": {
+              "segments": [
+                {
+                  "name": "All customers",
+                  "values": { "11681eba-e701-47b5-a045-f52bfe0399f5": "3" },
+                  "outcome": { "action": "HOLD", "alert_priority": 5 }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "transactions": [
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "high_velocity_outbound_cp_01" } },
+              "creditor": {
+                "name": "Sebastian Martin",
+                "identifier": {
+                  "external_identifier": "counterparty-hvocp-001",
+                  "type": "COUNTERPARTY"
+                }
+              }
+            },
+            "base_value": { "amount": 3200 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "high_velocity_outbound_cp_01" } },
+              "creditor": {
+                "name": "Sebastian Martin",
+                "identifier": {
+                  "external_identifier": "counterparty-hvocp-001",
+                  "type": "COUNTERPARTY"
+                }
+              }
+            },
+            "base_value": { "amount": 2750 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "high_velocity_outbound_cp_01" } },
+              "creditor": {
+                "name": "Sebastian Martin",
+                "identifier": {
+                  "external_identifier": "counterparty-hvocp-001",
+                  "type": "COUNTERPARTY"
+                }
+              }
+            },
+            "base_value": { "amount": 4100 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "high_velocity_outbound_cp_01" } },
+              "creditor": {
+                "name": "Sebastian Martin",
+                "identifier": {
+                  "external_identifier": "counterparty-hvocp-001",
+                  "type": "COUNTERPARTY"
+                }
+              }
+            },
+            "base_value": { "amount": 1850 }
+          }
+        }
+      ]
+    }
+  }
+]

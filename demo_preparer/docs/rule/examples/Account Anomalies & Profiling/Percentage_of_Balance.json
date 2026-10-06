@@ -1,0 +1,144 @@
+{
+  "name": "Percentage of Balance",
+  "description": "The customer's outbound transaction exceeded the set percentage of their account balance.",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["CUSTOMER"]
+      },
+      "specification": {
+        "and": [
+          {
+            "equals": [
+              {
+                "value": "transaction.monetary_details.direction",
+                "default": "NO_VALUE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than_or_equals": [
+              {
+                "value": "transaction.monetary_details.customer_account_balance.current_balance.amount",
+                "default": "0",
+                "datatype": "number",
+                "type": "field"
+              },
+              {
+                "value": "1f8e24ac-e37f-4204-8978-6398ce9a2566",
+                "name": "Balance",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          },
+          {
+            "or": [
+              {
+                "less_than_or_equals": [
+                  {
+                    "subtract": [
+                      {
+                        "value": "transaction.monetary_details.customer_account_balance.current_balance.amount",
+                        "default": "0",
+                        "datatype": "number",
+                        "type": "field"
+                      },
+                      {
+                        "value": "transaction.monetary_details.base_value.amount",
+                        "default": "0",
+                        "datatype": "number",
+                        "type": "field"
+                      }
+                    ]
+                  },
+                  {
+                    "value": "0",
+                    "datatype": "number",
+                    "name": null,
+                    "type": "constant"
+                  }
+                ]
+              },
+              {
+                "and": [
+                  {
+                    "greater_than": [
+                      {
+                        "subtract": [
+                          {
+                            "value": "transaction.monetary_details.customer_account_balance.current_balance.amount",
+                            "default": "0",
+                            "datatype": "number",
+                            "type": "field"
+                          },
+                          {
+                            "value": "transaction.monetary_details.base_value.amount",
+                            "default": "0",
+                            "datatype": "number",
+                            "type": "field"
+                          }
+                        ]
+                      },
+                      {
+                        "value": "0",
+                        "datatype": "number",
+                        "name": null,
+                        "type": "constant"
+                      }
+                    ]
+                  },
+                  {
+                    "greater_than": [
+                      {
+                        "value": "transaction.monetary_details.base_value.amount",
+                        "default": "0",
+                        "datatype": "number",
+                        "type": "field"
+                      },
+                      {
+                        "multiply": [
+                          {
+                            "value": "transaction.monetary_details.base_value.amount",
+                            "default": "0",
+                            "datatype": "number",
+                            "type": "field"
+                          },
+                          {
+                            "divide": [
+                              {
+                                "value": "f2a86bfe-c5c8-477d-96d9-29d13fc50e09",
+                                "name": "Percentage",
+                                "format": "number",
+                                "type": "segment_parameter"
+                              },
+                              {
+                                "value": "100",
+                                "datatype": "number",
+                                "name": null,
+                                "type": "constant"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

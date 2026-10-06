@@ -1,0 +1,141 @@
+{
+  "name": "Structuring - Inbound",
+  "description": "The customer received {{Number}} inbound transactions with values of at least 9,950.00 but not greater than 10,000 within the last 7 days, which exceeded the set limit.",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["CUSTOMER"]
+      },
+      "specification": {
+        "and": [
+          {
+            "equals": [
+              {
+                "value": "transaction.monetary_details.direction",
+                "default": "NO_VALUE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than_or_equals": [
+              {
+                "value": "transaction.monetary_details.base_value.amount",
+                "default": "0",
+                "datatype": "number",
+                "type": "field"
+              },
+              {
+                "value": "9950",
+                "datatype": "number",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "less_than": [
+              {
+                "value": "transaction.monetary_details.base_value.amount",
+                "default": "0",
+                "datatype": "number",
+                "type": "field"
+              },
+              {
+                "value": "10000",
+                "datatype": "number",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "count",
+                  "window": 7,
+                  "show_context": true,
+                  "window_unit": "calendar_day",
+                  "target_field": null,
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "filter_spec": {
+                    "and": [
+                      {
+                        "equals": [
+                          {
+                            "value": "transaction.monetary_details.direction",
+                            "default": "NO_VALUE",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      },
+                      {
+                        "greater_than_or_equals": [
+                          {
+                            "value": "transaction.monetary_details.base_value.amount",
+                            "default": "0",
+                            "datatype": "number",
+                            "type": "field"
+                          },
+                          {
+                            "value": "9950",
+                            "datatype": "number",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      },
+                      {
+                        "less_than": [
+                          {
+                            "value": "transaction.monetary_details.base_value.amount",
+                            "default": "0",
+                            "datatype": "number",
+                            "type": "field"
+                          },
+                          {
+                            "value": "10000",
+                            "datatype": "number",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "cfa26318-4050-40eb-b7ca-e8a3c7e57b29",
+                "name": "Number",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

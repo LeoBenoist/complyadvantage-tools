@@ -1,0 +1,156 @@
+{
+  "name": "[SUMATM] [RL_0040] High Sum | ATM Withdrawals",
+  "description": "The customer's {{ATM_Withdrawal_Sum_Limit}} {{Base_Currency}} sum of ATM withdrawals over the last 7 days has exceeded the set limit.",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["CUSTOMER"]
+      },
+      "specification": {
+        "and": [
+          {
+            "not_equals": [
+              {
+                "value": "transaction.monetary_details.base_value.iso_3_currency_code",
+                "default": "CURRENCY_CODE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "CURRENCY_CODE",
+                "datatype": "string",
+                "name": "Base_Currency",
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "value": "transaction.type",
+                "default": "NO_VALUE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "TRANSACTION_TYPE_CARD_PAYMENT",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "value": "transaction.monetary_details.direction",
+                "default": "NO_VALUE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "value": "transaction.monetary_details.payment_channel",
+                "default": "NO_VALUE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "PAYMENT_CHANNEL_ATM",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "aggregate": "sum",
+                  "window": 7,
+                  "window_unit": "calendar_day",
+                  "target_field": "transaction.monetary_details.base_value.amount",
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "show_context": true,
+                  "filter_spec": {
+                    "and": [
+                      {
+                        "equals": [
+                          {
+                            "value": "transaction.type",
+                            "default": "NO_VALUE",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "TRANSACTION_TYPE_CARD_PAYMENT",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      },
+                      {
+                        "equals": [
+                          {
+                            "value": "transaction.monetary_details.direction",
+                            "default": "NO_VALUE",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      },
+                      {
+                        "equals": [
+                          {
+                            "value": "transaction.monetary_details.payment_channel",
+                            "default": "NO_VALUE",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "PAYMENT_CHANNEL_ATM",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "ATM_Withdrawal_Sum_Limit",
+                "name": "ATM_Withdrawal_Sum_Limit",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

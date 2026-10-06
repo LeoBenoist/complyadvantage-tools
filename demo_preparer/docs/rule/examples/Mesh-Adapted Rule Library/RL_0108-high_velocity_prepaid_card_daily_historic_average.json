@@ -1,0 +1,220 @@
+{
+  "name": "[PREPC>HA] [RL_0108] High Velocity | Prepaid Card | Daily Historic Average",
+  "description": "The customer's {{Prepaid_Card_Count_Delimiter}} prepaid card transactions over the last day exceeded a set tolerance factor times their daily average prepaid card number. \n\n[The daily average number was calculated over the 179 days preceding the evaluated day, and it excludes days on which the customer had no prepaid card transactions. Applicable since the customer had more than the set minimum number of previous days on which they had prepaid card transactions.]",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["CUSTOMER"]
+      },
+      "specification": {
+        "and": [
+          {
+            "equals": [
+              {
+                "value": "transaction.monetary_details.card_payment.card.funding_type",
+                "default": "NO_VALUE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "CARD_FUNDING_TYPE_PREPAID",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "aggregate": "count",
+                  "window": 179,
+                  "window_unit": "calendar_day",
+                  "target_field": null,
+                  "include_current_record": false,
+                  "exclude_current_day": true,
+                  "show_context": false,
+                  "filter_spec": {
+                    "equals": [
+                      {
+                        "value": "transaction.monetary_details.card_payment.card.funding_type",
+                        "default": "NO_VALUE",
+                        "datatype": "string",
+                        "type": "field"
+                      },
+                      {
+                        "value": "CARD_FUNDING_TYPE_PREPAID",
+                        "datatype": "string",
+                        "name": null,
+                        "type": "constant"
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "multiply": [
+                  {
+                    "value": {
+                      "aggregate": "average_count_over_day",
+                      "window": 179,
+                      "window_unit": "calendar_day",
+                      "target_field": null,
+                      "include_current_record": false,
+                      "exclude_current_day": true,
+                      "show_context": false,
+                      "filter_spec": {
+                        "equals": [
+                          {
+                            "value": "transaction.monetary_details.card_payment.card.funding_type",
+                            "default": "NO_VALUE",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "CARD_FUNDING_TYPE_PREPAID",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      },
+                      "grouping_fields": ["transaction.customer_identifier.id"],
+                      "type": "scalar"
+                    },
+                    "type": "aggregation"
+                  },
+                  {
+                    "value": "Min_Number_of_Previous_Days_with_Prepaid_Card_Transactions",
+                    "name": "Min_Number_of_Previous_Days_with_Prepaid_Card_Transactions",
+                    "format": "number",
+                    "type": "segment_parameter"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "aggregate": "count",
+                  "window": 1,
+                  "window_unit": "calendar_day",
+                  "target_field": null,
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "show_context": false,
+                  "filter_spec": {
+                    "equals": [
+                      {
+                        "value": "transaction.monetary_details.card_payment.card.funding_type",
+                        "default": "NO_VALUE",
+                        "datatype": "string",
+                        "type": "field"
+                      },
+                      {
+                        "value": "CARD_FUNDING_TYPE_PREPAID",
+                        "datatype": "string",
+                        "name": null,
+                        "type": "constant"
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "Prepaid_Card_Count_Delimiter",
+                "name": "Prepaid_Card_Count_Delimiter",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "aggregate": "count",
+                  "window": 1,
+                  "window_unit": "calendar_day",
+                  "target_field": null,
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "show_context": true,
+                  "filter_spec": {
+                    "equals": [
+                      {
+                        "value": "transaction.monetary_details.card_payment.card.funding_type",
+                        "default": "NO_VALUE",
+                        "datatype": "string",
+                        "type": "field"
+                      },
+                      {
+                        "value": "CARD_FUNDING_TYPE_PREPAID",
+                        "datatype": "string",
+                        "name": null,
+                        "type": "constant"
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "multiply": [
+                  {
+                    "value": "Tolerance_Factor",
+                    "name": "Tolerance_Factor",
+                    "format": "number",
+                    "type": "segment_parameter"
+                  },
+                  {
+                    "value": {
+                      "aggregate": "average_count_over_day",
+                      "window": 179,
+                      "window_unit": "calendar_day",
+                      "target_field": null,
+                      "include_current_record": false,
+                      "exclude_current_day": true,
+                      "show_context": false,
+                      "filter_spec": {
+                        "equals": [
+                          {
+                            "value": "transaction.monetary_details.card_payment.card.funding_type",
+                            "default": "NO_VALUE",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "CARD_FUNDING_TYPE_PREPAID",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      },
+                      "grouping_fields": ["transaction.customer_identifier.id"],
+                      "type": "scalar"
+                    },
+                    "type": "aggregation"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

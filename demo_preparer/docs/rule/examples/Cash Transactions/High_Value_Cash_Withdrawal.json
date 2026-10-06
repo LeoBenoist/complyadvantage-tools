@@ -1,0 +1,64 @@
+{
+  "name": "High Value Cash Withdrawal",
+  "description": "A single cash withdrawal of {{Amount}} is greater than a limit.",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["CUSTOMER"]
+      },
+      "specification": {
+        "and": [
+          {
+            "equals": [
+              {
+                "type": "field",
+                "value": "transaction.monetary_details.payment_channel",
+                "default": "PAYMENT_CHANNEL_BRANCH",
+                "datatype": "string"
+              },
+              {
+                "type": "constant",
+                "value": "PAYMENT_CHANNEL_BRANCH",
+                "name": null,
+                "datatype": "string"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "type": "field",
+                "value": "transaction.monetary_details.direction",
+                "default": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                "datatype": "string"
+              },
+              {
+                "type": "constant",
+                "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                "name": null,
+                "datatype": "string"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "type": "field",
+                "value": "transaction.monetary_details.base_value.amount",
+                "default": "0",
+                "datatype": "float"
+              },
+              {
+                "type": "segment_parameter",
+                "value": "22222222-2222-2222-2222-222222222222",
+                "name": "Amount",
+                "format": "number"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

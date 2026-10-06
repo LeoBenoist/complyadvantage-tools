@@ -1,0 +1,79 @@
+{
+  "name": "High Sum - Inbound - Counterparty",
+  "description": "The {{Amount_Limit}} sum of inbound transactions the customer received from this counterparty over the last 14 days has exceeded the set limit.",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["CUSTOMER"]
+      },
+      "specification": {
+        "and": [
+          {
+            "equals": [
+              {
+                "value": "transaction.monetary_details.direction",
+                "default": "TEST",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "sum",
+                  "window": 14,
+                  "show_context": true,
+                  "window_unit": "calendar_day",
+                  "target_field": "transaction.monetary_details.base_value.amount",
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "filter_spec": {
+                    "equals": [
+                      {
+                        "value": "transaction.monetary_details.direction",
+                        "default": "NO_VALUE",
+                        "datatype": "string",
+                        "type": "field"
+                      },
+                      {
+                        "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                        "datatype": "string",
+                        "name": null,
+                        "type": "constant"
+                      }
+                    ]
+                  },
+                  "grouping_fields": [
+                    {
+                      "value": "counterparty-id",
+                      "type": "block"
+                    },
+                    "transaction.customer_identifier.id"
+                  ],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "117b9ad5-b672-463a-b19d-087f1e3b279c",
+                "name": "Amount_Limit",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

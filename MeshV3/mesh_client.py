@@ -2,10 +2,13 @@ import requests
 import sys
 import json
 import time
-import getpass
 import pandas as pd
 import os
 import hashlib
+from collections import deque
+from datetime import datetime, date
+
+from get_token import get_guest_access_token
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -21,17 +24,23 @@ ALERTS_ENDPOINT = "/v2/cases/{case_identifier}/alerts"
 RISKS_ENDPOINT = "/v2/alerts/{alert_identifier}/risks?risk_type_version=ENTITY_SCREENING:3"
 RISK_ENDPOINT = "/v2/entity-screening/risks/{risk_identifier}"
 
-# --- Module-level config (override from each script) ---
-BASE_URL = os.getenv("BASE_URL", "https://api.mesh.complyadvantage.com")
-default_username = os.getenv("USERNAME", "xx@complyadvantage.com")
-default_password = os.getenv("PASSWORD", "")
-default_realm = os.getenv("REALM", "complyadvantage")
-default_account_name = os.getenv("ACCOUNT_NAME", "Customer Account")
+# --- Module-level config ---
+BASE_URL = f"https://api.{os.environ['REGION']}.mesh.complyadvantage.com"
 search_key = os.getenv("SEARCH_KEY", "default")
-global_token = None
+global_token = get_guest_access_token()
+
+# Rate tracking — sliding window of live request timestamps (last 60 s)
+_request_timestamps: deque = deque()
+_RATE_LIMIT_WARN = int(os.getenv("RATE_LIMIT", "200"))  # requests per minute
 
 def get_cache_filename(method, endpoint, json_payload=None):
-    base_filename = f"{method}_{endpoint.replace('/', '_').replace('?', '_').replace('=', '_').replace('&', '_')}"
+    path, _, query = endpoint.partition('?')
+    path_part = path.replace('/', '_')
+    if query:
+        query_hash = hashlib.md5(query.encode('utf-8')).hexdigest()
+        base_filename = f"{method}_{path_part}_{query_hash}"
+    else:
+        base_filename = f"{method}_{path_part}"
     if json_payload:
         payload_str = json.dumps(json_payload, sort_keys=True)
         payload_hash = hashlib.md5(payload_str.encode('utf-8')).hexdigest()
@@ -77,7 +86,21 @@ def send_request(method, endpoint, json_payload=None):
 
     return response_data
 
+def _check_rate():
+    while True:
+        now = time.monotonic()
+        while _request_timestamps and _request_timestamps[0] < now - 60:
+            _request_timestamps.popleft()
+        if len(_request_timestamps) < _RATE_LIMIT_WARN:
+            break
+        wait = 60 - (now - _request_timestamps[0])
+        print(f"\033[33mWARNING: rate limit reached ({_RATE_LIMIT_WARN} req/min) — throttling for {wait:.1f}s\033[0m", flush=True)
+        time.sleep(wait)
+    _request_timestamps.append(time.monotonic())
+
+
 def _send_live_request(method, endpoint, json_payload=None):
+    _check_rate()
     url = BASE_URL + endpoint
     headers = {"accept": "application/json"}
     if global_token:
@@ -90,6 +113,8 @@ def _send_live_request(method, endpoint, json_payload=None):
             try:
                 return response.json()
             except json.JSONDecodeError:
+                return ''
+        if response.status_code == 204:
                 return ''
         elif response.status_code == 429:
             print("Rate limit exceeded. Retrying in 2 seconds...")
@@ -110,34 +135,9 @@ def _send_live_request(method, endpoint, json_payload=None):
         return _send_live_request(method, endpoint, json_payload)
 
 
-def authenticate(username, password, realm):
-    global global_token
-    payload = {"username": username, "password": password, "realm": realm}
-    response = _send_live_request("POST", TOKEN_ENDPOINT, json_payload=payload)
-    global_token = response.get("access_token")
-    print("Authentication successful.")
-
-
-def get_accounts(account_name):
-    endpoint = f"{ACCOUNTS_ENDPOINT}?name_contains={account_name}&page_number=1&page_size=10"
-    return _send_live_request("GET", endpoint).get("accounts", [])
-
-
-def set_account(account_identifier):
-    payload = {"account_identifier": account_identifier}
-    _send_live_request("PUT", SET_ACCOUNT_ENDPOINT, json_payload=payload)
-    print("Account set successfully.")
-
-
-def verify_account():
-    account_info = _send_live_request("GET", SET_ACCOUNT_ENDPOINT)
-    print("Current active account:", account_info.get("name"))
-    return account_info
-
-
 def get_customer_details(customer_identifier):
     endpoint = CUSTOMER_ENDPOINT.format(customer_identifier=customer_identifier)
-    return _send_live_request("GET", endpoint)
+    return send_request("GET", endpoint)
 
 
 def get_case_workflows():
@@ -184,6 +184,23 @@ def get_case_alerts(case_identifier):
         alert["risks"] = get_alert_risks(alert["identifier"])
     return alerts
 
+def get_open_case_workflows_url_string():
+    workflows = get_case_workflows()
+    data = workflows.get('workflows', [])
+    result = []
+    for item in data:
+        if item['case_type'] != 'PAYMENT_SCREENING' and item['case_type'] != 'TRANSACTION_MONITORING':
+            for stage in item['stages']:
+                if stage['stage_type'] != 'DECISION':
+                    result.append(f"stage.identifier={stage['identifier']}")
+    return "&".join(result)
+
+def iter_cases_by_month():
+    """Yields (year, month, cases_list) one month at a time to keep memory bounded."""
+    open_stages = get_open_case_workflows_url_string()
+    page_size = 100
+    now = datetime.utcnow()
+    year, month = 2016, 1
 
 def get_all_cases():
     page_number, page_size, consolidated_cases = 1, 100, []
@@ -223,16 +240,6 @@ def write_to_excel(data, filename):
 
 
 def run_main(case_analyser_fn, output_filename):
-    authenticate(default_username, default_password, default_realm)
-    accounts = get_accounts(default_account_name)
-    if accounts:
-        print(f"Found accounts: {[acc['name'] for acc in accounts]}")
-        set_account(accounts[0]["identifier"])
-    else:
-        print(f"No account found with the name '{default_account_name}'. Exiting.")
-        sys.exit(1)
-
-    verify_account()
     cases = get_all_cases()
     all_results = []
     for case in cases:

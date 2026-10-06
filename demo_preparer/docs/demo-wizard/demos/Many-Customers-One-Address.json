@@ -1,0 +1,120 @@
+[
+  {
+    "id": "many_cust_one_address_01",
+    "name": "Many Customers, One Address",
+    "description": "More than 2 distinct customers share the same registered address and each makes their first outbound payment from it, triggering a network linkage alert.",
+    "industry": "Finance",
+    "tags": ["Network", "Address", "Multiple Customers"],
+    "data": {
+      "customers": [
+        {
+          "comet_identifier": "many_cust_one_addr_01a",
+          "customer": {
+            "person": {
+              "address": [
+                {
+                  "address_line1": "47 Elmwood Road",
+                  "postal_code": "E1 6AN",
+                  "town_name": "London",
+                  "country": "GB"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "comet_identifier": "many_cust_one_addr_01b",
+          "person": {
+            "address": [
+              {
+                "address_line1": "47 Elmwood Road",
+                "postal_code": "E1 6AN",
+                "town_name": "London",
+                "country": "GB"
+              }
+            ]
+          }
+        },
+        {
+          "comet_identifier": "many_cust_one_addr_01c",
+          "person": {
+            "address": [
+              {
+                "address_line1": "47 Elmwood Road",
+                "postal_code": "E1 6AN",
+                "town_name": "London",
+                "country": "GB"
+              }
+            ]
+          }
+        }
+      ],
+      "scenarios": [
+        {
+          "name": "Many Customers, One Address",
+          "specification": {
+            "value": {
+              "segments": [
+                {
+                  "name": "All customers",
+                  "values": { "8b8f20bd-2ff9-4a8b-a1ca-9b2536fad15f": "2" },
+                  "outcome": { "action": "HOLD", "alert_priority": 7 }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "transactions": [
+        {
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "many_cust_one_addr_01a" },
+                "address": {
+                  "format": "STRUCTURED",
+                  "address_line1": "47 Elmwood Road",
+                  "postal_code": "E1 6AN",
+                  "town_name": "London",
+                  "country": "GB"
+                }
+              }
+            }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "many_cust_one_addr_01b" },
+                "address": {
+                  "format": "STRUCTURED",
+                  "address_line1": "47 Elmwood Road",
+                  "postal_code": "E1 6AN",
+                  "town_name": "London",
+                  "country": "GB"
+                }
+              }
+            }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "many_cust_one_addr_01c" },
+                "address": {
+                  "format": "STRUCTURED",
+                  "address_line1": "47 Elmwood Road",
+                  "postal_code": "E1 6AN",
+                  "town_name": "London",
+                  "country": "GB"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+]

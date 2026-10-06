@@ -1,0 +1,170 @@
+{
+  "name": "Potential Mule - High Activity - New Account",
+  "description": "This new customer had {{Min_Inbound_Number_30_Days_Limit}} inbound transactions and {{Min_Outbound_Number_30_Days_Limit}} outbound transactions within the last 30 days, exceeding the set inbound and outbound limits. [The customer was considered new for their first 30 days of transactional activity.]",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["CUSTOMER"]
+      },
+      "specification": {
+        "and": [
+          {
+            "or": [
+              {
+                "equals": [
+                  {
+                    "value": "transaction.monetary_details.direction",
+                    "default": "NO_VALUE",
+                    "datatype": "string",
+                    "type": "field"
+                  },
+                  {
+                    "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                    "datatype": "string",
+                    "name": null,
+                    "type": "constant"
+                  }
+                ]
+              },
+              {
+                "equals": [
+                  {
+                    "value": "transaction.monetary_details.direction",
+                    "default": "NO_VALUE",
+                    "datatype": "string",
+                    "type": "field"
+                  },
+                  {
+                    "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                    "datatype": "string",
+                    "name": null,
+                    "type": "constant"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "count",
+                  "window": 730,
+                  "show_context": true,
+                  "window_unit": "calendar_day",
+                  "target_field": null,
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "filter_spec": null,
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "count",
+                  "window": 30,
+                  "show_context": true,
+                  "window_unit": "calendar_day",
+                  "target_field": null,
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "filter_spec": null,
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              }
+            ]
+          },
+          {
+            "greater_than_or_equals": [
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "count",
+                  "window": 30,
+                  "show_context": true,
+                  "window_unit": "calendar_day",
+                  "target_field": null,
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "filter_spec": {
+                    "equals": [
+                      {
+                        "value": "transaction.monetary_details.direction",
+                        "default": "NO_VALUE",
+                        "datatype": "string",
+                        "type": "field"
+                      },
+                      {
+                        "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                        "datatype": "string",
+                        "name": null,
+                        "type": "constant"
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "fc8ce7d0-87db-4280-8620-93e3b4ebde74",
+                "name": "Min_Inbound_Number_30_Days_Limit",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          },
+          {
+            "greater_than_or_equals": [
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "count",
+                  "window": 30,
+                  "show_context": true,
+                  "window_unit": "calendar_day",
+                  "target_field": null,
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "filter_spec": {
+                    "equals": [
+                      {
+                        "value": "transaction.monetary_details.direction",
+                        "default": "NO_VALUE",
+                        "datatype": "string",
+                        "type": "field"
+                      },
+                      {
+                        "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                        "datatype": "string",
+                        "name": null,
+                        "type": "constant"
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "8a49a0a1-4e8b-4fd4-b2f7-8ebf5e0de067",
+                "name": "Min_Outbound_Number_30_Days_Limit",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

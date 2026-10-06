@@ -1,0 +1,124 @@
+{
+  "name": "[SUMREFND] [RL_0066] High Sum | Refunds",
+  "description": "The customer's {{Refund_Sum_Limit}} {{Base_Currency}} sum of refunds over the last 14 days has exceeded the set refund sum limit.",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["CUSTOMER"]
+      },
+      "specification": {
+        "and": [
+          {
+            "not_equals": [
+              {
+                "type": "field",
+                "value": "transaction.monetary_details.base_value.iso_3_currency_code",
+                "datatype": "string",
+                "default": "CURRENCY_CODE"
+              },
+              {
+                "type": "constant",
+                "name": "Base_Currency",
+                "value": "CURRENCY_CODE",
+                "datatype": "string"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "value": "transaction.type",
+                "default": "NO_VALUE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "TRANSACTION_TYPE_CARD_PAYMENT",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "value": "transaction.monetary_details.card_payment.card_payment_type",
+                "default": "NO_VALUE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "CARD_PAYMENT_TYPE_REFUND",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "aggregate": "sum",
+                  "window": 14,
+                  "window_unit": "calendar_day",
+                  "target_field": "transaction.monetary_details.base_value.amount",
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "show_context": true,
+                  "filter_spec": {
+                    "and": [
+                      {
+                        "equals": [
+                          {
+                            "value": "transaction.type",
+                            "default": "NO_VALUE",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "TRANSACTION_TYPE_CARD_PAYMENT",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      },
+                      {
+                        "equals": [
+                          {
+                            "value": "transaction.monetary_details.card_payment.card_payment_type",
+                            "default": "NO_VALUE",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "CARD_PAYMENT_TYPE_REFUND",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "Refund_Sum_Limit",
+                "name": "Refund_Sum_Limit",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

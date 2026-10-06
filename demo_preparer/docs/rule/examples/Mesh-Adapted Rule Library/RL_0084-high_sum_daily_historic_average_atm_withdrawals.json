@@ -1,0 +1,664 @@
+{
+  "name": "[HSUMATM] [RL_0084] High Sum | Daily Historic Average | ATM Withdrawals",
+  "description": "The customer's {{ATM_Withdrawal_Sum_Delimiter}} {{Base_Currency}} sum of ATM Withdrawals over the last day exceeded a set tolerance factor times their daily average ATM withdrawal sum. \n\n[The daily average sum was calculated over the 179 days preceding the evaluated day, and it excludes days on which the customer had no ATM withdrawals. Applicable since the customer had more than the set minimum number of preceding days on which they had ATM withdrawals.]",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["CUSTOMER"]
+      },
+      "specification": {
+        "and": [
+          {
+            "not_equals": [
+              {
+                "type": "field",
+                "value": "transaction.monetary_details.base_value.iso_3_currency_code",
+                "datatype": "string",
+                "default": "CURRENCY_CODE"
+              },
+              {
+                "type": "constant",
+                "name": "Base_Currency",
+                "value": "CURRENCY_CODE",
+                "datatype": "string"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "value": "transaction.type",
+                "default": "NO_VALUE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "TRANSACTION_TYPE_CARD_PAYMENT",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "value": "transaction.monetary_details.direction",
+                "default": "NO_VALUE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "value": "transaction.monetary_details.payment_channel",
+                "default": "NO_VALUE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "PAYMENT_CHANNEL_ATM",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "aggregate": "count",
+                  "window": 179,
+                  "window_unit": "calendar_day",
+                  "target_field": null,
+                  "include_current_record": false,
+                  "exclude_current_day": true,
+                  "show_context": false,
+                  "filter_spec": {
+                    "and": [
+                      {
+                        "equals": [
+                          {
+                            "value": "transaction.type",
+                            "default": "NO_VALUE",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "TRANSACTION_TYPE_CARD_PAYMENT",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      },
+                      {
+                        "equals": [
+                          {
+                            "value": "transaction.monetary_details.direction",
+                            "default": "NO_VALUE",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      },
+                      {
+                        "equals": [
+                          {
+                            "value": "transaction.monetary_details.payment_channel",
+                            "default": "NO_VALUE",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "PAYMENT_CHANNEL_ATM",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "multiply": [
+                  {
+                    "value": {
+                      "aggregate": "average_count_over_day",
+                      "window": 179,
+                      "window_unit": "calendar_day",
+                      "target_field": null,
+                      "include_current_record": false,
+                      "exclude_current_day": true,
+                      "show_context": false,
+                      "filter_spec": {
+                        "and": [
+                          {
+                            "equals": [
+                              {
+                                "value": "transaction.type",
+                                "default": "NO_VALUE",
+                                "datatype": "string",
+                                "type": "field"
+                              },
+                              {
+                                "value": "TRANSACTION_TYPE_CARD_PAYMENT",
+                                "datatype": "string",
+                                "name": null,
+                                "type": "constant"
+                              }
+                            ]
+                          },
+                          {
+                            "equals": [
+                              {
+                                "value": "transaction.monetary_details.direction",
+                                "default": "NO_VALUE",
+                                "datatype": "string",
+                                "type": "field"
+                              },
+                              {
+                                "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                                "datatype": "string",
+                                "name": null,
+                                "type": "constant"
+                              }
+                            ]
+                          },
+                          {
+                            "equals": [
+                              {
+                                "value": "transaction.monetary_details.payment_channel",
+                                "default": "NO_VALUE",
+                                "datatype": "string",
+                                "type": "field"
+                              },
+                              {
+                                "value": "PAYMENT_CHANNEL_ATM",
+                                "datatype": "string",
+                                "name": null,
+                                "type": "constant"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "grouping_fields": ["transaction.customer_identifier.id"],
+                      "type": "scalar"
+                    },
+                    "type": "aggregation"
+                  },
+                  {
+                    "type": "segment_parameter",
+                    "value": "Min_Number_of_Previous_Days_with_ATM_Withdrawals",
+                    "name": "Min_Number_of_Previous_Days_with_ATM_Withdrawals",
+                    "format": "number"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "aggregate": "sum",
+                  "window": 179,
+                  "window_unit": "calendar_day",
+                  "target_field": "transaction.monetary_details.base_value.amount",
+                  "include_current_record": false,
+                  "exclude_current_day": true,
+                  "show_context": false,
+                  "filter_spec": {
+                    "and": [
+                      {
+                        "equals": [
+                          {
+                            "value": "transaction.type",
+                            "default": "NO_VALUE",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "TRANSACTION_TYPE_CARD_PAYMENT",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      },
+                      {
+                        "equals": [
+                          {
+                            "value": "transaction.monetary_details.direction",
+                            "default": "NO_VALUE",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      },
+                      {
+                        "equals": [
+                          {
+                            "value": "transaction.monetary_details.payment_channel",
+                            "default": "NO_VALUE",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "PAYMENT_CHANNEL_ATM",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "0",
+                "datatype": "number",
+                "name": "Daily_Average_ATM_Sum",
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "aggregate": "sum",
+                  "window": 1,
+                  "window_unit": "calendar_day",
+                  "target_field": "transaction.monetary_details.base_value.amount",
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "show_context": false,
+                  "filter_spec": {
+                    "and": [
+                      {
+                        "equals": [
+                          {
+                            "value": "transaction.type",
+                            "default": "NO_VALUE",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "TRANSACTION_TYPE_CARD_PAYMENT",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      },
+                      {
+                        "equals": [
+                          {
+                            "value": "transaction.monetary_details.direction",
+                            "default": "NO_VALUE",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      },
+                      {
+                        "equals": [
+                          {
+                            "value": "transaction.monetary_details.payment_channel",
+                            "default": "NO_VALUE",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "PAYMENT_CHANNEL_ATM",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "ATM_Withdrawal_Sum_Delimiter",
+                "name": "ATM_Withdrawal_Sum_Delimiter",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "multiply": [
+                  {
+                    "value": {
+                      "aggregate": "sum",
+                      "window": 1,
+                      "window_unit": "calendar_day",
+                      "target_field": "transaction.monetary_details.base_value.amount",
+                      "include_current_record": true,
+                      "exclude_current_day": false,
+                      "show_context": true,
+                      "filter_spec": {
+                        "and": [
+                          {
+                            "equals": [
+                              {
+                                "value": "transaction.type",
+                                "default": "NO_VALUE",
+                                "datatype": "string",
+                                "type": "field"
+                              },
+                              {
+                                "value": "TRANSACTION_TYPE_CARD_PAYMENT",
+                                "datatype": "string",
+                                "name": null,
+                                "type": "constant"
+                              }
+                            ]
+                          },
+                          {
+                            "equals": [
+                              {
+                                "value": "transaction.monetary_details.direction",
+                                "default": "NO_VALUE",
+                                "datatype": "string",
+                                "type": "field"
+                              },
+                              {
+                                "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                                "datatype": "string",
+                                "name": null,
+                                "type": "constant"
+                              }
+                            ]
+                          },
+                          {
+                            "equals": [
+                              {
+                                "value": "transaction.monetary_details.payment_channel",
+                                "default": "NO_VALUE",
+                                "datatype": "string",
+                                "type": "field"
+                              },
+                              {
+                                "value": "PAYMENT_CHANNEL_ATM",
+                                "datatype": "string",
+                                "name": null,
+                                "type": "constant"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "grouping_fields": ["transaction.customer_identifier.id"],
+                      "type": "scalar"
+                    },
+                    "type": "aggregation"
+                  },
+                  {
+                    "value": {
+                      "aggregate": "count",
+                      "window": 179,
+                      "window_unit": "calendar_day",
+                      "target_field": null,
+                      "include_current_record": false,
+                      "exclude_current_day": true,
+                      "show_context": false,
+                      "filter_spec": {
+                        "and": [
+                          {
+                            "equals": [
+                              {
+                                "value": "transaction.type",
+                                "default": "NO_VALUE",
+                                "datatype": "string",
+                                "type": "field"
+                              },
+                              {
+                                "value": "TRANSACTION_TYPE_CARD_PAYMENT",
+                                "datatype": "string",
+                                "name": null,
+                                "type": "constant"
+                              }
+                            ]
+                          },
+                          {
+                            "equals": [
+                              {
+                                "value": "transaction.monetary_details.direction",
+                                "default": "NO_VALUE",
+                                "datatype": "string",
+                                "type": "field"
+                              },
+                              {
+                                "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                                "datatype": "string",
+                                "name": null,
+                                "type": "constant"
+                              }
+                            ]
+                          },
+                          {
+                            "equals": [
+                              {
+                                "value": "transaction.monetary_details.payment_channel",
+                                "default": "NO_VALUE",
+                                "datatype": "string",
+                                "type": "field"
+                              },
+                              {
+                                "value": "PAYMENT_CHANNEL_ATM",
+                                "datatype": "string",
+                                "name": null,
+                                "type": "constant"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "grouping_fields": ["transaction.customer_identifier.id"],
+                      "type": "scalar"
+                    },
+                    "type": "aggregation"
+                  }
+                ]
+              },
+              {
+                "multiply": [
+                  {
+                    "multiply": [
+                      {
+                        "value": "Tolerance_Factor",
+                        "name": "Tolerance_Factor",
+                        "format": "number",
+                        "type": "segment_parameter"
+                      },
+                      {
+                        "value": {
+                          "aggregate": "sum",
+                          "window": 179,
+                          "window_unit": "calendar_day",
+                          "target_field": "transaction.monetary_details.base_value.amount",
+                          "include_current_record": false,
+                          "exclude_current_day": true,
+                          "show_context": false,
+                          "filter_spec": {
+                            "and": [
+                              {
+                                "equals": [
+                                  {
+                                    "value": "transaction.type",
+                                    "default": "NO_VALUE",
+                                    "datatype": "string",
+                                    "type": "field"
+                                  },
+                                  {
+                                    "value": "TRANSACTION_TYPE_CARD_PAYMENT",
+                                    "datatype": "string",
+                                    "name": null,
+                                    "type": "constant"
+                                  }
+                                ]
+                              },
+                              {
+                                "equals": [
+                                  {
+                                    "value": "transaction.monetary_details.direction",
+                                    "default": "NO_VALUE",
+                                    "datatype": "string",
+                                    "type": "field"
+                                  },
+                                  {
+                                    "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                                    "datatype": "string",
+                                    "name": null,
+                                    "type": "constant"
+                                  }
+                                ]
+                              },
+                              {
+                                "equals": [
+                                  {
+                                    "value": "transaction.monetary_details.payment_channel",
+                                    "default": "NO_VALUE",
+                                    "datatype": "string",
+                                    "type": "field"
+                                  },
+                                  {
+                                    "value": "PAYMENT_CHANNEL_ATM",
+                                    "datatype": "string",
+                                    "name": null,
+                                    "type": "constant"
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          "grouping_fields": ["transaction.customer_identifier.id"],
+                          "type": "scalar"
+                        },
+                        "type": "aggregation"
+                      }
+                    ]
+                  },
+                  {
+                    "value": {
+                      "aggregate": "average_count_over_day",
+                      "window": 179,
+                      "window_unit": "calendar_day",
+                      "target_field": null,
+                      "include_current_record": false,
+                      "exclude_current_day": true,
+                      "show_context": false,
+                      "filter_spec": {
+                        "and": [
+                          {
+                            "equals": [
+                              {
+                                "value": "transaction.type",
+                                "default": "NO_VALUE",
+                                "datatype": "string",
+                                "type": "field"
+                              },
+                              {
+                                "value": "TRANSACTION_TYPE_CARD_PAYMENT",
+                                "datatype": "string",
+                                "name": null,
+                                "type": "constant"
+                              }
+                            ]
+                          },
+                          {
+                            "equals": [
+                              {
+                                "value": "transaction.monetary_details.direction",
+                                "default": "NO_VALUE",
+                                "datatype": "string",
+                                "type": "field"
+                              },
+                              {
+                                "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                                "datatype": "string",
+                                "name": null,
+                                "type": "constant"
+                              }
+                            ]
+                          },
+                          {
+                            "equals": [
+                              {
+                                "value": "transaction.monetary_details.payment_channel",
+                                "default": "NO_VALUE",
+                                "datatype": "string",
+                                "type": "field"
+                              },
+                              {
+                                "value": "PAYMENT_CHANNEL_ATM",
+                                "datatype": "string",
+                                "name": null,
+                                "type": "constant"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "grouping_fields": ["transaction.customer_identifier.id"],
+                      "type": "scalar"
+                    },
+                    "type": "aggregation"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

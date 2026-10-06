@@ -5,3 +5,6 @@ results/*.json
 *.xlsx
 *.csv
 __pycache__
+*cache*
+*results*
+*__pycache__*

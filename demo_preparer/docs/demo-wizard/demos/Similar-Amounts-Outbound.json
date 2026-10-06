@@ -1,0 +1,57 @@
+[
+  {
+    "id": "similar_amounts_outbound_01",
+    "name": "Similar Amounts - Outbound",
+    "description": "The customer's total outbound transactions over 30 days exceed 5,000 and represent at least 80% of their total inbound amount, suggesting pass-through behaviour.",
+    "industry": "Finance",
+    "tags": ["Similar Amounts", "Outbound", "Pass-Through", "Money Mule"],
+    "data": {
+      "customers": [{ "comet_identifier": "similar_amounts_outbound_01" }],
+      "scenarios": [
+        {
+          "name": "Similar Amounts - Outbound",
+          "specification": {
+            "value": {
+              "segments": [
+                {
+                  "name": "All customers",
+                  "values": {
+                    "dbd1a1f7-dbcb-4b37-bade-fe1055666ebe": "5000",
+                    "a322a7f6-efb1-480d-ad5d-8ecaaafa0c56": "80"
+                  },
+                  "outcome": { "action": "HOLD", "alert_priority": 7 }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "transactions": [
+        {
+          "details": {
+            "details": {
+              "creditor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "similar_amounts_outbound_01" } }
+            },
+            "base_value": { "amount": 10000 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "similar_amounts_outbound_01" } }
+            },
+            "base_value": { "amount": 4500 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "similar_amounts_outbound_01" } }
+            },
+            "base_value": { "amount": 4700 }
+          }
+        }
+      ]
+    }
+  }
+]

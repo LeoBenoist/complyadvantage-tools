@@ -17,11 +17,14 @@ def extract_alert_data(data):
             risk_indicators = risk.get('details', {}).get('detail', {}).get('profile', {}).get('risk_indicators', [])
 
             sanctions, peps = [], []
+            ri_risk_type_names = []
             for ri in risk_indicators:
                 for s in ri.get('sanction_indicators', {}).get('values', []):
                     sanctions.append(s.get("source_name"))
                 for p in ri.get('pep_indicators', {}).get('values', []):
                     peps.append(p.get("class"))
+                for rt in ri.get('risk_types', []):
+                    ri_risk_type_names.append(rt.get('name'))
 
             results.append({
                 'case_identifier': case_identifier,
@@ -33,6 +36,8 @@ def extract_alert_data(data):
                 'profile_match_score': profile_info.get('match_score'),
                 'profile_risk': risk.get('details', {}).get('detail', {}).get('profile', {}).get('risk_types', []),
                 # 'case_aml_types': aml_types,
+                'risk_indicator_risk_type_names': json.dumps(ri_risk_type_names),
+                'decision': risk.get('decision'),
                 'sanctions': json.dumps(sanctions),
                 'peps': json.dumps(peps),
                 'mesh_url': 'https://mesh.complyadvantage.com/cases/' + case_identifier,

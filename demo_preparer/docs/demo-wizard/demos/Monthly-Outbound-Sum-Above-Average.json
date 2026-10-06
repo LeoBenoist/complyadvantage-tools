@@ -1,0 +1,68 @@
+[
+  {
+    "id": "monthly_outbound_sum_avg_01",
+    "name": "Monthly Outbound Sum Above Average",
+    "description": "A customer's outbound total this month exceeds 3,000 and is more than 2× their average from the prior 2 months, flagging an unusual spike.",
+    "industry": "Finance",
+    "tags": ["Monthly", "Outbound", "Above Average", "Anomaly"],
+    "data": {
+      "customers": [{ "comet_identifier": "monthly_outbound_sum_avg_01" }],
+      "scenarios": [
+        {
+          "name": "Monthly Outbound Sum Above Average",
+          "specification": {
+            "value": {
+              "segments": [
+                {
+                  "name": "All customers",
+                  "values": {
+                    "292140ae-5a77-41c9-8329-13bbad536b64": "3000",
+                    "bdb2f93f-a7ba-450f-82c7-1ccdfdf26ddc": "2"
+                  },
+                  "outcome": { "action": "HOLD", "alert_priority": 6 }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "transactions": [
+        {
+          "comet_occurred_at_offset": { "value": 4, "unit": "months" },
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "monthly_outbound_sum_avg_01" } }
+            },
+            "base_value": { "amount": 900 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 2, "unit": "months" },
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "monthly_outbound_sum_avg_01" } }
+            },
+            "base_value": { "amount": 1100 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 2, "unit": "months" },
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "monthly_outbound_sum_avg_01" } }
+            },
+            "base_value": { "amount": 950 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "monthly_outbound_sum_avg_01" } }
+            },
+            "base_value": { "amount": 8500 }
+          }
+        }
+      ]
+    }
+  }
+]

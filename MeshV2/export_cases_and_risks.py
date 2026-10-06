@@ -83,4 +83,4 @@ def extract_alert_data(data):
 
 
 if __name__ == "__main__":
-    mc.run_main(extract_alert_data, f"lydia.xlsx")
+    mc.run_main(extract_alert_data, "lydia")

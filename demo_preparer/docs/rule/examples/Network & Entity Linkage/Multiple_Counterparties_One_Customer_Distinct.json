@@ -1,0 +1,77 @@
+{
+  "name": "Multiple Counterparties, One Customer - Distinct",
+  "description": "The customer transacted with {{Counterparties_per_Customer_Limit}} different counterparties within the last 30 days, which exceeded the set limit.",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["CUSTOMER"]
+      },
+      "specification": {
+        "and": [
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "unique_count",
+                  "window": 30,
+                  "show_context": true,
+                  "window_unit": "calendar_day",
+                  "target_field": {
+                    "value": "counterparty-id",
+                    "type": "block"
+                  },
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "filter_spec": null,
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "hll"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "6fc19e78-50fc-4fdd-a08d-c9897f5b716b",
+                "name": "Counterparties_per_Customer_Limit",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "count",
+                  "window": 30,
+                  "show_context": true,
+                  "window_unit": "calendar_day",
+                  "target_field": null,
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "filter_spec": null,
+                  "grouping_fields": [
+                    "transaction.customer_identifier.id",
+                    {
+                      "value": "counterparty-id",
+                      "type": "block"
+                    }
+                  ],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "1",
+                "datatype": "number",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

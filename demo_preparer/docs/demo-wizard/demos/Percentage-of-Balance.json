@@ -1,0 +1,44 @@
+[
+  {
+    "id": "percentage_of_balance_01",
+    "name": "Percentage of Balance",
+    "description": "A customer makes an outbound transaction that drains or nearly drains their account balance, which is at least 10,000.",
+    "industry": "Finance",
+    "tags": ["Balance", "Outbound", "Account Anomaly"],
+    "data": {
+      "customers": [{ "comet_identifier": "percentage_of_balance_01" }],
+      "scenarios": [
+        {
+          "name": "Percentage of Balance",
+          "specification": {
+            "value": {
+              "segments": [
+                {
+                  "name": "All customers",
+                  "values": {
+                    "1f8e24ac-e37f-4204-8978-6398ce9a2566": "10000",
+                    "f2a86bfe-c5c8-477d-96d9-29d13fc50e09": "50"
+                  },
+                  "outcome": { "action": "HOLD", "alert_priority": 7 }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "transactions": [
+        {
+          "details": {
+            "customer_account_balance": {
+              "current_balance": { "amount": 15000 }
+            },
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "percentage_of_balance_01" } }
+            },
+            "base_value": { "amount": 15001 }
+          }
+        }
+      ]
+    }
+  }
+]

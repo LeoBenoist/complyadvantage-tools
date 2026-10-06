@@ -1,0 +1,200 @@
+{
+  "name": "[IN-OUT-1] [RL_0024] Large Outbound Transaction Compared to Sum of Inbound",
+  "description": "The customer's outbound transaction of {{Outbound_Delimiter}} {{Base_Currency}} exceeded the set percentage of their {{Inbound_Sum}} {{Base_Currency}} sum of inbound transactions over the last 14 days. \n\n[Applicable since the outbound transaction was at least as much as the outbound delimiter amount, and since the customer received {{Inbound_Transaction_Count_Delimiter}} inbound transactions over the same 14 days, exceeding the set inbound transaction count delimiter.]",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["TRANSACTION"]
+      },
+      "specification": {
+        "and": [
+          {
+            "not_equals": [
+              {
+                "type": "field",
+                "value": "transaction.monetary_details.base_value.iso_3_currency_code",
+                "datatype": "string",
+                "default": "CURRENCY_CODE"
+              },
+              {
+                "type": "constant",
+                "name": "Base_Currency",
+                "value": "CURRENCY_CODE",
+                "datatype": "string"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "type": "field",
+                "value": "transaction.monetary_details.direction",
+                "datatype": "string",
+                "default": "NO_VALUE"
+              },
+              {
+                "type": "constant",
+                "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                "datatype": "string"
+              }
+            ]
+          },
+          {
+            "greater_than_or_equals": [
+              {
+                "type": "field",
+                "value": "transaction.monetary_details.base_value.amount",
+                "datatype": "number",
+                "default": "0"
+              },
+              {
+                "type": "segment_parameter",
+                "value": "Outbound_Delimiter",
+                "name": "Outbound_Delimiter",
+                "format": "number"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "type": "field",
+                "value": "transaction.monetary_details.base_value.amount",
+                "datatype": "number",
+                "default": "0"
+              },
+              {
+                "multiply": [
+                  {
+                    "divide": [
+                      {
+                        "type": "segment_parameter",
+                        "value": "Percentage",
+                        "name": "Percentage",
+                        "format": "number"
+                      },
+                      {
+                        "type": "constant",
+                        "value": "100",
+                        "datatype": "number"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "aggregation",
+                    "value": {
+                      "aggregate": "sum",
+                      "exclude_current_day": false,
+                      "filter_spec": {
+                        "equals": [
+                          {
+                            "type": "field",
+                            "value": "transaction.monetary_details.direction",
+                            "datatype": "string",
+                            "default": "NO_VALUE"
+                          },
+                          {
+                            "type": "constant",
+                            "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                            "datatype": "string"
+                          }
+                        ]
+                      },
+                      "grouping_fields": ["transaction.customer_identifier.id"],
+                      "include_current_record": true,
+                      "target_field": "transaction.monetary_details.base_value.amount",
+                      "type": "scalar",
+                      "uuid": null,
+                      "window": 14,
+                      "window_unit": "calendar_day"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "greater_than_or_equals": [
+              {
+                "type": "aggregation",
+                "value": {
+                  "aggregate": "sum",
+                  "exclude_current_day": false,
+                  "filter_spec": {
+                    "equals": [
+                      {
+                        "type": "field",
+                        "value": "transaction.monetary_details.direction",
+                        "datatype": "string",
+                        "default": "NO_VALUE"
+                      },
+                      {
+                        "type": "constant",
+                        "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                        "datatype": "string"
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "include_current_record": true,
+                  "target_field": "transaction.monetary_details.base_value.amount",
+                  "type": "scalar",
+                  "uuid": null,
+                  "window": 14,
+                  "show_context": true,
+                  "window_unit": "calendar_day"
+                }
+              },
+              {
+                "type": "constant",
+                "name": "Inbound_Sum",
+                "value": "0",
+                "datatype": "number"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "type": "aggregation",
+                "value": {
+                  "aggregate": "count",
+                  "exclude_current_day": false,
+                  "filter_spec": {
+                    "equals": [
+                      {
+                        "type": "field",
+                        "value": "transaction.monetary_details.direction",
+                        "datatype": "string",
+                        "default": "NO_VALUE"
+                      },
+                      {
+                        "type": "constant",
+                        "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                        "datatype": "string"
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "include_current_record": true,
+                  "target_field": null,
+                  "type": "scalar",
+                  "uuid": null,
+                  "window": 14,
+                  "window_unit": "calendar_day"
+                }
+              },
+              {
+                "type": "segment_parameter",
+                "value": "Inbound_Transaction_Count_Delimiter",
+                "name": "Inbound_Transaction_Count_Delimiter",
+                "format": "number"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

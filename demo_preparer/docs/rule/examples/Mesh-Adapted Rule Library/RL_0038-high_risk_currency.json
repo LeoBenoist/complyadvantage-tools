@@ -1,0 +1,80 @@
+{
+  "name": "[HRCU] [RL_0038] High-Risk Currency",
+  "description": "The transaction currency was {{Currency}}, which was classified as a {{Currency_Risk_Level}} risk currency. [Applicable since the transaction of {{Minimum_Transaction_Amount}} {{Base_Currency}} was at least the set minimum amount. Currency risk is set on the 'Currency Risk' lookup list.]",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["TRANSACTION"]
+      },
+      "specification": {
+        "and": [
+          {
+            "not_equals": [
+              {
+                "value": "transaction.monetary_details.base_value.iso_3_currency_code",
+                "default": "CURRENCY_CODE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "CURRENCY_CODE",
+                "datatype": "string",
+                "name": "Base_Currency",
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "not_equals": [
+              {
+                "value": "transaction.monetary_details.value.iso_3_currency_code",
+                "default": "CURRENCY_CODE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "CURRENCY_CODE",
+                "datatype": "string",
+                "name": "Currency",
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "value": "transaction.enrichments.currency_risk.string_value",
+                "default": "Low",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "Currency_Risk_Level",
+                "name": "Currency_Risk_Level",
+                "format": "string",
+                "type": "segment_parameter"
+              }
+            ]
+          },
+          {
+            "greater_than_or_equals": [
+              {
+                "value": "transaction.monetary_details.base_value.amount",
+                "default": "0",
+                "datatype": "number",
+                "type": "field"
+              },
+              {
+                "value": "Minimum_Transaction_Amount",
+                "name": "Minimum_Transaction_Amount",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

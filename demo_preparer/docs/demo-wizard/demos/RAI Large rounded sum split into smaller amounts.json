@@ -1,0 +1,90 @@
+[
+  {
+    "id": "rai-large-rounded-sum-split-into-smaller-amounts",
+    "name": "AI Large rounded sum split into smaller amounts",
+    "description": "100k split into 4 transactions with arbitrary amounts 42 345, 24 678, 20 333, 12 644.",
+    "industry": "Finance",
+    "tags": ["AI"],
+    "data": {
+      "customers": [
+        {
+          "comet_identifier": "rai-large-rounded-sum-split-into-smaller-amounts"
+        }
+      ],
+      "transactions": [
+        {
+          "comet_occurred_at_offset": { "value": 1, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-large-rounded-sum-split-into-smaller-amounts" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e1",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 42345 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 1, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-large-rounded-sum-split-into-smaller-amounts" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e1",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 24678 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 1, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-large-rounded-sum-split-into-smaller-amounts" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e1",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 20333 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 1, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-large-rounded-sum-split-into-smaller-amounts" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e1",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 12644 }
+          }
+        }
+      ]
+    }
+  }
+]

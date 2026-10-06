@@ -1,0 +1,533 @@
+{
+  "paths": [
+    {
+      "field": "customer[0].identifier.id",
+      "alias": "customerIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].identifier.version",
+      "alias": "customerIdentifierVersion",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "customer[0].account_identifier.id",
+      "alias": "customerAccountIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].person.title",
+      "alias": "customerPersonTitle",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].person.first_name",
+      "alias": "customerPersonFirstName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].person.middle_name",
+      "alias": "customerPersonMiddleName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].person.last_name",
+      "alias": "customerPersonLastName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].person.date_of_birth.year",
+      "alias": "customerPersonDateOfBirthYear",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "customer[0].person.date_of_birth.month",
+      "alias": "customerPersonDateOfBirthMonth",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "customer[0].person.date_of_birth.day",
+      "alias": "customerPersonDateOfBirthDay",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "customer[0].person.date_of_birth",
+      "alias": "customerPersonDateOfBirth",
+      "type": [
+        "date"
+      ]
+    },
+    {
+      "field": "customer[0].person.gender",
+      "alias": "customerPersonGender",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].person.salary_range.low",
+      "alias": "customerPersonSalaryRangeLow",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "customer[0].person.salary_range.high",
+      "alias": "customerPersonSalaryRangeHigh",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "customer[0].person.salary_currency",
+      "alias": "customerPersonSalaryCurrency",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].person.source_of_wealth",
+      "alias": "customerPersonSourceOfWealth",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].person.country_of_birth",
+      "alias": "customerPersonCountryOfBirth",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].person.full_name",
+      "alias": "customerPersonFullName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].person.suffix",
+      "alias": "customerPersonSuffix",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].person.fathers_name",
+      "alias": "customerPersonFathersName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].person.mothers_name",
+      "alias": "customerPersonMothersName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].person.industry",
+      "alias": "customerPersonIndustry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].person.net_worth.amount",
+      "alias": "customerPersonNetWorthAmount",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "customer[0].person.net_worth.currency",
+      "alias": "customerPersonNetWorthCurrency",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].person.source_of_income",
+      "alias": "customerPersonSourceOfIncome",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer\\[0\\]\\.person\\.custom_fields\\.[a-zA-Z0-9_]+\\.field_key",
+      "alias": "customerPersonCustomFieldsFieldKey",
+      "type": [
+        "string"
+      ],
+      "matchType": "REGEX"
+    },
+    {
+      "field": "customer\\[0\\]\\.person\\.custom_fields\\.[a-zA-Z0-9_]+\\.string_value",
+      "alias": "customerPersonCustomFieldsStringValue",
+      "type": [
+        "string"
+      ],
+      "matchType": "REGEX"
+    },
+    {
+      "field": "customer\\[0\\]\\.person\\.custom_fields\\.[a-zA-Z0-9_]+\\.integer_value",
+      "alias": "customerPersonCustomFieldsIntegerValue",
+      "type": [
+        "number"
+      ],
+      "matchType": "REGEX"
+    },
+    {
+      "field": "customer\\[0\\]\\.person\\.custom_fields\\.[a-zA-Z0-9_]+\\.float_value",
+      "alias": "customerPersonCustomFieldsFloatValue",
+      "type": [
+        "number"
+      ],
+      "matchType": "REGEX"
+    },
+    {
+      "field": "customer\\[0\\]\\.person\\.custom_fields\\.[a-zA-Z0-9_]+\\.date_value",
+      "alias": "customerPersonCustomFieldsDateValue",
+      "type": [
+        "date"
+      ],
+      "matchType": "REGEX"
+    },
+    {
+      "field": "customer\\[0\\]\\.person\\.custom_fields\\.[a-zA-Z0-9_]+\\.datetime_value",
+      "alias": "customerPersonCustomFieldsDatetimeValue",
+      "type": [
+        "datetime"
+      ],
+      "matchType": "REGEX"
+    },
+    {
+      "field": "customer[0].company.legal_name",
+      "alias": "customerCompanyLegalName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].company.company_type",
+      "alias": "customerCompanyCompanyType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].company.company_status",
+      "alias": "customerCompanyCompanyStatus",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].company.place_of_registration",
+      "alias": "customerCompanyPlaceOfRegistration",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].company.registration_authority_identification",
+      "alias": "customerCompanyRegistrationAuthorityIdentification",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].company.incorporation_date.year",
+      "alias": "customerCompanyIncorporationDateYear",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "customer[0].company.incorporation_date.month",
+      "alias": "customerCompanyIncorporationDateMonth",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "customer[0].company.incorporation_date.day",
+      "alias": "customerCompanyIncorporationDateDay",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "customer[0].company.incorporation_date",
+      "alias": "customerCompanyIncorporationDate",
+      "type": [
+        "date"
+      ]
+    },
+    {
+      "field": "customer[0].company.industry",
+      "alias": "customerCompanyIndustry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].company.source_of_income",
+      "alias": "customerCompanySourceOfIncome",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer\\[0\\]\\.company\\.custom_fields\\.[a-zA-Z0-9_]+\\.field_key",
+      "alias": "customerCompanyCustomFieldsFieldKey",
+      "type": [
+        "string"
+      ],
+      "matchType": "REGEX"
+    },
+    {
+      "field": "customer\\[0\\]\\.company\\.custom_fields\\.[a-zA-Z0-9_]+\\.string_value",
+      "alias": "customerCompanyCustomFieldsStringValue",
+      "type": [
+        "string"
+      ],
+      "matchType": "REGEX"
+    },
+    {
+      "field": "customer\\[0\\]\\.company\\.custom_fields\\.[a-zA-Z0-9_]+\\.integer_value",
+      "alias": "customerCompanyCustomFieldsIntegerValue",
+      "type": [
+        "number"
+      ],
+      "matchType": "REGEX"
+    },
+    {
+      "field": "customer\\[0\\]\\.company\\.custom_fields\\.[a-zA-Z0-9_]+\\.float_value",
+      "alias": "customerCompanyCustomFieldsFloatValue",
+      "type": [
+        "number"
+      ],
+      "matchType": "REGEX"
+    },
+    {
+      "field": "customer\\[0\\]\\.company\\.custom_fields\\.[a-zA-Z0-9_]+\\.date_value",
+      "alias": "customerCompanyCustomFieldsDateValue",
+      "type": [
+        "date"
+      ],
+      "matchType": "REGEX"
+    },
+    {
+      "field": "customer\\[0\\]\\.company\\.custom_fields\\.[a-zA-Z0-9_]+\\.datetime_value",
+      "alias": "customerCompanyCustomFieldsDatetimeValue",
+      "type": [
+        "datetime"
+      ],
+      "matchType": "REGEX"
+    },
+    {
+      "field": "customer[0].undefined.name",
+      "alias": "customerUndefinedName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].undefined.birth_year",
+      "alias": "customerUndefinedBirthYear",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "customer[0].vessel.name",
+      "alias": "customerVesselName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].vessel.vessel_type",
+      "alias": "customerVesselType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].vessel.year_of_build",
+      "alias": "customerVesselYearOfBuild",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "customer[0].vessel.tonnage",
+      "alias": "customerVesselTonnage",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer\\[0\\]\\.vessel\\.custom_fields\\.[a-zA-Z0-9_]+\\.field_key",
+      "alias": "customerVesselCustomFieldsFieldKey",
+      "type": [
+        "string"
+      ],
+      "matchType": "REGEX"
+    },
+    {
+      "field": "customer\\[0\\]\\.vessel\\.custom_fields\\.[a-zA-Z0-9_]+\\.string_value",
+      "alias": "customerVesselCustomFieldsStringValue",
+      "type": [
+        "string"
+      ],
+      "matchType": "REGEX"
+    },
+    {
+      "field": "customer\\[0\\]\\.vessel\\.custom_fields\\.[a-zA-Z0-9_]+\\.integer_value",
+      "alias": "customerVesselCustomFieldsIntegerValue",
+      "type": [
+        "number"
+      ],
+      "matchType": "REGEX"
+    },
+    {
+      "field": "customer\\[0\\]\\.vessel\\.custom_fields\\.[a-zA-Z0-9_]+\\.float_value",
+      "alias": "customerVesselCustomFieldsFloatValue",
+      "type": [
+        "number"
+      ],
+      "matchType": "REGEX"
+    },
+    {
+      "field": "customer\\[0\\]\\.vessel\\.custom_fields\\.[a-zA-Z0-9_]+\\.date_value",
+      "alias": "customerVesselCustomFieldsDateValue",
+      "type": [
+        "date"
+      ],
+      "matchType": "REGEX"
+    },
+    {
+      "field": "customer\\[0\\]\\.vessel\\.custom_fields\\.[a-zA-Z0-9_]+\\.datetime_value",
+      "alias": "customerVesselCustomFieldsDatetimeValue",
+      "type": [
+        "datetime"
+      ],
+      "matchType": "REGEX"
+    },
+    {
+      "field": "customer[0].customer_status",
+      "alias": "customerCustomerStatus",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].external_identifier.id",
+      "alias": "customerExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].created_at",
+      "alias": "customerCreatedAt",
+      "type": [
+        "datetime"
+      ]
+    },
+    {
+      "field": "customer[0].updated_at",
+      "alias": "customerUpdatedAt",
+      "type": [
+        "datetime"
+      ]
+    },
+    {
+      "field": "customer[0].configuration.screening_configuration_identifier.id",
+      "alias": "customerConfigurationScreeningConfigurationIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].configuration.monitor_configuration_identifier.id",
+      "alias": "customerConfigurationMonitorConfigurationIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].monitoring.entity_screening.entity_screening_monitor_configuration_identifier.id",
+      "alias": "customerMonitoringEntityScreeningEntityScreeningMonitorConfigurationIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].monitoring.entity_screening.entity_screening_monitor_configuration_enabled",
+      "alias": "customerMonitoringEntityScreeningEntityScreeningMonitorConfigurationEnabled",
+      "type": [
+        "boolean"
+      ]
+    },
+    {
+      "field": "customer[0].acquisition_source",
+      "alias": "customerAcquisitionSource",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "customer[0].customer_since.year",
+      "alias": "customerCustomerSinceYear",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "customer[0].customer_since.month",
+      "alias": "customerCustomerSinceMonth",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "customer[0].customer_since.day",
+      "alias": "customerCustomerSinceDay",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "customer[0].customer_since",
+      "alias": "customerCustomerSince",
+      "type": [
+        "date"
+      ]
+    }
+  ]
+}

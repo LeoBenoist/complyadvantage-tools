@@ -1,0 +1,132 @@
+{
+  "name": "[TX>%LOAN] [RL_0073] Loan Payment Almost Reaches Loan Balance",
+  "description": "The customer's {{Loan_Type}} loan repayment of {{Minimum_Transaction_Amount}} {{Base_Currency}} exceeded the set percentage of the loan's remaining base balance. [Applicable if the transaction is on a loan product and the loan's remaining base balance was provided.]",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["TRANSACTION"]
+      },
+      "specification": {
+        "and": [
+          {
+            "equals": [
+              {
+                "value": "transaction.monetary_details.direction",
+                "default": "NO_VALUE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "not_equals": [
+              {
+                "value": "transaction.monetary_details.base_value.iso_3_currency_code",
+                "default": "CURRENCY_CODE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "CURRENCY_CODE",
+                "datatype": "string",
+                "name": "Base_Currency",
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "not_equals": [
+              {
+                "value": "transaction.product.product_details.loan.loan_type",
+                "default": "LOAN_TYPE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "LOAN_TYPE",
+                "datatype": "string",
+                "name": "Loan_Type",
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "not_equals": [
+              {
+                "value": "transaction.product.product_details.loan.base_remaining_balance_value.amount",
+                "default": "0",
+                "datatype": "number",
+                "type": "field"
+              },
+              {
+                "value": "0",
+                "datatype": "number",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": "transaction.monetary_details.base_value.amount",
+                "default": "0",
+                "datatype": "number",
+                "type": "field"
+              },
+              {
+                "value": "Minimum_Transaction_Amount",
+                "name": "Minimum_Transaction_Amount",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": "transaction.monetary_details.base_value.amount",
+                "default": "0",
+                "datatype": "number",
+                "type": "field"
+              },
+              {
+                "multiply": [
+                  {
+                    "value": "transaction.product.product_details.loan.base_remaining_balance_value.amount",
+                    "default": "0",
+                    "datatype": "number",
+                    "type": "field"
+                  },
+                  {
+                    "divide": [
+                      {
+                        "value": "Loan_Balance_Percentage",
+                        "name": "Loan_Balance_Percentage",
+                        "format": "number",
+                        "type": "segment_parameter"
+                      },
+                      {
+                        "value": "100",
+                        "datatype": "number",
+                        "name": null,
+                        "type": "constant"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,81 @@
+[
+  {
+    "id": "potential_mule_new_account_01",
+    "name": "Potential Mule - High Activity - New Account",
+    "description": "A new customer (all transactions within first 30 days) sends at least 3 inbound and 3 outbound transactions, suggesting potential money mule activity.",
+    "industry": "Finance",
+    "tags": ["Money Mule", "New Account", "High Activity", "Inbound", "Outbound"],
+    "data": {
+      "customers": [{ "comet_identifier": "potential_mule_new_account_01" }],
+      "scenarios": [
+        {
+          "name": "Potential Mule - High Activity - New Account",
+          "specification": {
+            "value": {
+              "segments": [
+                {
+                  "name": "All customers",
+                  "values": {
+                    "fc8ce7d0-87db-4280-8620-93e3b4ebde74": "2",
+                    "8a49a0a1-4e8b-4fd4-b2f7-8ebf5e0de067": "2"
+                  },
+                  "outcome": { "action": "HOLD", "alert_priority": 8 }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "transactions": [
+        {
+          "details": {
+            "details": {
+              "creditor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "potential_mule_new_account_01" } }
+            },
+            "base_value": { "amount": 3200 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "creditor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "potential_mule_new_account_01" } }
+            },
+            "base_value": { "amount": 2800 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "creditor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "potential_mule_new_account_01" } }
+            },
+            "base_value": { "amount": 4100 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "potential_mule_new_account_01" } }
+            },
+            "base_value": { "amount": 2950 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "potential_mule_new_account_01" } }
+            },
+            "base_value": { "amount": 1850 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "potential_mule_new_account_01" } }
+            },
+            "base_value": { "amount": 3400 }
+          }
+        }
+      ]
+    }
+  }
+]

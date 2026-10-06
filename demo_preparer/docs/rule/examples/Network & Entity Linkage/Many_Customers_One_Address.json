@@ -1,0 +1,97 @@
+{
+  "name": "Many Customers, One Address",
+  "description": "This Customer is one of {{Number}} Customers to have made Outbound payments relating to a single address (this is their first Outbound payment relating to this address).",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["TRANSACTION"]
+      },
+      "specification": {
+        "and": [
+          {
+            "equals": [
+              {
+                "value": "transaction.monetary_details.direction",
+                "default": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "unique_count",
+                  "window": 730,
+                  "show_context": true,
+                  "window_unit": "day",
+                  "target_field": "transaction.customer_identifier.id",
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "filter_spec": null,
+                  "grouping_fields": [
+                    "transaction.monetary_details.bank_payment.debtor.structured_address.address_line_1",
+                    "transaction.monetary_details.bank_payment.debtor.structured_address.post_code",
+                    "transaction.monetary_details.bank_payment.debtor.structured_address.town_name",
+                    "transaction.monetary_details.bank_payment.debtor.structured_address.country",
+                    "transaction.monetary_details.direction"
+                  ],
+                  "type": "hll"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "8b8f20bd-2ff9-4a8b-a1ca-9b2536fad15f",
+                "name": "Number",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "count",
+                  "window": 730,
+                  "show_context": true,
+                  "window_unit": "day",
+                  "target_field": null,
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "filter_spec": null,
+                  "grouping_fields": [
+                    "transaction.customer_identifier.id",
+                    "transaction.monetary_details.bank_payment.debtor.structured_address.address_line_1",
+                    "transaction.monetary_details.bank_payment.debtor.structured_address.post_code",
+                    "transaction.monetary_details.bank_payment.debtor.structured_address.town_name",
+                    "transaction.monetary_details.bank_payment.debtor.structured_address.country_subdivision",
+                    "transaction.monetary_details.direction"
+                  ],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "1",
+                "datatype": "integer",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

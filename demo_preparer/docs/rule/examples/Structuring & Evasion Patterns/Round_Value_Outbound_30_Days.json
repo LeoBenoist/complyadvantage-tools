@@ -1,0 +1,200 @@
+{
+  "name": "Round Value - Outbound - 30 Days",
+  "description": "The Customer sent {{Number}} round-value transactions totaling {{Amount}}, which exceeded the set limits. [Round-value transactions are defined as transactions with an amount divisible by 1,000 with no remainder.]",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["CUSTOMER"]
+      },
+      "specification": {
+        "and": [
+          {
+            "equals": [
+              {
+                "value": "transaction.monetary_details.direction",
+                "default": "NO_VALUE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "mod": [
+                  {
+                    "value": "transaction.monetary_details.base_value.amount",
+                    "default": "0",
+                    "datatype": "number",
+                    "type": "field"
+                  },
+                  {
+                    "value": "1000",
+                    "datatype": "number",
+                    "name": null,
+                    "type": "constant"
+                  }
+                ]
+              },
+              {
+                "value": "0",
+                "datatype": "number",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than_or_equals": [
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "count",
+                  "window": 30,
+                  "show_context": true,
+                  "window_unit": "calendar_day",
+                  "target_field": null,
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "filter_spec": {
+                    "and": [
+                      {
+                        "equals": [
+                          {
+                            "value": "transaction.monetary_details.direction",
+                            "default": "TEST",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      },
+                      {
+                        "equals": [
+                          {
+                            "mod": [
+                              {
+                                "value": "transaction.monetary_details.base_value.amount",
+                                "default": "0",
+                                "datatype": "number",
+                                "type": "field"
+                              },
+                              {
+                                "value": "1000",
+                                "datatype": "number",
+                                "name": null,
+                                "type": "constant"
+                              }
+                            ]
+                          },
+                          {
+                            "value": "0",
+                            "datatype": "number",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "1da304a9-a6e9-4e76-b2e1-55b8adb7b5c4",
+                "name": "Number",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          },
+          {
+            "greater_than_or_equals": [
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "sum",
+                  "window": 30,
+                  "show_context": true,
+                  "window_unit": "calendar_day",
+                  "target_field": "transaction.monetary_details.value.amount",
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "filter_spec": {
+                    "and": [
+                      {
+                        "equals": [
+                          {
+                            "value": "transaction.monetary_details.direction",
+                            "default": "TEST",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      },
+                      {
+                        "equals": [
+                          {
+                            "mod": [
+                              {
+                                "value": "transaction.monetary_details.value.amount",
+                                "default": "0",
+                                "datatype": "number",
+                                "type": "field"
+                              },
+                              {
+                                "value": "1000",
+                                "datatype": "number",
+                                "name": null,
+                                "type": "constant"
+                              }
+                            ]
+                          },
+                          {
+                            "value": "0",
+                            "datatype": "number",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "fb0c32cb-c1c4-4e96-86fe-9697918dd848",
+                "name": "Amount",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

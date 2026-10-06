@@ -63,7 +63,7 @@ CARD_COLUMN_MAPPING: dict[str, str] = {
     # "Statut":                       "transaction.monetary_transaction.card_payment.payment_stages_info.authorization.state",
     # "Date d’autorisation": "transaction.monetary_transaction.card_payment.payment_stages_info.authorization.timestamp",
     # "Cause erreur autorisation":    "transaction.monetary_transaction.card_payment.payment_stages_info.authorization.response.reason_code",
-    "Cause de l’erreur":    "transaction.monetary_transaction.card_payment.payment_stages_info.authorization.response.reason_code",
+    # "Cause de l’erreur":    "transaction.monetary_transaction.card_payment.payment_stages_info.authorization.response.reason_code",
     # "Id autorisation":              "transaction.monetary_transaction.card_payment.payment_stages_info.authorization.identifier",
     # "Montant autorisation":         "transaction.monetary_transaction.card_payment.payment_stages_info.authorization.value.amount",
     # Settlement stage
@@ -442,6 +442,13 @@ def _apply_common_post_processing(result: pd.DataFrame, df: pd.DataFrame, prefix
     for col in result.columns:
         if col.endswith(".amount"):
             result[col] = pd.to_numeric(result[col], errors="coerce")
+
+    # Strip newline characters from all name columns
+    for col in result.columns:
+        if col.endswith(".name") or col.endswith(".full_name"):
+            mask = result[col].notna()
+            if mask.any():
+                result.loc[mask, col] = result.loc[mask, col].astype(str).str.replace(r"[\r\n]+", " ", regex=True).str.strip()
 
 
 def convert_card(df: pd.DataFrame, prefix: str = "") -> pd.DataFrame:

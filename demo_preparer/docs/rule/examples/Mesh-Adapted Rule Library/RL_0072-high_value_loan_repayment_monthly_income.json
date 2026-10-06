@@ -1,0 +1,80 @@
+{
+  "name": "[TX>INC] [RL_0072] High Value Loan Repayment | Monthly Income",
+  "description": "The customer's {{Loan_Type}} loan repayment was {{Loan_Repayment_Value_Limit}} {{Base_Currency}}, exceeding the set limit. [Set the limit to the customer's monthly-income-based ceiling; customer income is not available as a transaction field. Applicable to transactions on a loan product.]",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["TRANSACTION"]
+      },
+      "specification": {
+        "and": [
+          {
+            "equals": [
+              {
+                "value": "transaction.monetary_details.direction",
+                "default": "NO_VALUE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "not_equals": [
+              {
+                "value": "transaction.monetary_details.base_value.iso_3_currency_code",
+                "default": "CURRENCY_CODE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "CURRENCY_CODE",
+                "datatype": "string",
+                "name": "Base_Currency",
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "not_equals": [
+              {
+                "value": "transaction.product.product_details.loan.loan_type",
+                "default": "LOAN_TYPE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "LOAN_TYPE",
+                "datatype": "string",
+                "name": "Loan_Type",
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": "transaction.monetary_details.base_value.amount",
+                "default": "0",
+                "datatype": "number",
+                "type": "field"
+              },
+              {
+                "value": "Loan_Repayment_Value_Limit",
+                "name": "Loan_Repayment_Value_Limit",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

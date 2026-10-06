@@ -1,0 +1,320 @@
+{
+  "name": "Pic d'activité inhabituel vs. profil historique du marchand (velocity spike)",
+  "description": "Le volume inbound du marchand sur les 3 derniers jours ({{Volume_Inbound_3J}}) est {{Ratio_Pic_Observe}} fois supérieur à la moyenne journalière historique calculée sur les 90 jours précédents. [Déclenché sur la base de {{Jours_Actifs_Historique}} jours actifs en historique sur 90 jours et d'un volume courant dépassant le seuil minimum configuré.]",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["CUSTOMER"]
+      },
+      "specification": {
+        "and": [
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "count",
+                  "window": 90,
+                  "window_unit": "calendar_day",
+                  "target_field": null,
+                  "include_current_record": false,
+                  "exclude_current_day": true,
+                  "show_context": true,
+                  "filter_spec": {
+                    "equals": [
+                      {
+                        "value": "transaction.monetary_details.direction",
+                        "default": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                        "datatype": "string",
+                        "type": "field"
+                      },
+                      {
+                        "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                        "datatype": "string",
+                        "name": null,
+                        "type": "constant"
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "multiply": [
+                  {
+                    "value": {
+                      "uuid": null,
+                      "aggregate": "average_count_over_day",
+                      "window": 90,
+                      "window_unit": "calendar_day",
+                      "target_field": null,
+                      "include_current_record": false,
+                      "exclude_current_day": true,
+                      "show_context": true,
+                      "filter_spec": {
+                        "equals": [
+                          {
+                            "value": "transaction.monetary_details.direction",
+                            "default": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      },
+                      "grouping_fields": ["transaction.customer_identifier.id"],
+                      "type": "scalar"
+                    },
+                    "type": "aggregation"
+                  },
+                  {
+                    "value": "Jours_Actifs_Minimum",
+                    "name": "Jours_Actifs_Historique",
+                    "format": "number",
+                    "type": "segment_parameter"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "sum",
+                  "window": 90,
+                  "window_unit": "calendar_day",
+                  "target_field": "transaction.monetary_details.base_value.amount",
+                  "include_current_record": false,
+                  "exclude_current_day": true,
+                  "show_context": true,
+                  "filter_spec": {
+                    "equals": [
+                      {
+                        "value": "transaction.monetary_details.direction",
+                        "default": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                        "datatype": "string",
+                        "type": "field"
+                      },
+                      {
+                        "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                        "datatype": "string",
+                        "name": null,
+                        "type": "constant"
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "0",
+                "datatype": "number",
+                "name": "Somme_Historique_Inbound",
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "sum",
+                  "window": 3,
+                  "window_unit": "calendar_day",
+                  "target_field": "transaction.monetary_details.base_value.amount",
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "show_context": true,
+                  "filter_spec": {
+                    "equals": [
+                      {
+                        "value": "transaction.monetary_details.direction",
+                        "default": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                        "datatype": "string",
+                        "type": "field"
+                      },
+                      {
+                        "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                        "datatype": "string",
+                        "name": null,
+                        "type": "constant"
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "Seuil_Volume_Inbound",
+                "name": "Volume_Inbound_3J",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "multiply": [
+                  {
+                    "value": {
+                      "uuid": null,
+                      "aggregate": "sum",
+                      "window": 3,
+                      "window_unit": "calendar_day",
+                      "target_field": "transaction.monetary_details.base_value.amount",
+                      "include_current_record": true,
+                      "exclude_current_day": false,
+                      "show_context": true,
+                      "filter_spec": {
+                        "equals": [
+                          {
+                            "value": "transaction.monetary_details.direction",
+                            "default": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      },
+                      "grouping_fields": ["transaction.customer_identifier.id"],
+                      "type": "scalar"
+                    },
+                    "type": "aggregation"
+                  },
+                  {
+                    "value": {
+                      "uuid": null,
+                      "aggregate": "count",
+                      "window": 90,
+                      "window_unit": "calendar_day",
+                      "target_field": null,
+                      "include_current_record": false,
+                      "exclude_current_day": true,
+                      "show_context": true,
+                      "filter_spec": {
+                        "equals": [
+                          {
+                            "value": "transaction.monetary_details.direction",
+                            "default": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      },
+                      "grouping_fields": ["transaction.customer_identifier.id"],
+                      "type": "scalar"
+                    },
+                    "type": "aggregation"
+                  }
+                ]
+              },
+              {
+                "multiply": [
+                  {
+                    "multiply": [
+                      {
+                        "value": "Facteur_Tolerance",
+                        "name": "Ratio_Pic_Observe",
+                        "format": "number",
+                        "type": "segment_parameter"
+                      },
+                      {
+                        "value": {
+                          "uuid": null,
+                          "aggregate": "sum",
+                          "window": 90,
+                          "window_unit": "calendar_day",
+                          "target_field": "transaction.monetary_details.base_value.amount",
+                          "include_current_record": false,
+                          "exclude_current_day": true,
+                          "show_context": true,
+                          "filter_spec": {
+                            "equals": [
+                              {
+                                "value": "transaction.monetary_details.direction",
+                                "default": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                                "datatype": "string",
+                                "type": "field"
+                              },
+                              {
+                                "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                                "datatype": "string",
+                                "name": null,
+                                "type": "constant"
+                              }
+                            ]
+                          },
+                          "grouping_fields": ["transaction.customer_identifier.id"],
+                          "type": "scalar"
+                        },
+                        "type": "aggregation"
+                      }
+                    ]
+                  },
+                  {
+                    "value": {
+                      "uuid": null,
+                      "aggregate": "average_count_over_day",
+                      "window": 90,
+                      "window_unit": "calendar_day",
+                      "target_field": null,
+                      "include_current_record": false,
+                      "exclude_current_day": true,
+                      "show_context": true,
+                      "filter_spec": {
+                        "equals": [
+                          {
+                            "value": "transaction.monetary_details.direction",
+                            "default": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                            "datatype": "string",
+                            "type": "field"
+                          },
+                          {
+                            "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      },
+                      "grouping_fields": ["transaction.customer_identifier.id"],
+                      "type": "scalar"
+                    },
+                    "type": "aggregation"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -2,7 +2,7 @@ import os
 import json
 import mesh_client as mc
 
-MATCH_THRESHOLD = int(os.getenv("MATCH_THRESHOLD", "90"))
+MATCH_THRESHOLD = int(os.getenv("MATCH_THRESHOLD", "20"))
 
 def extract_alert_data(data):
     print(data)
@@ -18,6 +18,7 @@ def extract_alert_data(data):
     # Aggregated at case level — all alerts merged into one row
     all_sanctions, all_watchlists, all_peps = [], [], []
     all_profile_identifiers, all_profile_names, all_profile_scores, all_profile_risks = [], [], [], []
+    all_ri_risk_type_names = []
 
     for alert in alerts:
         for risk in alert.get('risks', []):
@@ -36,6 +37,8 @@ def extract_alert_data(data):
                     all_watchlists.append(w.get("source_name"))
                 for p in ri.get('pep_indicators', {}).get('values', []):
                     all_peps.append(p.get("class"))
+                for rt in ri.get('risk_types', []):
+                    all_ri_risk_type_names.append(rt.get('name'))
 
             all_profile_identifiers.append(profile_info.get('identifier'))
             all_profile_names.append(risk.get('details', {}).get('detail', {}).get('profile', {}).get('match_details', {}).get('match_name', {}).get('name', ''))
@@ -52,9 +55,10 @@ def extract_alert_data(data):
             'profile_match_score': json.dumps(list(dict.fromkeys(all_profile_scores))),
             'profile_risk': list(dict.fromkeys(all_profile_risks)),
             # 'case_aml_types': aml_types,
-            'sanctions': json.dumps(all_sanctions),
-            'watchlists': json.dumps(all_watchlists),
-            'peps': json.dumps(all_peps),
+            'risk_indicator_risk_type_names': json.dumps(list(dict.fromkeys(all_ri_risk_type_names))),
+            'sanctions': json.dumps(list(dict.fromkeys(all_sanctions))),
+            'watchlists': json.dumps(list(dict.fromkeys(all_watchlists))),
+            'peps': json.dumps(list(dict.fromkeys(all_peps))),
             'mesh_url': 'https://mesh.complyadvantage.com/cases/' + case_identifier,
         })
     return results

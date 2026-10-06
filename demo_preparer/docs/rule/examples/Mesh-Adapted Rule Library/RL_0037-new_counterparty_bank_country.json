@@ -1,0 +1,88 @@
+{
+  "name": "[NBCOU] [RL_0037] New Counterparty Bank Country",
+  "description": "This was the customer's first transaction to or from {{Counterparty_Country}} over the last 730 days. [Applicable since the counterparty's country was provided and the customer had made at least one previous transaction.]",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["TRANSACTION"]
+      },
+      "specification": {
+        "and": [
+          {
+            "not_equals": [
+              {
+                "value": "counterparty-country-code",
+                "default": "Country_Code",
+                "datatype": "string",
+                "type": "block"
+              },
+              {
+                "value": "Country_Code",
+                "datatype": "string",
+                "name": "Counterparty_Country",
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "count",
+                  "window": 730,
+                  "window_unit": "calendar_day",
+                  "target_field": null,
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "filter_spec": null,
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "1",
+                "datatype": "number",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "count",
+                  "window": 730,
+                  "window_unit": "calendar_day",
+                  "target_field": null,
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "filter_spec": null,
+                  "grouping_fields": [
+                    "transaction.customer_identifier.id",
+                    {
+                      "value": "counterparty-country-code",
+                      "type": "block"
+                    }
+                  ],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "1",
+                "datatype": "number",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

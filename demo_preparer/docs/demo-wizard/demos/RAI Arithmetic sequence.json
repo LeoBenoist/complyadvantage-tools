@@ -1,0 +1,432 @@
+[
+  {
+    "id": "rai-arithmetic-sequence",
+    "name": "AI High ratio of repeating digits in amounts from one customer within one day.",
+    "description": "Sequence of transactions with high ratio of repeating digits.",
+    "industry": "Finance",
+    "tags": ["AI"],
+    "data": {
+      "customers": [
+        {
+          "comet_identifier": "rai-arithmetic-sequence"
+        }
+      ],
+      "transactions": [
+        {
+          "comet_occurred_at_offset": { "value": 1, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-arithmetic-sequence" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 77.77 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 2, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-arithmetic-sequence" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 77.77 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 2, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-arithmetic-sequence" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 77.77 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 2, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-arithmetic-sequence" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 39365.78 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 2, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-arithmetic-sequence" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 1111.11 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 2, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-arithmetic-sequence" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 1111.11 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 2, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-arithmetic-sequence" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 1111.11 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 2, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-arithmetic-sequence" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 1111.11 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 2, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-arithmetic-sequence" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 1111.11 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 2, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-arithmetic-sequence" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 1111.11 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 2, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-arithmetic-sequence" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 1111.11 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 2, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-arithmetic-sequence" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 1111.11 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 2, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-arithmetic-sequence" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 1111.11 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 2, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-arithmetic-sequence" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 1111.11 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 2, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-arithmetic-sequence" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 1111.11 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 2, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-arithmetic-sequence" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 1111.11 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 2, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-arithmetic-sequence" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 1111.11 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 2, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-arithmetic-sequence" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 1111.11 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 2, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-arithmetic-sequence" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 1111.11 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 2, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-arithmetic-sequence" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 1111.11 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 2, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-arithmetic-sequence" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 1111.11 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 2, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-arithmetic-sequence" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 1111.11 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 2, "unit": "hours" },
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": { "type": "CUSTOMER", "comet_identifier": "rai-arithmetic-sequence" }
+              },
+              "creditor": {
+                "identifier": {
+                  "external_identifier": "counterparty-e4c1d018-6a3e-4641-a731-96498b8b650e",
+                  "type": "COUNTERPARTY"
+                },
+                "name": "Romaguera and Sons"
+              }
+            },
+            "value": { "amount": 1111.11 }
+          }
+        }
+      ]
+    }
+  }
+]

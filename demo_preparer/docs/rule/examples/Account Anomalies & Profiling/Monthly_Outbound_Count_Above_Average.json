@@ -1,0 +1,188 @@
+{
+  "name": "Monthly Outbound Count Above Average",
+  "description": "This Customer's count of Outbound transactions in the last month was {{Number_of_Transactions}}, which was greater than a Factor above their average from the preceding 2 months (which was {{Factor}}).",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["CUSTOMER"]
+      },
+      "specification": {
+        "and": [
+          {
+            "equals": [
+              {
+                "value": "transaction.monetary_details.direction",
+                "default": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "count",
+                  "window": 24,
+                  "show_context": true,
+                  "window_unit": "month",
+                  "target_field": null,
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "filter_spec": null,
+                  "grouping_fields": [
+                    "transaction.customer_identifier.id",
+                    "transaction.monetary_details.direction"
+                  ],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "count",
+                  "window": 3,
+                  "show_context": true,
+                  "window_unit": "month",
+                  "target_field": null,
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "filter_spec": null,
+                  "grouping_fields": [
+                    "transaction.customer_identifier.id",
+                    "transaction.monetary_details.direction"
+                  ],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "count",
+                  "window": 1,
+                  "show_context": true,
+                  "window_unit": "month",
+                  "target_field": null,
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "filter_spec": null,
+                  "grouping_fields": [
+                    "transaction.customer_identifier.id",
+                    "transaction.monetary_details.direction"
+                  ],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "e6907a2a-61c2-4ea5-83be-a8c2acca7f62",
+                "name": "Number_of_Transactions",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "count",
+                  "window": 1,
+                  "show_context": true,
+                  "window_unit": "month",
+                  "target_field": null,
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "filter_spec": null,
+                  "grouping_fields": [
+                    "transaction.customer_identifier.id",
+                    "transaction.monetary_details.direction"
+                  ],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "multiply": [
+                  {
+                    "divide": [
+                      {
+                        "subtract": [
+                          {
+                            "value": {
+                              "uuid": null,
+                              "aggregate": "count",
+                              "window": 3,
+                              "show_context": true,
+                              "window_unit": "month",
+                              "target_field": null,
+                              "include_current_record": true,
+                              "exclude_current_day": false,
+                              "filter_spec": null,
+                              "grouping_fields": [
+                                "transaction.customer_identifier.id",
+                                "transaction.monetary_details.direction"
+                              ],
+                              "type": "scalar"
+                            },
+                            "type": "aggregation"
+                          },
+                          {
+                            "value": {
+                              "uuid": null,
+                              "aggregate": "count",
+                              "window": 1,
+                              "show_context": true,
+                              "window_unit": "month",
+                              "target_field": null,
+                              "include_current_record": true,
+                              "exclude_current_day": false,
+                              "filter_spec": null,
+                              "grouping_fields": [
+                                "transaction.customer_identifier.id",
+                                "transaction.monetary_details.direction"
+                              ],
+                              "type": "scalar"
+                            },
+                            "type": "aggregation"
+                          }
+                        ]
+                      },
+                      {
+                        "value": "2",
+                        "datatype": "integer",
+                        "name": "Count_from_preceding_months",
+                        "type": "constant"
+                      }
+                    ]
+                  },
+                  {
+                    "value": "39d4b235-ec98-47fe-90d1-dae04ea7290a",
+                    "name": "Factor",
+                    "format": "number",
+                    "type": "segment_parameter"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

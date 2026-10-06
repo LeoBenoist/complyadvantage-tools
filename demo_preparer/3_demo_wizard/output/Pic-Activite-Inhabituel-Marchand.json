@@ -1,0 +1,163 @@
+[
+  {
+    "id": "pic_activite_inhabituel_marchand_01",
+    "name": "Pic d'activité inhabituel vs. profil historique du marchand (velocity spike)",
+    "description": "Le volume inbound du marchand sur les 3 derniers jours (1 500) est 4,5× supérieur à la moyenne journalière historique sur 90 jours (333/j, total 30 000 sur 6 jours actifs), contre un facteur seuil de 3×.",
+    "industry": "Finance",
+    "tags": ["Velocity Spike", "Marchand", "Anomalie", "Profil Historique", "Inbound"],
+    "data": {
+      "customers": [
+        {
+          "comet_identifier": "pic_activite_marchand_01"
+        }
+      ],
+      "scenarios": [
+        {
+          "name": "Pic d'activité inhabituel vs. profil historique du marchand (velocity spike)",
+          "specification": {
+            "value": {
+              "segments": [
+                {
+                  "name": "All customers",
+                  "values": {
+                    "Facteur_Tolerance": "3",
+                    "Jours_Actifs_Minimum": "5",
+                    "Seuil_Volume_Inbound": "1000"
+                  },
+                  "outcome": { "action": "HOLD", "alert_priority": 6 }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "transactions": [
+        {
+          "comet_occurred_at_offset": { "value": 85, "unit": "days" },
+          "details": {
+            "details": {
+              "creditor": {
+                "identifier": {
+                  "type": "CUSTOMER",
+                  "comet_identifier": "pic_activite_marchand_01"
+                }
+              }
+            },
+            "base_value": { "amount": 5000 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 75, "unit": "days" },
+          "details": {
+            "details": {
+              "creditor": {
+                "identifier": {
+                  "type": "CUSTOMER",
+                  "comet_identifier": "pic_activite_marchand_01"
+                }
+              }
+            },
+            "base_value": { "amount": 5000 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 65, "unit": "days" },
+          "details": {
+            "details": {
+              "creditor": {
+                "identifier": {
+                  "type": "CUSTOMER",
+                  "comet_identifier": "pic_activite_marchand_01"
+                }
+              }
+            },
+            "base_value": { "amount": 5000 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 55, "unit": "days" },
+          "details": {
+            "details": {
+              "creditor": {
+                "identifier": {
+                  "type": "CUSTOMER",
+                  "comet_identifier": "pic_activite_marchand_01"
+                }
+              }
+            },
+            "base_value": { "amount": 5000 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 45, "unit": "days" },
+          "details": {
+            "details": {
+              "creditor": {
+                "identifier": {
+                  "type": "CUSTOMER",
+                  "comet_identifier": "pic_activite_marchand_01"
+                }
+              }
+            },
+            "base_value": { "amount": 5000 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 35, "unit": "days" },
+          "details": {
+            "details": {
+              "creditor": {
+                "identifier": {
+                  "type": "CUSTOMER",
+                  "comet_identifier": "pic_activite_marchand_01"
+                }
+              }
+            },
+            "base_value": { "amount": 5000 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 2, "unit": "days" },
+          "details": {
+            "details": {
+              "creditor": {
+                "identifier": {
+                  "type": "CUSTOMER",
+                  "comet_identifier": "pic_activite_marchand_01"
+                }
+              }
+            },
+            "base_value": { "amount": 500 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 1, "unit": "days" },
+          "details": {
+            "details": {
+              "creditor": {
+                "identifier": {
+                  "type": "CUSTOMER",
+                  "comet_identifier": "pic_activite_marchand_01"
+                }
+              }
+            },
+            "base_value": { "amount": 500 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "creditor": {
+                "identifier": {
+                  "type": "CUSTOMER",
+                  "comet_identifier": "pic_activite_marchand_01"
+                }
+              }
+            },
+            "base_value": { "amount": 500 }
+          }
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,40 @@
+{
+  "name": "[P-2nd] [RL_0021] Second Transaction",
+  "description": "This was the customer's second transaction.",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["CUSTOMER"]
+      },
+      "specification": {
+        "equals": [
+          {
+            "type": "aggregation",
+            "value": {
+              "aggregate": "count",
+              "exclude_current_day": false,
+              "show_context": true,
+              "filter_spec": null,
+              "grouping_fields": [
+                "transaction.customer_identifier.id"
+              ],
+              "include_current_record": true,
+              "target_field": null,
+              "type": "scalar",
+              "uuid": null,
+              "window": 730,
+              "window_unit": "calendar_day"
+            }
+          },
+          {
+            "type": "constant",
+            "value": "2",
+            "name": "Transaction_Count",
+            "datatype": "number"
+          }
+        ]
+      }
+    }
+  }
+}

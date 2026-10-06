@@ -1,0 +1,116 @@
+{
+  "name": "[P-%BAL] [RL_0001] Percentage of Balance",
+  "description": "The customer's outbound transaction of {{Outbound_Transaction_Delimiter}} {{Base_Currency}} exceeded the set percentage of their account balance.  \n\n[Applicable since their {{Balance_Limit}} {{Base_Currency}} balance (before the transaction) was at least the set limit.] ",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["TRANSACTION"]
+      },
+      "specification": {
+        "and": [
+          {
+            "not_equals": [
+              {
+                "type": "field",
+                "datatype": "string",
+                "default": "CURRENCY_CODE",
+                "value": "transaction.monetary_details.base_value.iso_3_currency_code"
+              },
+              {
+                "value": "CURRENCY_CODE",
+                "datatype": "string",
+                "name": "Base_Currency",
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "type": "field",
+                "datatype": "string",
+                "default": "NO_VALUE",
+                "value": "transaction.monetary_details.direction"
+              },
+              {
+                "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than_or_equals": [
+              {
+                "type": "field",
+                "datatype": "number",
+                "default": "-10000000000000000",
+                "value": "transaction.monetary_details.customer_account_balance.current_base_balance.amount"
+              },
+              {
+                "value": "Balance_Limit",
+                "name": "Balance_Limit",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          },
+          {
+            "greater_than_or_equals": [
+              {
+                "type": "field",
+                "datatype": "number",
+                "default": "0",
+                "value": "transaction.monetary_details.base_value.amount"
+              },
+              {
+                "value": "Outbound_Transaction_Delimiter",
+                "name": "Outbound_Transaction_Delimiter",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "type": "field",
+                "datatype": "number",
+                "default": "0",
+                "value": "transaction.monetary_details.base_value.amount"
+              },
+              {
+                "multiply": [
+                  {
+                    "type": "field",
+                    "datatype": "number",
+                    "default": "-10000000000000000",
+                    "value": "transaction.monetary_details.customer_account_balance.current_base_balance.amount"
+                  },
+                  {
+                    "divide": [
+                      {
+                        "value": "Percentage",
+                        "name": "Percentage",
+                        "format": "number",
+                        "type": "segment_parameter"
+                      },
+                      {
+                        "value": "100",
+                        "datatype": "number",
+                        "name": null,
+                        "type": "constant"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

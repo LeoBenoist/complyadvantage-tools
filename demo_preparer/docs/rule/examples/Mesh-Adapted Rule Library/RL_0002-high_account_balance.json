@@ -1,0 +1,90 @@
+{
+  "name": "[P-LBAL] [RL_0002] High Account Balance",
+  "description": "The customer's account balance reached {{Balance_Limit}} {{Base_Currency}} after this inbound transaction, exceeding the configured high-balance limit. [Applicable if the transaction currency was provided. The post-transaction balance is estimated as the current base account balance plus the inbound base amount.]",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["TRANSACTION"]
+      },
+      "specification": {
+        "and": [
+          {
+            "not_equals": [
+              {
+                "value": "transaction.monetary_details.base_value.iso_3_currency_code",
+                "default": "CURRENCY_CODE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "CURRENCY_CODE",
+                "datatype": "string",
+                "name": "Base_Currency",
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "value": "transaction.monetary_details.direction",
+                "default": "NO_VALUE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": "transaction.monetary_details.base_value.amount",
+                "default": "0",
+                "datatype": "number",
+                "type": "field"
+              },
+              {
+                "value": "0",
+                "datatype": "number",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "add": [
+                  {
+                    "value": "transaction.monetary_details.customer_account_balance.current_base_balance.amount",
+                    "default": "0",
+                    "datatype": "number",
+                    "type": "field"
+                  },
+                  {
+                    "value": "transaction.monetary_details.base_value.amount",
+                    "default": "0",
+                    "datatype": "number",
+                    "type": "field"
+                  }
+                ]
+              },
+              {
+                "value": "Balance_Limit",
+                "name": "Balance_Limit",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

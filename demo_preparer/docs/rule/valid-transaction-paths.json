@@ -1,0 +1,4649 @@
+{
+  "paths": [
+    {
+      "field": "transaction.identifier.identifier",
+      "alias": "transactionIdentifier",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.external_identifier.id",
+      "alias": "externalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.customer_identifier.id",
+      "alias": "customerIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.customer_identifier.version",
+      "alias": "customerIdentifierVersion",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.identifier.version",
+      "alias": "transactionIdentifierVersion",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.customer_external_identifier.id",
+      "alias": "transactionCustomerExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.evaluation_outcome",
+      "alias": "transactionEvaluationOutcome",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.review_decision",
+      "alias": "transactionReviewDecision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.classification",
+      "alias": "classification",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.type",
+      "alias": "type",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.occurred_at.timestamp",
+      "alias": "occurredAtTimestamp",
+      "type": [
+        "datetime"
+      ]
+    },
+    {
+      "field": "transaction.occurred_at.iana_timezone",
+      "alias": "occurredAtTimezone",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.occurred_at",
+      "alias": "occurredAt",
+      "type": [
+        "datetime"
+      ]
+    },
+    {
+      "field": "transaction.received_at",
+      "alias": "receivedAt",
+      "type": [
+        "datetime"
+      ]
+    },
+    {
+      "field": "transaction\\.custom_fields\\.[a-zA-Z0-9_]+\\.key",
+      "alias": "customFieldsKey",
+      "type": [
+        "string"
+      ],
+      "matchType": "REGEX"
+    },
+    {
+      "field": "transaction\\.custom_fields\\.[a-zA-Z0-9_]+\\.string_value",
+      "alias": "customFieldsStringValue",
+      "type": [
+        "string"
+      ],
+      "matchType": "REGEX"
+    },
+    {
+      "field": "transaction\\.custom_fields\\.[a-zA-Z0-9_]+\\.decimal_value",
+      "alias": "customFieldsDecimalValue",
+      "type": [
+        "number"
+      ],
+      "matchType": "REGEX"
+    },
+    {
+      "field": "transaction\\.enrichments\\.[a-zA-Z0-9_]+\\.key",
+      "alias": "enrichmentFieldKey",
+      "type": [
+        "string"
+      ],
+      "matchType": "REGEX"
+    },
+    {
+      "field": "transaction\\.enrichments\\.[a-zA-Z0-9_]+\\.string_value",
+      "alias": "enrichmentFieldStringValue",
+      "type": [
+        "string"
+      ],
+      "matchType": "REGEX"
+    },
+    {
+      "field": "transaction\\.enrichments\\.[a-zA-Z0-9_]+\\.decimal_value",
+      "alias": "enrichmentFieldDecimalValue",
+      "type": [
+        "number"
+      ],
+      "matchType": "REGEX"
+    },
+    {
+      "field": "transaction\\.enrichments\\.[a-zA-Z0-9_]+\\.boolean_value",
+      "alias": "enrichmentFieldBooleanValue",
+      "type": [
+        "boolean"
+      ],
+      "matchType": "REGEX"
+    },
+    {
+      "field": "transaction.regulatory_reporting_details.fincen_details.fincen_cash_transaction_subtype",
+      "alias": "regulatoryReportingFincenSubtype",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.reference_text",
+      "alias": "monetaryDetailsReferenceText",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.value.amount",
+      "alias": "monetaryDetailsValueAmount",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.value.iso_3_currency_code",
+      "alias": "monetaryDetailsValueCurrency",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.value.crypto_asset.identifier.namespace",
+      "alias": "monetaryDetailsValueCryptoAssetIdentifierNamespace",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.value.crypto_asset.identifier.reference",
+      "alias": "monetaryDetailsValueCryptoAssetIdentifierReference",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.value.crypto_asset.symbol",
+      "alias": "monetaryDetailsValueCryptoAssetSymbol",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.base_value.amount",
+      "alias": "monetaryDetailsBaseValueAmount",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.base_value.iso_3_currency_code",
+      "alias": "monetaryDetailsBaseValueCurrency",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.base_value.crypto_asset.identifier.namespace",
+      "alias": "monetaryDetailsBaseValueCryptoAssetIdentifierNamespace",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.base_value.crypto_asset.identifier.reference",
+      "alias": "monetaryDetailsBaseValueCryptoAssetIdentifierReference",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.base_value.crypto_asset.symbol",
+      "alias": "monetaryDetailsBaseValueCryptoAssetSymbol",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.local_value.amount",
+      "alias": "monetaryDetailsLocalValueAmount",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.local_value.iso_3_currency_code",
+      "alias": "monetaryDetailsLocalValueCurrency",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.local_value.crypto_asset.identifier.namespace",
+      "alias": "monetaryDetailsLocalValueCryptoAssetIdentifierNamespace",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.local_value.crypto_asset.identifier.reference",
+      "alias": "monetaryDetailsLocalValueCryptoAssetIdentifierReference",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.local_value.crypto_asset.symbol",
+      "alias": "monetaryDetailsLocalValueCryptoAssetSymbol",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.payment_channel",
+      "alias": "monetaryDetailsPaymentChannel",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.customer_account_balance.current_balance.amount",
+      "alias": "monetaryDetailsCustomerAccountBalanceAmount",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.customer_account_balance.current_balance.iso_3_currency_code",
+      "alias": "monetaryDetailsCustomerAccountBalanceCurrency",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.customer_account_balance.current_balance.crypto_asset.identifier.namespace",
+      "alias": "monetaryDetailsCustomerAccountBalanceCryptoAssetIdentifierNamespace",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.customer_account_balance.current_balance.crypto_asset.identifier.reference",
+      "alias": "monetaryDetailsCustomerAccountBalanceCryptoAssetIdentifierReference",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.customer_account_balance.current_balance.crypto_asset.symbol",
+      "alias": "monetaryDetailsCustomerAccountBalanceCryptoAssetSymbol",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.customer_account_balance.current_base_balance.amount",
+      "alias": "monetaryDetailsCustomerAccountBaseBalanceAmount",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.customer_account_balance.current_base_balance.iso_3_currency_code",
+      "alias": "monetaryDetailsCustomerAccountBaseBalanceCurrency",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.customer_account_balance.current_base_balance.crypto_asset.identifier.namespace",
+      "alias": "monetaryDetailsCustomerAccountBaseBalanceCryptoAssetIdentifierNamespace",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.customer_account_balance.current_base_balance.crypto_asset.identifier.reference",
+      "alias": "monetaryDetailsCustomerAccountBaseBalanceCryptoAssetIdentifierReference",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.customer_account_balance.current_base_balance.crypto_asset.symbol",
+      "alias": "monetaryDetailsCustomerAccountBaseBalanceCryptoAssetSymbol",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.product_name",
+      "alias": "monetaryDetailsProductName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.direction",
+      "alias": "monetaryDetailsDirection",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.state",
+      "alias": "bankPaymentState",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.payment_scheme",
+      "alias": "bankPaymentPaymentScheme",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.name",
+      "alias": "bankPaymentDebtorName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.structured_address.address_line_1",
+      "alias": "bankPaymentDebtorStructuredAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.structured_address.address_line_2",
+      "alias": "bankPaymentDebtorStructuredAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.structured_address.post_code",
+      "alias": "bankPaymentDebtorStructuredAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.structured_address.town_name",
+      "alias": "bankPaymentDebtorStructuredAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.structured_address.country_subdivision",
+      "alias": "bankPaymentDebtorStructuredAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.structured_address.country",
+      "alias": "bankPaymentDebtorStructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.structured_address.address_type",
+      "alias": "bankPaymentDebtorStructuredAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.unstructured_address.local_details",
+      "alias": "bankPaymentDebtorUnstructuredAddressLocalDetails",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.unstructured_address.country",
+      "alias": "bankPaymentDebtorUnstructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.customer_identifier.id",
+      "alias": "bankPaymentDebtorCustomerIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.customer_identifier.version",
+      "alias": "bankPaymentDebtorCustomerIdentifierVersion",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.counterparty.external_identifier.id",
+      "alias": "bankPaymentDebtorCounterpartyExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.counterparty.bank_account.bank.bic",
+      "alias": "bankPaymentDebtorCounterpartyBankAccountBankBic",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.counterparty.bank_account.bank.name",
+      "alias": "bankPaymentDebtorCounterpartyBankAccountBankName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.counterparty.bank_account.bank.legal_entity_address.address_line_1",
+      "alias": "bankPaymentDebtorCounterpartyBankAccountBankLegalEntityAddressAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.counterparty.bank_account.bank.legal_entity_address.address_line_2",
+      "alias": "bankPaymentDebtorCounterpartyBankAccountBankLegalEntityAddressAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.counterparty.bank_account.bank.legal_entity_address.post_code",
+      "alias": "bankPaymentDebtorCounterpartyBankAccountBankLegalEntityAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.counterparty.bank_account.bank.legal_entity_address.town_name",
+      "alias": "bankPaymentDebtorCounterpartyBankAccountBankLegalEntityAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.counterparty.bank_account.bank.legal_entity_address.country_subdivision",
+      "alias": "bankPaymentDebtorCounterpartyBankAccountBankLegalEntityAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.counterparty.bank_account.bank.legal_entity_address.country",
+      "alias": "bankPaymentDebtorCounterpartyBankAccountBankLegalEntityAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.counterparty.bank_account.bank.legal_entity_address.address_type",
+      "alias": "bankPaymentDebtorCounterpartyBankAccountBankLegalEntityAddressAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.counterparty.bank_account.iban",
+      "alias": "bankPaymentDebtorCounterpartyBankAccountIban",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.counterparty.bank_account.local.clearing_identifier.type",
+      "alias": "bankPaymentDebtorCounterpartyBankAccountLocalClearingIdentifierType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.counterparty.bank_account.local.clearing_identifier.value",
+      "alias": "bankPaymentDebtorCounterpartyBankAccountLocalClearingIdentifierValue",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.counterparty.bank_account.local.account_number",
+      "alias": "bankPaymentDebtorCounterpartyBankAccountLocalAccountNumber",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.counterparty.bank_account.local.account_number_suffix",
+      "alias": "bankPaymentDebtorCounterpartyBankAccountLocalAccountNumberSuffix",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.debtor.customer_external_identifier.id",
+      "alias": "bankPaymentDebtorCustomerExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.name",
+      "alias": "bankPaymentUltimateDebtorName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.structured_address.address_line_1",
+      "alias": "bankPaymentUltimateDebtorStructuredAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.structured_address.address_line_2",
+      "alias": "bankPaymentUltimateDebtorStructuredAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.structured_address.post_code",
+      "alias": "bankPaymentUltimateDebtorStructuredAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.structured_address.town_name",
+      "alias": "bankPaymentUltimateDebtorStructuredAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.structured_address.country_subdivision",
+      "alias": "bankPaymentUltimateDebtorStructuredAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.structured_address.country",
+      "alias": "bankPaymentUltimateDebtorStructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.structured_address.address_type",
+      "alias": "bankPaymentUltimateDebtorStructuredAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.unstructured_address.local_details",
+      "alias": "bankPaymentUltimateDebtorUnstructuredAddressLocalDetails",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.unstructured_address.country",
+      "alias": "bankPaymentUltimateDebtorUnstructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.customer_identifier.id",
+      "alias": "bankPaymentUltimateDebtorCustomerIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.customer_identifier.version",
+      "alias": "bankPaymentUltimateDebtorCustomerIdentifierVersion",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.counterparty.external_identifier.id",
+      "alias": "bankPaymentUltimateDebtorCounterpartyExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.counterparty.bank_account.bank.bic",
+      "alias": "bankPaymentUltimateDebtorCounterpartyBankAccountBankBic",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.counterparty.bank_account.bank.name",
+      "alias": "bankPaymentUltimateDebtorCounterpartyBankAccountBankName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.counterparty.bank_account.bank.legal_entity_address.address_line_1",
+      "alias": "bankPaymentUltimateDebtorCounterpartyBankAccountBankLegalEntityAddressAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.counterparty.bank_account.bank.legal_entity_address.address_line_2",
+      "alias": "bankPaymentUltimateDebtorCounterpartyBankAccountBankLegalEntityAddressAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.counterparty.bank_account.bank.legal_entity_address.post_code",
+      "alias": "bankPaymentUltimateDebtorCounterpartyBankAccountBankLegalEntityAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.counterparty.bank_account.bank.legal_entity_address.town_name",
+      "alias": "bankPaymentUltimateDebtorCounterpartyBankAccountBankLegalEntityAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.counterparty.bank_account.bank.legal_entity_address.country_subdivision",
+      "alias": "bankPaymentUltimateDebtorCounterpartyBankAccountBankLegalEntityAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.counterparty.bank_account.bank.legal_entity_address.country",
+      "alias": "bankPaymentUltimateDebtorCounterpartyBankAccountBankLegalEntityAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.counterparty.bank_account.bank.legal_entity_address.address_type",
+      "alias": "bankPaymentUltimateDebtorCounterpartyBankAccountBankLegalEntityAddressAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.counterparty.bank_account.iban",
+      "alias": "bankPaymentUltimateDebtorCounterpartyBankAccountIban",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.counterparty.bank_account.local.clearing_identifier.type",
+      "alias": "bankPaymentUltimateDebtorCounterpartyBankAccountLocalClearingIdentifierType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.counterparty.bank_account.local.clearing_identifier.value",
+      "alias": "bankPaymentUltimateDebtorCounterpartyBankAccountLocalClearingIdentifierValue",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.counterparty.bank_account.local.account_number",
+      "alias": "bankPaymentUltimateDebtorCounterpartyBankAccountLocalAccountNumber",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.counterparty.bank_account.local.account_number_suffix",
+      "alias": "bankPaymentUltimateDebtorCounterpartyBankAccountLocalAccountNumberSuffix",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_debtor.customer_external_identifier.id",
+      "alias": "bankPaymentUltimateDebtorCustomerExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.name",
+      "alias": "bankPaymentCreditorName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.structured_address.address_line_1",
+      "alias": "bankPaymentCreditorStructuredAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.structured_address.address_line_2",
+      "alias": "bankPaymentCreditorStructuredAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.structured_address.post_code",
+      "alias": "bankPaymentCreditorStructuredAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.structured_address.town_name",
+      "alias": "bankPaymentCreditorStructuredAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.structured_address.country_subdivision",
+      "alias": "bankPaymentCreditorStructuredAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.structured_address.country",
+      "alias": "bankPaymentCreditorStructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.structured_address.address_type",
+      "alias": "bankPaymentCreditorStructuredAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.unstructured_address.local_details",
+      "alias": "bankPaymentCreditorUnstructuredAddressLocalDetails",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.unstructured_address.country",
+      "alias": "bankPaymentCreditorUnstructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.customer_identifier.id",
+      "alias": "bankPaymentCreditorCustomerIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.customer_identifier.version",
+      "alias": "bankPaymentCreditorCustomerIdentifierVersion",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.counterparty.external_identifier.id",
+      "alias": "bankPaymentCreditorCounterpartyExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.counterparty.bank_account.bank.bic",
+      "alias": "bankPaymentCreditorCounterpartyBankAccountBankBic",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.counterparty.bank_account.bank.name",
+      "alias": "bankPaymentCreditorCounterpartyBankAccountBankName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.counterparty.bank_account.bank.legal_entity_address.address_line_1",
+      "alias": "bankPaymentCreditorCounterpartyBankAccountBankLegalEntityAddressAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.counterparty.bank_account.bank.legal_entity_address.address_line_2",
+      "alias": "bankPaymentCreditorCounterpartyBankAccountBankLegalEntityAddressAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.counterparty.bank_account.bank.legal_entity_address.post_code",
+      "alias": "bankPaymentCreditorCounterpartyBankAccountBankLegalEntityAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.counterparty.bank_account.bank.legal_entity_address.town_name",
+      "alias": "bankPaymentCreditorCounterpartyBankAccountBankLegalEntityAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.counterparty.bank_account.bank.legal_entity_address.country_subdivision",
+      "alias": "bankPaymentCreditorCounterpartyBankAccountBankLegalEntityAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.counterparty.bank_account.bank.legal_entity_address.country",
+      "alias": "bankPaymentCreditorCounterpartyBankAccountBankLegalEntityAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.counterparty.bank_account.bank.legal_entity_address.address_type",
+      "alias": "bankPaymentCreditorCounterpartyBankAccountBankLegalEntityAddressAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.counterparty.bank_account.iban",
+      "alias": "bankPaymentCreditorCounterpartyBankAccountIban",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.counterparty.bank_account.local.clearing_identifier.type",
+      "alias": "bankPaymentCreditorCounterpartyBankAccountLocalClearingIdentifierType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.counterparty.bank_account.local.clearing_identifier.value",
+      "alias": "bankPaymentCreditorCounterpartyBankAccountLocalClearingIdentifierValue",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.counterparty.bank_account.local.account_number",
+      "alias": "bankPaymentCreditorCounterpartyBankAccountLocalAccountNumber",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.counterparty.bank_account.local.account_number_suffix",
+      "alias": "bankPaymentCreditorCounterpartyBankAccountLocalAccountNumberSuffix",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.creditor.customer_external_identifier.id",
+      "alias": "bankPaymentCreditorCustomerExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.name",
+      "alias": "bankPaymentUltimateCreditorName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.structured_address.address_line_1",
+      "alias": "bankPaymentUltimateCreditorStructuredAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.structured_address.address_line_2",
+      "alias": "bankPaymentUltimateCreditorStructuredAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.structured_address.post_code",
+      "alias": "bankPaymentUltimateCreditorStructuredAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.structured_address.town_name",
+      "alias": "bankPaymentUltimateCreditorStructuredAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.structured_address.country_subdivision",
+      "alias": "bankPaymentUltimateCreditorStructuredAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.structured_address.country",
+      "alias": "bankPaymentUltimateCreditorStructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.structured_address.address_type",
+      "alias": "bankPaymentUltimateCreditorStructuredAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.unstructured_address.local_details",
+      "alias": "bankPaymentUltimateCreditorUnstructuredAddressLocalDetails",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.unstructured_address.country",
+      "alias": "bankPaymentUltimateCreditorUnstructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.customer_identifier.id",
+      "alias": "bankPaymentUltimateCreditorCustomerIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.customer_identifier.version",
+      "alias": "bankPaymentUltimateCreditorCustomerIdentifierVersion",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.counterparty.external_identifier.id",
+      "alias": "bankPaymentUltimateCreditorCounterpartyExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.counterparty.bank_account.bank.bic",
+      "alias": "bankPaymentUltimateCreditorCounterpartyBankAccountBankBic",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.counterparty.bank_account.bank.name",
+      "alias": "bankPaymentUltimateCreditorCounterpartyBankAccountBankName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.counterparty.bank_account.bank.legal_entity_address.address_line_1",
+      "alias": "bankPaymentUltimateCreditorCounterpartyBankAccountBankLegalEntityAddressAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.counterparty.bank_account.bank.legal_entity_address.address_line_2",
+      "alias": "bankPaymentUltimateCreditorCounterpartyBankAccountBankLegalEntityAddressAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.counterparty.bank_account.bank.legal_entity_address.post_code",
+      "alias": "bankPaymentUltimateCreditorCounterpartyBankAccountBankLegalEntityAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.counterparty.bank_account.bank.legal_entity_address.town_name",
+      "alias": "bankPaymentUltimateCreditorCounterpartyBankAccountBankLegalEntityAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.counterparty.bank_account.bank.legal_entity_address.country_subdivision",
+      "alias": "bankPaymentUltimateCreditorCounterpartyBankAccountBankLegalEntityAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.counterparty.bank_account.bank.legal_entity_address.country",
+      "alias": "bankPaymentUltimateCreditorCounterpartyBankAccountBankLegalEntityAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.counterparty.bank_account.bank.legal_entity_address.address_type",
+      "alias": "bankPaymentUltimateCreditorCounterpartyBankAccountBankLegalEntityAddressAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.counterparty.bank_account.iban",
+      "alias": "bankPaymentUltimateCreditorCounterpartyBankAccountIban",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.counterparty.bank_account.local.clearing_identifier.type",
+      "alias": "bankPaymentUltimateCreditorCounterpartyBankAccountLocalClearingIdentifierType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.counterparty.bank_account.local.clearing_identifier.value",
+      "alias": "bankPaymentUltimateCreditorCounterpartyBankAccountLocalClearingIdentifierValue",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.counterparty.bank_account.local.account_number",
+      "alias": "bankPaymentUltimateCreditorCounterpartyBankAccountLocalAccountNumber",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.counterparty.bank_account.local.account_number_suffix",
+      "alias": "bankPaymentUltimateCreditorCounterpartyBankAccountLocalAccountNumberSuffix",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.bank_payment.ultimate_creditor.customer_external_identifier.id",
+      "alias": "bankPaymentUltimateCreditorCustomerExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_payment_type",
+      "alias": "cardPaymentType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card.funding_type",
+      "alias": "cardPaymentCardFundingType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card.fingerprint",
+      "alias": "cardPaymentCardFingerprint",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card.wallet_identifier",
+      "alias": "cardPaymentCardWalletIdentifier",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card.wallet_type",
+      "alias": "cardPaymentCardWalletType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_verification_results.avs_check.result",
+      "alias": "cardPaymentCardVerificationResultsAvsCheckResult",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_verification_results.avs_check.description",
+      "alias": "cardPaymentCardVerificationResultsAvsCheckDescription",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_verification_results.cvc_check.result",
+      "alias": "cardPaymentCardVerificationResultsCvcCheckResult",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_verification_results.cvc_check.description",
+      "alias": "cardPaymentCardVerificationResultsCvcCheckDescription",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_verification_results.three_d_secure_check.result",
+      "alias": "cardPaymentCardVerificationResultsThreeDSecureCheckResult",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_verification_results.three_d_secure_check.description",
+      "alias": "cardPaymentCardVerificationResultsThreeDSecureCheckDescription",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.name",
+      "alias": "cardPaymentCardHolderDetailsName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.structured_address.address_line_1",
+      "alias": "cardPaymentCardHolderDetailsStructuredAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.structured_address.address_line_2",
+      "alias": "cardPaymentCardHolderDetailsStructuredAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.structured_address.post_code",
+      "alias": "cardPaymentCardHolderDetailsStructuredAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.structured_address.town_name",
+      "alias": "cardPaymentCardHolderDetailsStructuredAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.structured_address.country_subdivision",
+      "alias": "cardPaymentCardHolderDetailsStructuredAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.structured_address.country",
+      "alias": "cardPaymentCardHolderDetailsStructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.structured_address.address_type",
+      "alias": "cardPaymentCardHolderDetailsStructuredAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.unstructured_address.local_details",
+      "alias": "cardPaymentCardHolderDetailsUnstructuredAddressLocalDetails",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.unstructured_address.country",
+      "alias": "cardPaymentCardHolderDetailsUnstructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.customer_identifier.id",
+      "alias": "cardPaymentCardHolderDetailsCustomerIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.customer_identifier.version",
+      "alias": "cardPaymentCardHolderDetailsCustomerIdentifierVersion",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.counterparty.external_identifier.id",
+      "alias": "cardPaymentCardHolderDetailsCounterpartyExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.counterparty.bank_account.bank.bic",
+      "alias": "cardPaymentCardHolderDetailsCounterpartyBankAccountBankBic",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.counterparty.bank_account.bank.name",
+      "alias": "cardPaymentCardHolderDetailsCounterpartyBankAccountBankName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.counterparty.bank_account.bank.legal_entity_address.address_line_1",
+      "alias": "cardPaymentCardHolderDetailsCounterpartyBankAccountBankLegalEntityAddressAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.counterparty.bank_account.bank.legal_entity_address.address_line_2",
+      "alias": "cardPaymentCardHolderDetailsCounterpartyBankAccountBankLegalEntityAddressAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.counterparty.bank_account.bank.legal_entity_address.post_code",
+      "alias": "cardPaymentCardHolderDetailsCounterpartyBankAccountBankLegalEntityAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.counterparty.bank_account.bank.legal_entity_address.town_name",
+      "alias": "cardPaymentCardHolderDetailsCounterpartyBankAccountBankLegalEntityAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.counterparty.bank_account.bank.legal_entity_address.country_subdivision",
+      "alias": "cardPaymentCardHolderDetailsCounterpartyBankAccountBankLegalEntityAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.counterparty.bank_account.bank.legal_entity_address.country",
+      "alias": "cardPaymentCardHolderDetailsCounterpartyBankAccountBankLegalEntityAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.counterparty.bank_account.bank.legal_entity_address.address_type",
+      "alias": "cardPaymentCardHolderDetailsCounterpartyBankAccountBankLegalEntityAddressAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.counterparty.bank_account.iban",
+      "alias": "cardPaymentCardHolderDetailsCounterpartyBankAccountIban",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.counterparty.bank_account.local.clearing_identifier.type",
+      "alias": "cardPaymentCardHolderDetailsCounterpartyBankAccountLocalClearingIdentifierType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.counterparty.bank_account.local.clearing_identifier.value",
+      "alias": "cardPaymentCardHolderDetailsCounterpartyBankAccountLocalClearingIdentifierValue",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.counterparty.bank_account.local.account_number",
+      "alias": "cardPaymentCardHolderDetailsCounterpartyBankAccountLocalAccountNumber",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.counterparty.bank_account.local.account_number_suffix",
+      "alias": "cardPaymentCardHolderDetailsCounterpartyBankAccountLocalAccountNumberSuffix",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_holder.details.customer_external_identifier.id",
+      "alias": "cardPaymentCardHolderDetailsCustomerExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.bin.identifier",
+      "alias": "cardPaymentIssuerBinIdentifier",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.name",
+      "alias": "cardPaymentIssuerDetailsName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.structured_address.address_line_1",
+      "alias": "cardPaymentIssuerDetailsStructuredAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.structured_address.address_line_2",
+      "alias": "cardPaymentIssuerDetailsStructuredAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.structured_address.post_code",
+      "alias": "cardPaymentIssuerDetailsStructuredAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.structured_address.town_name",
+      "alias": "cardPaymentIssuerDetailsStructuredAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.structured_address.country_subdivision",
+      "alias": "cardPaymentIssuerDetailsStructuredAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.structured_address.country",
+      "alias": "cardPaymentIssuerDetailsStructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.structured_address.address_type",
+      "alias": "cardPaymentIssuerDetailsStructuredAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.unstructured_address.local_details",
+      "alias": "cardPaymentIssuerDetailsUnstructuredAddressLocalDetails",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.unstructured_address.country",
+      "alias": "cardPaymentIssuerDetailsUnstructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.customer_identifier.id",
+      "alias": "cardPaymentIssuerDetailsCustomerIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.customer_identifier.version",
+      "alias": "cardPaymentIssuerDetailsCustomerIdentifierVersion",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.counterparty.external_identifier.id",
+      "alias": "cardPaymentIssuerDetailsCounterpartyExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.counterparty.bank_account.bank.bic",
+      "alias": "cardPaymentIssuerDetailsCounterpartyBankAccountBankBic",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.counterparty.bank_account.bank.name",
+      "alias": "cardPaymentIssuerDetailsCounterpartyBankAccountBankName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.counterparty.bank_account.bank.legal_entity_address.address_line_1",
+      "alias": "cardPaymentIssuerDetailsCounterpartyBankAccountBankLegalEntityAddressAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.counterparty.bank_account.bank.legal_entity_address.address_line_2",
+      "alias": "cardPaymentIssuerDetailsCounterpartyBankAccountBankLegalEntityAddressAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.counterparty.bank_account.bank.legal_entity_address.post_code",
+      "alias": "cardPaymentIssuerDetailsCounterpartyBankAccountBankLegalEntityAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.counterparty.bank_account.bank.legal_entity_address.town_name",
+      "alias": "cardPaymentIssuerDetailsCounterpartyBankAccountBankLegalEntityAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.counterparty.bank_account.bank.legal_entity_address.country_subdivision",
+      "alias": "cardPaymentIssuerDetailsCounterpartyBankAccountBankLegalEntityAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.counterparty.bank_account.bank.legal_entity_address.country",
+      "alias": "cardPaymentIssuerDetailsCounterpartyBankAccountBankLegalEntityAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.counterparty.bank_account.bank.legal_entity_address.address_type",
+      "alias": "cardPaymentIssuerDetailsCounterpartyBankAccountBankLegalEntityAddressAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.counterparty.bank_account.iban",
+      "alias": "cardPaymentIssuerDetailsCounterpartyBankAccountIban",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.counterparty.bank_account.local.clearing_identifier.type",
+      "alias": "cardPaymentIssuerDetailsCounterpartyBankAccountLocalClearingIdentifierType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.counterparty.bank_account.local.clearing_identifier.value",
+      "alias": "cardPaymentIssuerDetailsCounterpartyBankAccountLocalClearingIdentifierValue",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.counterparty.bank_account.local.account_number",
+      "alias": "cardPaymentIssuerDetailsCounterpartyBankAccountLocalAccountNumber",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.counterparty.bank_account.local.account_number_suffix",
+      "alias": "cardPaymentIssuerDetailsCounterpartyBankAccountLocalAccountNumberSuffix",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.issuer.details.customer_external_identifier.id",
+      "alias": "cardPaymentIssuerDetailsCustomerExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.identifier.identifier",
+      "alias": "cardPaymentAcquirerIdentifier",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.name",
+      "alias": "cardPaymentAcquirerDetailsName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.structured_address.address_line_1",
+      "alias": "cardPaymentAcquirerDetailsStructuredAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.structured_address.address_line_2",
+      "alias": "cardPaymentAcquirerDetailsStructuredAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.structured_address.post_code",
+      "alias": "cardPaymentAcquirerDetailsStructuredAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.structured_address.town_name",
+      "alias": "cardPaymentAcquirerDetailsStructuredAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.structured_address.country_subdivision",
+      "alias": "cardPaymentAcquirerDetailsStructuredAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.structured_address.country",
+      "alias": "cardPaymentAcquirerDetailsStructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.structured_address.address_type",
+      "alias": "cardPaymentAcquirerDetailsStructuredAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.unstructured_address.local_details",
+      "alias": "cardPaymentAcquirerDetailsUnstructuredAddressLocalDetails",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.unstructured_address.country",
+      "alias": "cardPaymentAcquirerDetailsUnstructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.customer_identifier.id",
+      "alias": "cardPaymentAcquirerDetailsCustomerIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.customer_identifier.version",
+      "alias": "cardPaymentAcquirerDetailsCustomerIdentifierVersion",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.counterparty.external_identifier.id",
+      "alias": "cardPaymentAcquirerDetailsCounterpartyExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.counterparty.bank_account.bank.bic",
+      "alias": "cardPaymentAcquirerDetailsCounterpartyBankAccountBankBic",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.counterparty.bank_account.bank.name",
+      "alias": "cardPaymentAcquirerDetailsCounterpartyBankAccountBankName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.counterparty.bank_account.bank.legal_entity_address.address_line_1",
+      "alias": "cardPaymentAcquirerDetailsCounterpartyBankAccountBankLegalEntityAddressAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.counterparty.bank_account.bank.legal_entity_address.address_line_2",
+      "alias": "cardPaymentAcquirerDetailsCounterpartyBankAccountBankLegalEntityAddressAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.counterparty.bank_account.bank.legal_entity_address.post_code",
+      "alias": "cardPaymentAcquirerDetailsCounterpartyBankAccountBankLegalEntityAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.counterparty.bank_account.bank.legal_entity_address.town_name",
+      "alias": "cardPaymentAcquirerDetailsCounterpartyBankAccountBankLegalEntityAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.counterparty.bank_account.bank.legal_entity_address.country_subdivision",
+      "alias": "cardPaymentAcquirerDetailsCounterpartyBankAccountBankLegalEntityAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.counterparty.bank_account.bank.legal_entity_address.country",
+      "alias": "cardPaymentAcquirerDetailsCounterpartyBankAccountBankLegalEntityAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.counterparty.bank_account.bank.legal_entity_address.address_type",
+      "alias": "cardPaymentAcquirerDetailsCounterpartyBankAccountBankLegalEntityAddressAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.counterparty.bank_account.iban",
+      "alias": "cardPaymentAcquirerDetailsCounterpartyBankAccountIban",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.counterparty.bank_account.local.clearing_identifier.type",
+      "alias": "cardPaymentAcquirerDetailsCounterpartyBankAccountLocalClearingIdentifierType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.counterparty.bank_account.local.clearing_identifier.value",
+      "alias": "cardPaymentAcquirerDetailsCounterpartyBankAccountLocalClearingIdentifierValue",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.counterparty.bank_account.local.account_number",
+      "alias": "cardPaymentAcquirerDetailsCounterpartyBankAccountLocalAccountNumber",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.counterparty.bank_account.local.account_number_suffix",
+      "alias": "cardPaymentAcquirerDetailsCounterpartyBankAccountLocalAccountNumberSuffix",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.acquirer.details.customer_external_identifier.id",
+      "alias": "cardPaymentAcquirerDetailsCustomerExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.category_type",
+      "alias": "cardPaymentMerchantCategoryType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.mcc_category_code",
+      "alias": "cardPaymentMerchantMccCategoryCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.mcc_code_description",
+      "alias": "cardPaymentMerchantMccCodeDescription",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.name",
+      "alias": "cardPaymentMerchantDetailsName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.structured_address.address_line_1",
+      "alias": "cardPaymentMerchantDetailsStructuredAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.structured_address.address_line_2",
+      "alias": "cardPaymentMerchantDetailsStructuredAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.structured_address.post_code",
+      "alias": "cardPaymentMerchantDetailsStructuredAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.structured_address.town_name",
+      "alias": "cardPaymentMerchantDetailsStructuredAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.structured_address.country_subdivision",
+      "alias": "cardPaymentMerchantDetailsStructuredAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.structured_address.country",
+      "alias": "cardPaymentMerchantDetailsStructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.structured_address.address_type",
+      "alias": "cardPaymentMerchantDetailsStructuredAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.unstructured_address.local_details",
+      "alias": "cardPaymentMerchantDetailsUnstructuredAddressLocalDetails",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.unstructured_address.country",
+      "alias": "cardPaymentMerchantDetailsUnstructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.customer_identifier.id",
+      "alias": "cardPaymentMerchantDetailsCustomerIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.customer_identifier.version",
+      "alias": "cardPaymentMerchantDetailsCustomerIdentifierVersion",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.counterparty.external_identifier.id",
+      "alias": "cardPaymentMerchantDetailsCounterpartyExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.counterparty.bank_account.bank.bic",
+      "alias": "cardPaymentMerchantDetailsCounterpartyBankAccountBankBic",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.counterparty.bank_account.bank.name",
+      "alias": "cardPaymentMerchantDetailsCounterpartyBankAccountBankName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.counterparty.bank_account.bank.legal_entity_address.address_line_1",
+      "alias": "cardPaymentMerchantDetailsCounterpartyBankAccountBankLegalEntityAddressAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.counterparty.bank_account.bank.legal_entity_address.address_line_2",
+      "alias": "cardPaymentMerchantDetailsCounterpartyBankAccountBankLegalEntityAddressAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.counterparty.bank_account.bank.legal_entity_address.post_code",
+      "alias": "cardPaymentMerchantDetailsCounterpartyBankAccountBankLegalEntityAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.counterparty.bank_account.bank.legal_entity_address.town_name",
+      "alias": "cardPaymentMerchantDetailsCounterpartyBankAccountBankLegalEntityAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.counterparty.bank_account.bank.legal_entity_address.country_subdivision",
+      "alias": "cardPaymentMerchantDetailsCounterpartyBankAccountBankLegalEntityAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.counterparty.bank_account.bank.legal_entity_address.country",
+      "alias": "cardPaymentMerchantDetailsCounterpartyBankAccountBankLegalEntityAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.counterparty.bank_account.bank.legal_entity_address.address_type",
+      "alias": "cardPaymentMerchantDetailsCounterpartyBankAccountBankLegalEntityAddressAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.counterparty.bank_account.iban",
+      "alias": "cardPaymentMerchantDetailsCounterpartyBankAccountIban",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.counterparty.bank_account.local.clearing_identifier.type",
+      "alias": "cardPaymentMerchantDetailsCounterpartyBankAccountLocalClearingIdentifierType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.counterparty.bank_account.local.clearing_identifier.value",
+      "alias": "cardPaymentMerchantDetailsCounterpartyBankAccountLocalClearingIdentifierValue",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.counterparty.bank_account.local.account_number",
+      "alias": "cardPaymentMerchantDetailsCounterpartyBankAccountLocalAccountNumber",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.counterparty.bank_account.local.account_number_suffix",
+      "alias": "cardPaymentMerchantDetailsCounterpartyBankAccountLocalAccountNumberSuffix",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.merchant.details.customer_external_identifier.id",
+      "alias": "cardPaymentMerchantDetailsCustomerExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.category_type",
+      "alias": "cardPaymentSubMerchantCategoryType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.mcc_category_code",
+      "alias": "cardPaymentSubMerchantMccCategoryCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.mcc_code_description",
+      "alias": "cardPaymentSubMerchantMccCodeDescription",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.name",
+      "alias": "cardPaymentSubMerchantDetailsName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.structured_address.address_line_1",
+      "alias": "cardPaymentSubMerchantDetailsStructuredAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.structured_address.address_line_2",
+      "alias": "cardPaymentSubMerchantDetailsStructuredAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.structured_address.post_code",
+      "alias": "cardPaymentSubMerchantDetailsStructuredAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.structured_address.town_name",
+      "alias": "cardPaymentSubMerchantDetailsStructuredAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.structured_address.country_subdivision",
+      "alias": "cardPaymentSubMerchantDetailsStructuredAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.structured_address.country",
+      "alias": "cardPaymentSubMerchantDetailsStructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.structured_address.address_type",
+      "alias": "cardPaymentSubMerchantDetailsStructuredAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.unstructured_address.local_details",
+      "alias": "cardPaymentSubMerchantDetailsUnstructuredAddressLocalDetails",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.unstructured_address.country",
+      "alias": "cardPaymentSubMerchantDetailsUnstructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.customer_identifier.id",
+      "alias": "cardPaymentSubMerchantDetailsCustomerIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.customer_identifier.version",
+      "alias": "cardPaymentSubMerchantDetailsCustomerIdentifierVersion",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.counterparty.external_identifier.id",
+      "alias": "cardPaymentSubMerchantDetailsCounterpartyExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.counterparty.bank_account.bank.bic",
+      "alias": "cardPaymentSubMerchantDetailsCounterpartyBankAccountBankBic",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.counterparty.bank_account.bank.name",
+      "alias": "cardPaymentSubMerchantDetailsCounterpartyBankAccountBankName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.counterparty.bank_account.bank.legal_entity_address.address_line_1",
+      "alias": "cardPaymentSubMerchantDetailsCounterpartyBankAccountBankLegalEntityAddressAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.counterparty.bank_account.bank.legal_entity_address.address_line_2",
+      "alias": "cardPaymentSubMerchantDetailsCounterpartyBankAccountBankLegalEntityAddressAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.counterparty.bank_account.bank.legal_entity_address.post_code",
+      "alias": "cardPaymentSubMerchantDetailsCounterpartyBankAccountBankLegalEntityAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.counterparty.bank_account.bank.legal_entity_address.town_name",
+      "alias": "cardPaymentSubMerchantDetailsCounterpartyBankAccountBankLegalEntityAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.counterparty.bank_account.bank.legal_entity_address.country_subdivision",
+      "alias": "cardPaymentSubMerchantDetailsCounterpartyBankAccountBankLegalEntityAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.counterparty.bank_account.bank.legal_entity_address.country",
+      "alias": "cardPaymentSubMerchantDetailsCounterpartyBankAccountBankLegalEntityAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.counterparty.bank_account.bank.legal_entity_address.address_type",
+      "alias": "cardPaymentSubMerchantDetailsCounterpartyBankAccountBankLegalEntityAddressAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.counterparty.bank_account.iban",
+      "alias": "cardPaymentSubMerchantDetailsCounterpartyBankAccountIban",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.counterparty.bank_account.local.clearing_identifier.type",
+      "alias": "cardPaymentSubMerchantDetailsCounterpartyBankAccountLocalClearingIdentifierType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.counterparty.bank_account.local.clearing_identifier.value",
+      "alias": "cardPaymentSubMerchantDetailsCounterpartyBankAccountLocalClearingIdentifierValue",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.counterparty.bank_account.local.account_number",
+      "alias": "cardPaymentSubMerchantDetailsCounterpartyBankAccountLocalAccountNumber",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.counterparty.bank_account.local.account_number_suffix",
+      "alias": "cardPaymentSubMerchantDetailsCounterpartyBankAccountLocalAccountNumberSuffix",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.sub_merchant.details.customer_external_identifier.id",
+      "alias": "cardPaymentSubMerchantDetailsCustomerExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.pos_condition.condition.code",
+      "alias": "cardPaymentPosConditionCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.pos_condition.condition.description",
+      "alias": "cardPaymentPosConditionDescription",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.pos_condition.entry_mode.code",
+      "alias": "cardPaymentPosEntryModeCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.pos_condition.entry_mode.description",
+      "alias": "cardPaymentPosEntryModeDescription",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stage",
+      "alias": "cardPaymentStage",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.related_transaction_identifier.id",
+      "alias": "cardPaymentRelatedTransactionIdentifier",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.authorization.state",
+      "alias": "cardPaymentPaymentStagesInfoAuthorizationState",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.authorization.timestamp",
+      "alias": "cardPaymentPaymentStagesInfoAuthorizationTimestamp",
+      "type": [
+        "datetime"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.authorization.response.code",
+      "alias": "cardPaymentPaymentStagesInfoAuthorizationResponseCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.authorization.response.reason_code",
+      "alias": "cardPaymentPaymentStagesInfoAuthorizationResponseReasonCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.authorization.identifier.identifier",
+      "alias": "cardPaymentPaymentStagesInfoAuthorizationIdentifier",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.authorization.value.amount",
+      "alias": "cardPaymentPaymentStagesInfoAuthorizationValueAmount",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.authorization.value.iso_3_currency_code",
+      "alias": "cardPaymentPaymentStagesInfoAuthorizationValueCurrency",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.authorization.type",
+      "alias": "cardPaymentPaymentStagesInfoAuthorizationType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.settlement.timestamp",
+      "alias": "cardPaymentPaymentStagesInfoSettlementTimestamp",
+      "type": [
+        "datetime"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.settlement.value.amount",
+      "alias": "cardPaymentPaymentStagesInfoSettlementValueAmount",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.settlement.value.iso_3_currency_code",
+      "alias": "cardPaymentPaymentStagesInfoSettlementValueCurrency",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.reversal.timestamp",
+      "alias": "cardPaymentPaymentStagesInfoReversalTimestamp",
+      "type": [
+        "datetime"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.reversal.value.amount",
+      "alias": "cardPaymentPaymentStagesInfoReversalValueAmount",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.reversal.value.iso_3_currency_code",
+      "alias": "cardPaymentPaymentStagesInfoReversalValueCurrency",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.reversal.id.identifier",
+      "alias": "cardPaymentPaymentStagesInfoReversalIdentifier",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.refund.timestamp",
+      "alias": "cardPaymentPaymentStagesInfoRefundTimestamp",
+      "type": [
+        "datetime"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.refund.reason.code",
+      "alias": "cardPaymentPaymentStagesInfoRefundReasonCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.refund.reason.description",
+      "alias": "cardPaymentPaymentStagesInfoRefundReasonDescription",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.chargeback.value.amount",
+      "alias": "cardPaymentPaymentStagesInfoChargebackValueAmount",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.chargeback.value.iso_3_currency_code",
+      "alias": "cardPaymentPaymentStagesInfoChargebackValueCurrency",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.chargeback.timestamp",
+      "alias": "cardPaymentPaymentStagesInfoChargebackTimestamp",
+      "type": [
+        "datetime"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.chargeback.reason",
+      "alias": "cardPaymentPaymentStagesInfoChargebackReason",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.chargeback.description",
+      "alias": "cardPaymentPaymentStagesInfoChargebackDescription",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.chargeback.outcome",
+      "alias": "cardPaymentPaymentStagesInfoChargebackOutcome",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.authorization.value.crypto_asset.identifier.namespace",
+      "alias": "cardPaymentPaymentStagesInfoAuthorizationValueCryptoAssetIdentifierNamespace",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.authorization.value.crypto_asset.identifier.reference",
+      "alias": "cardPaymentPaymentStagesInfoAuthorizationValueCryptoAssetIdentifierReference",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.authorization.value.crypto_asset.symbol",
+      "alias": "cardPaymentPaymentStagesInfoAuthorizationValueCryptoAssetSymbol",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.settlement.value.crypto_asset.identifier.namespace",
+      "alias": "cardPaymentPaymentStagesInfoSettlementValueCryptoAssetIdentifierNamespace",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.settlement.value.crypto_asset.identifier.reference",
+      "alias": "cardPaymentPaymentStagesInfoSettlementValueCryptoAssetIdentifierReference",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.settlement.value.crypto_asset.symbol",
+      "alias": "cardPaymentPaymentStagesInfoSettlementValueCryptoAssetSymbol",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.reversal.value.crypto_asset.identifier.namespace",
+      "alias": "cardPaymentPaymentStagesInfoReversalValueCryptoAssetIdentifierNamespace",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.reversal.value.crypto_asset.identifier.reference",
+      "alias": "cardPaymentPaymentStagesInfoReversalValueCryptoAssetIdentifierReference",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.reversal.value.crypto_asset.symbol",
+      "alias": "cardPaymentPaymentStagesInfoReversalValueCryptoAssetSymbol",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.chargeback.value.crypto_asset.identifier.namespace",
+      "alias": "cardPaymentPaymentStagesInfoChargebackValueCryptoAssetIdentifierNamespace",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.chargeback.value.crypto_asset.identifier.reference",
+      "alias": "cardPaymentPaymentStagesInfoChargebackValueCryptoAssetIdentifierReference",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.payment_stages_info.chargeback.value.crypto_asset.symbol",
+      "alias": "cardPaymentPaymentStagesInfoChargebackValueCryptoAssetSymbol",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_payment_scope",
+      "alias": "cardPaymentScope",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.card_payment.card_scheme",
+      "alias": "cardPaymentScheme",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.payment_scheme",
+      "alias": "remittancePaymentScheme",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.service_provider.identifier.identifier",
+      "alias": "remittanceServiceProviderIdentifierIdentifier",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.service_provider.type",
+      "alias": "remittanceServiceProviderType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.service_provider.name",
+      "alias": "remittanceServiceProviderName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.source_payment_method",
+      "alias": "remittanceSourcePaymentMethod",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.collection_method",
+      "alias": "remittanceCollectionMethod",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.relationship",
+      "alias": "remittanceRelationship",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.purpose_of_payment",
+      "alias": "remittancePurposeOfPayment",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.purpose_of_payment_details",
+      "alias": "remittancePurposeOfPaymentDetails",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.source_of_funds",
+      "alias": "remittanceSourceOfFunds",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.source_of_funds_details",
+      "alias": "remittanceSourceOfFundsDetails",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.name",
+      "alias": "remittanceDebtorName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.structured_address.address_line_1",
+      "alias": "remittanceDebtorStructuredAddressAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.structured_address.address_line_2",
+      "alias": "remittanceDebtorStructuredAddressAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.structured_address.post_code",
+      "alias": "remittanceDebtorStructuredAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.structured_address.town_name",
+      "alias": "remittanceDebtorStructuredAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.structured_address.country_subdivision",
+      "alias": "remittanceDebtorStructuredAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.structured_address.country",
+      "alias": "remittanceDebtorStructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.structured_address.address_type",
+      "alias": "remittanceDebtorStructuredAddressAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.unstructured_address.local_details",
+      "alias": "remittanceDebtorUnstructuredAddressLocalDetails",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.unstructured_address.country",
+      "alias": "remittanceDebtorUnstructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.customer_identifier.id",
+      "alias": "remittanceDebtorCustomerIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.customer_identifier.version",
+      "alias": "remittanceDebtorCustomerIdentifierVersion",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.counterparty.external_identifier.id",
+      "alias": "remittanceDebtorCounterpartyExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.counterparty.bank_account.bank.bic",
+      "alias": "remittanceDebtorCounterpartyBankAccountBankBic",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.counterparty.bank_account.bank.name",
+      "alias": "remittanceDebtorCounterpartyBankAccountBankName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.counterparty.bank_account.bank.legal_entity_address.address_line_1",
+      "alias": "remittanceDebtorCounterpartyBankAccountBankLegalEntityAddressAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.counterparty.bank_account.bank.legal_entity_address.address_line_2",
+      "alias": "remittanceDebtorCounterpartyBankAccountBankLegalEntityAddressAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.counterparty.bank_account.bank.legal_entity_address.post_code",
+      "alias": "remittanceDebtorCounterpartyBankAccountBankLegalEntityAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.counterparty.bank_account.bank.legal_entity_address.town_name",
+      "alias": "remittanceDebtorCounterpartyBankAccountBankLegalEntityAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.counterparty.bank_account.bank.legal_entity_address.country_subdivision",
+      "alias": "remittanceDebtorCounterpartyBankAccountBankLegalEntityAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.counterparty.bank_account.bank.legal_entity_address.country",
+      "alias": "remittanceDebtorCounterpartyBankAccountBankLegalEntityAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.counterparty.bank_account.bank.legal_entity_address.address_type",
+      "alias": "remittanceDebtorCounterpartyBankAccountBankLegalEntityAddressAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.counterparty.bank_account.iban",
+      "alias": "remittanceDebtorCounterpartyBankAccountIban",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.counterparty.bank_account.local.clearing_identifier.type",
+      "alias": "remittanceDebtorCounterpartyBankAccountLocalClearingIdentifierType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.counterparty.bank_account.local.clearing_identifier.value",
+      "alias": "remittanceDebtorCounterpartyBankAccountLocalClearingIdentifierValue",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.counterparty.bank_account.local.account_number",
+      "alias": "remittanceDebtorCounterpartyBankAccountLocalAccountNumber",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.counterparty.bank_account.local.account_number_suffix",
+      "alias": "remittanceDebtorCounterpartyBankAccountLocalAccountNumberSuffix",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.debtor.customer_external_identifier.id",
+      "alias": "remittanceDebtorCustomerExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.name",
+      "alias": "remittanceUltimateDebtorName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.structured_address.address_line_1",
+      "alias": "remittanceUltimateDebtorStructuredAddressAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.structured_address.address_line_2",
+      "alias": "remittanceUltimateDebtorStructuredAddressAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.structured_address.post_code",
+      "alias": "remittanceUltimateDebtorStructuredAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.structured_address.town_name",
+      "alias": "remittanceUltimateDebtorStructuredAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.structured_address.country_subdivision",
+      "alias": "remittanceUltimateDebtorStructuredAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.structured_address.country",
+      "alias": "remittanceUltimateDebtorStructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.structured_address.address_type",
+      "alias": "remittanceUltimateDebtorStructuredAddressAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.unstructured_address.local_details",
+      "alias": "remittanceUltimateDebtorUnstructuredAddressLocalDetails",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.unstructured_address.country",
+      "alias": "remittanceUltimateDebtorUnstructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.customer_identifier.id",
+      "alias": "remittanceUltimateDebtorCustomerIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.customer_identifier.version",
+      "alias": "remittanceUltimateDebtorCustomerIdentifierVersion",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.counterparty.external_identifier.id",
+      "alias": "remittanceUltimateDebtorCounterpartyExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.counterparty.bank_account.bank.bic",
+      "alias": "remittanceUltimateDebtorCounterpartyBankAccountBankBic",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.counterparty.bank_account.bank.name",
+      "alias": "remittanceUltimateDebtorCounterpartyBankAccountBankName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.counterparty.bank_account.bank.legal_entity_address.address_line_1",
+      "alias": "remittanceUltimateDebtorCounterpartyBankAccountBankLegalEntityAddressAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.counterparty.bank_account.bank.legal_entity_address.address_line_2",
+      "alias": "remittanceUltimateDebtorCounterpartyBankAccountBankLegalEntityAddressAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.counterparty.bank_account.bank.legal_entity_address.post_code",
+      "alias": "remittanceUltimateDebtorCounterpartyBankAccountBankLegalEntityAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.counterparty.bank_account.bank.legal_entity_address.town_name",
+      "alias": "remittanceUltimateDebtorCounterpartyBankAccountBankLegalEntityAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.counterparty.bank_account.bank.legal_entity_address.country_subdivision",
+      "alias": "remittanceUltimateDebtorCounterpartyBankAccountBankLegalEntityAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.counterparty.bank_account.bank.legal_entity_address.country",
+      "alias": "remittanceUltimateDebtorCounterpartyBankAccountBankLegalEntityAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.counterparty.bank_account.bank.legal_entity_address.address_type",
+      "alias": "remittanceUltimateDebtorCounterpartyBankAccountBankLegalEntityAddressAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.counterparty.bank_account.iban",
+      "alias": "remittanceUltimateDebtorCounterpartyBankAccountIban",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.counterparty.bank_account.local.clearing_identifier.type",
+      "alias": "remittanceUltimateDebtorCounterpartyBankAccountLocalClearingIdentifierType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.counterparty.bank_account.local.clearing_identifier.value",
+      "alias": "remittanceUltimateDebtorCounterpartyBankAccountLocalClearingIdentifierValue",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.counterparty.bank_account.local.account_number",
+      "alias": "remittanceUltimateDebtorCounterpartyBankAccountLocalAccountNumber",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.counterparty.bank_account.local.account_number_suffix",
+      "alias": "remittanceUltimateDebtorCounterpartyBankAccountLocalAccountNumberSuffix",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_debtor.customer_external_identifier.id",
+      "alias": "remittanceUltimateDebtorCustomerExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.name",
+      "alias": "remittanceCreditorDetailsName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.structured_address.address_line_1",
+      "alias": "remittanceCreditorDetailsStructuredAddressAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.structured_address.address_line_2",
+      "alias": "remittanceCreditorDetailsStructuredAddressAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.structured_address.post_code",
+      "alias": "remittanceCreditorDetailsStructuredAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.structured_address.town_name",
+      "alias": "remittanceCreditorDetailsStructuredAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.structured_address.country_subdivision",
+      "alias": "remittanceCreditorDetailsStructuredAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.structured_address.country",
+      "alias": "remittanceCreditorDetailsStructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.structured_address.address_type",
+      "alias": "remittanceCreditorDetailsStructuredAddressAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.unstructured_address.local_details",
+      "alias": "remittanceCreditorDetailsUnstructuredAddressLocalDetails",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.unstructured_address.country",
+      "alias": "remittanceCreditorDetailsUnstructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.customer_identifier.id",
+      "alias": "remittanceCreditorDetailsCustomerIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.customer_identifier.version",
+      "alias": "remittanceCreditorDetailsCustomerIdentifierVersion",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.counterparty.external_identifier.id",
+      "alias": "remittanceCreditorDetailsCounterpartyExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.counterparty.bank_account.bank.bic",
+      "alias": "remittanceCreditorDetailsCounterpartyBankAccountBankBic",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.counterparty.bank_account.bank.name",
+      "alias": "remittanceCreditorDetailsCounterpartyBankAccountBankName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.counterparty.bank_account.bank.legal_entity_address.address_line_1",
+      "alias": "remittanceCreditorDetailsCounterpartyBankAccountBankLegalEntityAddressAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.counterparty.bank_account.bank.legal_entity_address.address_line_2",
+      "alias": "remittanceCreditorDetailsCounterpartyBankAccountBankLegalEntityAddressAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.counterparty.bank_account.bank.legal_entity_address.post_code",
+      "alias": "remittanceCreditorDetailsCounterpartyBankAccountBankLegalEntityAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.counterparty.bank_account.bank.legal_entity_address.town_name",
+      "alias": "remittanceCreditorDetailsCounterpartyBankAccountBankLegalEntityAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.counterparty.bank_account.bank.legal_entity_address.country_subdivision",
+      "alias": "remittanceCreditorDetailsCounterpartyBankAccountBankLegalEntityAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.counterparty.bank_account.bank.legal_entity_address.country",
+      "alias": "remittanceCreditorDetailsCounterpartyBankAccountBankLegalEntityAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.counterparty.bank_account.bank.legal_entity_address.address_type",
+      "alias": "remittanceCreditorDetailsCounterpartyBankAccountBankLegalEntityAddressAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.counterparty.bank_account.iban",
+      "alias": "remittanceCreditorDetailsCounterpartyBankAccountIban",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.counterparty.bank_account.local.clearing_identifier.type",
+      "alias": "remittanceCreditorDetailsCounterpartyBankAccountLocalClearingIdentifierType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.counterparty.bank_account.local.clearing_identifier.value",
+      "alias": "remittanceCreditorDetailsCounterpartyBankAccountLocalClearingIdentifierValue",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.counterparty.bank_account.local.account_number",
+      "alias": "remittanceCreditorDetailsCounterpartyBankAccountLocalAccountNumber",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.counterparty.bank_account.local.account_number_suffix",
+      "alias": "remittanceCreditorDetailsCounterpartyBankAccountLocalAccountNumberSuffix",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.details.customer_external_identifier.id",
+      "alias": "remittanceCreditorDetailsCustomerExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.cash_pickup.location_id",
+      "alias": "remittanceCreditorCashPickupLocationId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.cash_pickup.country",
+      "alias": "remittanceCreditorCashPickupCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.cash_pickup.agent_network",
+      "alias": "remittanceCreditorCashPickupAgentNetwork",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.account_details.cash_pickup.location_id",
+      "alias": "remittanceCreditorAccountDetailsCashPickupLocationId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.account_details.cash_pickup.country",
+      "alias": "remittanceCreditorAccountDetailsCashPickupCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.creditor.account_details.cash_pickup.agent_network",
+      "alias": "remittanceCreditorAccountDetailsCashPickupAgentNetwork",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.name",
+      "alias": "remittanceUltimateCreditorName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.structured_address.address_line_1",
+      "alias": "remittanceUltimateCreditorStructuredAddressAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.structured_address.address_line_2",
+      "alias": "remittanceUltimateCreditorStructuredAddressAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.structured_address.post_code",
+      "alias": "remittanceUltimateCreditorStructuredAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.structured_address.town_name",
+      "alias": "remittanceUltimateCreditorStructuredAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.structured_address.country_subdivision",
+      "alias": "remittanceUltimateCreditorStructuredAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.structured_address.country",
+      "alias": "remittanceUltimateCreditorStructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.structured_address.address_type",
+      "alias": "remittanceUltimateCreditorStructuredAddressAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.unstructured_address.local_details",
+      "alias": "remittanceUltimateCreditorUnstructuredAddressLocalDetails",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.unstructured_address.country",
+      "alias": "remittanceUltimateCreditorUnstructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.customer_identifier.id",
+      "alias": "remittanceUltimateCreditorCustomerIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.customer_identifier.version",
+      "alias": "remittanceUltimateCreditorCustomerIdentifierVersion",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.counterparty.external_identifier.id",
+      "alias": "remittanceUltimateCreditorCounterpartyExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.counterparty.bank_account.bank.bic",
+      "alias": "remittanceUltimateCreditorCounterpartyBankAccountBankBic",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.counterparty.bank_account.bank.name",
+      "alias": "remittanceUltimateCreditorCounterpartyBankAccountBankName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.counterparty.bank_account.bank.legal_entity_address.address_line_1",
+      "alias": "remittanceUltimateCreditorCounterpartyBankAccountBankLegalEntityAddressAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.counterparty.bank_account.bank.legal_entity_address.address_line_2",
+      "alias": "remittanceUltimateCreditorCounterpartyBankAccountBankLegalEntityAddressAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.counterparty.bank_account.bank.legal_entity_address.post_code",
+      "alias": "remittanceUltimateCreditorCounterpartyBankAccountBankLegalEntityAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.counterparty.bank_account.bank.legal_entity_address.town_name",
+      "alias": "remittanceUltimateCreditorCounterpartyBankAccountBankLegalEntityAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.counterparty.bank_account.bank.legal_entity_address.country_subdivision",
+      "alias": "remittanceUltimateCreditorCounterpartyBankAccountBankLegalEntityAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.counterparty.bank_account.bank.legal_entity_address.country",
+      "alias": "remittanceUltimateCreditorCounterpartyBankAccountBankLegalEntityAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.counterparty.bank_account.bank.legal_entity_address.address_type",
+      "alias": "remittanceUltimateCreditorCounterpartyBankAccountBankLegalEntityAddressAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.counterparty.bank_account.iban",
+      "alias": "remittanceUltimateCreditorCounterpartyBankAccountIban",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.counterparty.bank_account.local.clearing_identifier.type",
+      "alias": "remittanceUltimateCreditorCounterpartyBankAccountLocalClearingIdentifierType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.counterparty.bank_account.local.clearing_identifier.value",
+      "alias": "remittanceUltimateCreditorCounterpartyBankAccountLocalClearingIdentifierValue",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.counterparty.bank_account.local.account_number",
+      "alias": "remittanceUltimateCreditorCounterpartyBankAccountLocalAccountNumber",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.counterparty.bank_account.local.account_number_suffix",
+      "alias": "remittanceUltimateCreditorCounterpartyBankAccountLocalAccountNumberSuffix",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.remittance.ultimate_creditor.customer_external_identifier.id",
+      "alias": "remittanceUltimateCreditorCustomerExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.destination_tag",
+      "alias": "cryptoDestinationTag",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.transaction_hash",
+      "alias": "cryptoTransactionHash",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.chain.identifier.namespace",
+      "alias": "cryptoChainIdentifierNamespace",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.chain.identifier.reference",
+      "alias": "cryptoChainIdentifierReference",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.chain.network_name",
+      "alias": "cryptoChainNetworkName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.chain.network_type",
+      "alias": "cryptoChainNetworkType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.asset.identifier.namespace",
+      "alias": "cryptoAssetIdentifierNamespace",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.asset.identifier.reference",
+      "alias": "cryptoAssetIdentifierReference",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.asset.symbol",
+      "alias": "cryptoAssetSymbol",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.name",
+      "alias": "cryptoDebtorName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.structured_address.address_line_1",
+      "alias": "cryptoDebtorStructuredAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.structured_address.address_line_2",
+      "alias": "cryptoDebtorStructuredAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.structured_address.post_code",
+      "alias": "cryptoDebtorStructuredAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.structured_address.town_name",
+      "alias": "cryptoDebtorStructuredAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.structured_address.country_subdivision",
+      "alias": "cryptoDebtorStructuredAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.structured_address.country",
+      "alias": "cryptoDebtorStructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.structured_address.address_type",
+      "alias": "cryptoDebtorStructuredAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.unstructured_address.local_details",
+      "alias": "cryptoDebtorUnstructuredAddressLocalDetails",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.unstructured_address.country",
+      "alias": "cryptoDebtorUnstructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.customer_identifier.id",
+      "alias": "cryptoDebtorCustomerIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.customer_identifier.version",
+      "alias": "cryptoDebtorCustomerIdentifierVersion",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.counterparty.external_identifier.id",
+      "alias": "cryptoDebtorCounterpartyExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.counterparty.bank_account.bank.bic",
+      "alias": "cryptoDebtorDetailsCounterpartyBankAccountBankBic",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.counterparty.bank_account.bank.name",
+      "alias": "cryptoDebtorDetailsCounterpartyBankAccountBankName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.counterparty.bank_account.bank.legal_entity_address.address_line_1",
+      "alias": "cryptoDebtorDetailsCounterpartyBankAccountBankLegalEntityAddressAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.counterparty.bank_account.bank.legal_entity_address.address_line_2",
+      "alias": "cryptoDebtorDetailsCounterpartyBankAccountBankLegalEntityAddressAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.counterparty.bank_account.bank.legal_entity_address.post_code",
+      "alias": "cryptoDebtorDetailsCounterpartyBankAccountBankLegalEntityAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.counterparty.bank_account.bank.legal_entity_address.town_name",
+      "alias": "cryptoDebtorDetailsCounterpartyBankAccountBankLegalEntityAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.counterparty.bank_account.bank.legal_entity_address.country_subdivision",
+      "alias": "cryptoDebtorDetailsCounterpartyBankAccountBankLegalEntityAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.counterparty.bank_account.bank.legal_entity_address.country",
+      "alias": "cryptoDebtorDetailsCounterpartyBankAccountBankLegalEntityAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.counterparty.bank_account.bank.legal_entity_address.address_type",
+      "alias": "cryptoDebtorDetailsCounterpartyBankAccountBankLegalEntityAddressAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.counterparty.bank_account.iban",
+      "alias": "cryptoDebtorDetailsCounterpartyBankAccountIban",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.counterparty.bank_account.local.clearing_identifier.type",
+      "alias": "cryptoDebtorDetailsCounterpartyBankAccountLocalClearingIdentifierType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.counterparty.bank_account.local.clearing_identifier.value",
+      "alias": "cryptoDebtorDetailsCounterpartyBankAccountLocalClearingIdentifierValue",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.counterparty.bank_account.local.account_number",
+      "alias": "cryptoDebtorDetailsCounterpartyBankAccountLocalAccountNumber",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.counterparty.bank_account.local.account_number_suffix",
+      "alias": "cryptoDebtorDetailsCounterpartyBankAccountLocalAccountNumberSuffix",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.details.customer_external_identifier.id",
+      "alias": "cryptoDebtorCustomerExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.wallet.wallet_id",
+      "alias": "cryptoDebtorWalletId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.wallet.managing_exchange",
+      "alias": "cryptoDebtorWalletManagingExchange",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.wallet.chain.identifier.namespace",
+      "alias": "cryptoDebtorWalletChainIdentifierNamespace",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.wallet.chain.identifier.reference",
+      "alias": "cryptoDebtorWalletChainIdentifierReference",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.wallet.chain.network_name",
+      "alias": "cryptoDebtorWalletChainNetworkName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.debtor.wallet.chain.network_type",
+      "alias": "cryptoDebtorWalletChainNetworkType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.name",
+      "alias": "cryptoCreditorName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.structured_address.address_line_1",
+      "alias": "cryptoCreditorStructuredAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.structured_address.address_line_2",
+      "alias": "cryptoCreditorStructuredAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.structured_address.post_code",
+      "alias": "cryptoCreditorStructuredAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.structured_address.town_name",
+      "alias": "cryptoCreditorStructuredAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.structured_address.country_subdivision",
+      "alias": "cryptoCreditorStructuredAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.structured_address.country",
+      "alias": "cryptoCreditorStructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.structured_address.address_type",
+      "alias": "cryptoCreditorStructuredAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.unstructured_address.local_details",
+      "alias": "cryptoCreditorUnstructuredAddressLocalDetails",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.unstructured_address.country",
+      "alias": "cryptoCreditorUnstructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.customer_identifier.id",
+      "alias": "cryptoCreditorCustomerIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.customer_identifier.version",
+      "alias": "cryptoCreditorCustomerIdentifierVersion",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.counterparty.external_identifier.id",
+      "alias": "cryptoCreditorCounterpartyExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.counterparty.bank_account.bank.bic",
+      "alias": "cryptoCreditorDetailsCounterpartyBankAccountBankBic",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.counterparty.bank_account.bank.name",
+      "alias": "cryptoCreditorDetailsCounterpartyBankAccountBankName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.counterparty.bank_account.bank.legal_entity_address.address_line_1",
+      "alias": "cryptoCreditorDetailsCounterpartyBankAccountBankLegalEntityAddressAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.counterparty.bank_account.bank.legal_entity_address.address_line_2",
+      "alias": "cryptoCreditorDetailsCounterpartyBankAccountBankLegalEntityAddressAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.counterparty.bank_account.bank.legal_entity_address.post_code",
+      "alias": "cryptoCreditorDetailsCounterpartyBankAccountBankLegalEntityAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.counterparty.bank_account.bank.legal_entity_address.town_name",
+      "alias": "cryptoCreditorDetailsCounterpartyBankAccountBankLegalEntityAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.counterparty.bank_account.bank.legal_entity_address.country_subdivision",
+      "alias": "cryptoCreditorDetailsCounterpartyBankAccountBankLegalEntityAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.counterparty.bank_account.bank.legal_entity_address.country",
+      "alias": "cryptoCreditorDetailsCounterpartyBankAccountBankLegalEntityAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.counterparty.bank_account.bank.legal_entity_address.address_type",
+      "alias": "cryptoCreditorDetailsCounterpartyBankAccountBankLegalEntityAddressAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.counterparty.bank_account.iban",
+      "alias": "cryptoCreditorDetailsCounterpartyBankAccountIban",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.counterparty.bank_account.local.clearing_identifier.type",
+      "alias": "cryptoCreditorDetailsCounterpartyBankAccountLocalClearingIdentifierType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.counterparty.bank_account.local.clearing_identifier.value",
+      "alias": "cryptoCreditorDetailsCounterpartyBankAccountLocalClearingIdentifierValue",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.counterparty.bank_account.local.account_number",
+      "alias": "cryptoCreditorDetailsCounterpartyBankAccountLocalAccountNumber",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.counterparty.bank_account.local.account_number_suffix",
+      "alias": "cryptoCreditorDetailsCounterpartyBankAccountLocalAccountNumberSuffix",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.details.customer_external_identifier.id",
+      "alias": "cryptoCreditorCustomerExternalIdentifierId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.wallet.wallet_id",
+      "alias": "cryptoCreditorWalletId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.wallet.managing_exchange",
+      "alias": "cryptoCreditorWalletManagingExchange",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.wallet.chain.identifier.namespace",
+      "alias": "cryptoCreditorWalletChainIdentifierNamespace",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.wallet.chain.identifier.reference",
+      "alias": "cryptoCreditorWalletChainIdentifierReference",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.wallet.chain.network_name",
+      "alias": "cryptoCreditorWalletChainNetworkName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.monetary_details.crypto.creditor.wallet.chain.network_type",
+      "alias": "cryptoCreditorWalletChainNetworkType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.non_monetary_details",
+      "alias": "nonMonetaryDetails"
+    },
+    {
+      "field": "transaction.initiating_channel.network_details.ip_address.address",
+      "alias": "initiatingChannelNetworkDetailsIpAddress",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.initiating_channel.network_details.ip_address.type",
+      "alias": "initiatingChannelNetworkDetailsIpAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.initiating_channel.network_details.country",
+      "alias": "initiatingChannelNetworkCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.initiating_channel.device.phone_number",
+      "alias": "initiatingChannelDevicePhoneNumber",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.initiating_channel.device.fingerprint",
+      "alias": "initiatingChannelDeviceFingerprint",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.initiating_channel.atm.identifier",
+      "alias": "initiatingChannelAtmIdentifier",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.initiating_channel.atm.provider",
+      "alias": "initiatingChannelAtmProvider",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.initiating_channel.atm.geographic_location.latitude",
+      "alias": "initiatingChannelAtmGeographicLocationLatitude",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.initiating_channel.atm.geographic_location.longitude",
+      "alias": "initiatingChannelAtmGeographicLocationLongitude",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.initiating_channel.atm.structured_address.address_line_1",
+      "alias": "initiatingChannelAtmStructuredAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.initiating_channel.atm.structured_address.address_line_2",
+      "alias": "initiatingChannelAtmStructuredAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.initiating_channel.atm.structured_address.post_code",
+      "alias": "initiatingChannelAtmStructuredAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.initiating_channel.atm.structured_address.town_name",
+      "alias": "initiatingChannelAtmStructuredAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.initiating_channel.atm.structured_address.country_subdivision",
+      "alias": "initiatingChannelAtmStructuredAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.initiating_channel.atm.structured_address.country",
+      "alias": "initiatingChannelAtmStructuredAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.initiating_channel.atm.structured_address.address_type",
+      "alias": "initiatingChannelAtmStructuredAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.identifier.id",
+      "alias": "productIdentifier",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_name",
+      "alias": "productName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_status",
+      "alias": "productStatus",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.currency",
+      "alias": "productCurrency",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.purpose",
+      "alias": "productPurpose",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.onboarding_channel",
+      "alias": "productOnboardingChannel",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.onboarding_channel.online.ip_address",
+      "alias": "productOnboardingChannelOnlineIpAddress",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.onboarding_channel.online.ip_format",
+      "alias": "productOnboardingChannelOnlineIpFormat",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.onboarding_channel.online.device_id",
+      "alias": "productOnboardingChannelOnlineDeviceId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.onboarding_channel.online.device_type",
+      "alias": "productOnboardingChannelOnlineDeviceType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.onboarding_channel.in_branch.branch_identifier",
+      "alias": "productOnboardingChannelInBranchBranchIdentifier",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.monthly_payment_amount.value",
+      "alias": "productMonthlyPaymentAmount",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.product.monthly_received_amount.value",
+      "alias": "productMonthlyReceivedAmount",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.product.monthly_transaction_count.value",
+      "alias": "productMonthlyTransactionCount",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.product.external_identifier",
+      "alias": "productExternalIdentifier",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.expected_monthly_payment_value.amount",
+      "alias": "expectedMonthlyPaymentValue",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.product.expected_monthly_payment_value.iso_3_currency_code",
+      "alias": "expectedMonthlyPaymentCurrencyCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.expected_monthly_payment_value.crypto_asset.identifier.namespace",
+      "alias": "expectedMonthlyPaymentValueCryptoAssetIdentifierNamespace",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.expected_monthly_payment_value.crypto_asset.identifier.reference",
+      "alias": "expectedMonthlyPaymentValueCryptoAssetIdentifierReference",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.expected_monthly_payment_value.crypto_asset.symbol",
+      "alias": "expectedMonthlyPaymentValueCryptoAssetSymbol",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.base_expected_monthly_payment_value.amount",
+      "alias": "baseExpectedMonthlyPaymentValue",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.product.base_expected_monthly_payment_value.iso_3_currency_code",
+      "alias": "baseExpectedMonthlyPaymentCurrencyCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.base_expected_monthly_payment_value.crypto_asset.identifier.namespace",
+      "alias": "baseExpectedMonthlyPaymentValueCryptoAssetIdentifierNamespace",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.base_expected_monthly_payment_value.crypto_asset.identifier.reference",
+      "alias": "baseExpectedMonthlyPaymentValueCryptoAssetIdentifierReference",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.base_expected_monthly_payment_value.crypto_asset.symbol",
+      "alias": "baseExpectedMonthlyPaymentValueCryptoAssetSymbol",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.loan_type",
+      "alias": "loanType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.funded_at",
+      "alias": "loanFundedAt",
+      "type": [
+        "datetime"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.settled_at",
+      "alias": "loanSettledAt",
+      "type": [
+        "datetime"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.expected_repayment_date",
+      "alias": "loanExpectedRepaymentDate",
+      "type": [
+        "date"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.expected_repayment_date.year",
+      "alias": "loanExpectedRepaymentDateYear",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.expected_repayment_date.month",
+      "alias": "loanExpectedRepaymentDateMonth",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.expected_repayment_date.day",
+      "alias": "loanExpectedRepaymentDateDay",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.expected_installment_count",
+      "alias": "loanExpectedInstallmentCount",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.loan_value.amount",
+      "alias": "loanValueAmount",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.loan_value.iso_3_currency_code",
+      "alias": "loanValueCurrency",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.loan_value.crypto_asset.identifier.namespace",
+      "alias": "loanValueCryptoAssetIdentifierNamespace",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.loan_value.crypto_asset.identifier.reference",
+      "alias": "loanValueCryptoAssetIdentifierReference",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.loan_value.crypto_asset.symbol",
+      "alias": "loanValueCryptoAssetSymbol",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.base_loan_value.amount",
+      "alias": "loanBaseValueAmount",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.base_loan_value.iso_3_currency_code",
+      "alias": "loanBaseValueCurrency",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.base_loan_value.crypto_asset.identifier.namespace",
+      "alias": "loanBaseValueCryptoAssetIdentifierNamespace",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.base_loan_value.crypto_asset.identifier.reference",
+      "alias": "loanBaseValueCryptoAssetIdentifierReference",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.base_loan_value.crypto_asset.symbol",
+      "alias": "loanBaseValueCryptoAssetSymbol",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.remaining_balance_value.amount",
+      "alias": "loanRemainingBalanceAmount",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.remaining_balance_value.iso_3_currency_code",
+      "alias": "loanRemainingBalanceCurrency",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.remaining_balance_value.crypto_asset.identifier.namespace",
+      "alias": "loanRemainingBalanceCryptoAssetIdentifierNamespace",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.remaining_balance_value.crypto_asset.identifier.reference",
+      "alias": "loanRemainingBalanceCryptoAssetIdentifierReference",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.remaining_balance_value.crypto_asset.symbol",
+      "alias": "loanRemainingBalanceCryptoAssetSymbol",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.base_remaining_balance_value.amount",
+      "alias": "loanBaseRemainingBalanceAmount",
+      "type": [
+        "number"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.base_remaining_balance_value.iso_3_currency_code",
+      "alias": "loanBaseRemainingBalanceCurrency",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.base_remaining_balance_value.crypto_asset.identifier.namespace",
+      "alias": "loanBaseRemainingBalanceCryptoAssetIdentifierNamespace",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.base_remaining_balance_value.crypto_asset.identifier.reference",
+      "alias": "loanBaseRemainingBalanceCryptoAssetIdentifierReference",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.loan.base_remaining_balance_value.crypto_asset.symbol",
+      "alias": "loanBaseRemainingBalanceCryptoAssetSymbol",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.bank_account.account_number",
+      "alias": "productDetailsBankAccountAccountNumber",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.bank_account.sort_code",
+      "alias": "productDetailsBankAccountSortCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.bank_account.iban",
+      "alias": "productDetailsBankAccountIban",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.bank_account.bban",
+      "alias": "productDetailsBankAccountBban",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.bank_account.bank.bic",
+      "alias": "productDetailsBankAccountBankBic",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.bank_account.bank.name",
+      "alias": "productDetailsBankAccountBankName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.bank_account.bank.legal_entity_address.address_line_1",
+      "alias": "productDetailsBankAccountBankLegalEntityAddressAddressLine1",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.bank_account.bank.legal_entity_address.address_line_2",
+      "alias": "productDetailsBankAccountBankLegalEntityAddressAddressLine2",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.bank_account.bank.legal_entity_address.post_code",
+      "alias": "productDetailsBankAccountBankLegalEntityAddressPostCode",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.bank_account.bank.legal_entity_address.town_name",
+      "alias": "productDetailsBankAccountBankLegalEntityAddressTownName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.bank_account.bank.legal_entity_address.country_subdivision",
+      "alias": "productDetailsBankAccountBankLegalEntityAddressCountrySubdivision",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.bank_account.bank.legal_entity_address.country",
+      "alias": "productDetailsBankAccountBankLegalEntityAddressCountry",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.bank_account.bank.legal_entity_address.address_type",
+      "alias": "productDetailsBankAccountBankLegalEntityAddressAddressType",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.crypto_wallet.wallet_id",
+      "alias": "productDetailsCryptoWalletWalletId",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.crypto_wallet.managing_exchange",
+      "alias": "productDetailsCryptoWalletManagingExchange",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.crypto_wallet.chain.identifier.namespace",
+      "alias": "productDetailsCryptoWalletChainIdentifierNamespace",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.crypto_wallet.chain.identifier.reference",
+      "alias": "productDetailsCryptoWalletChainIdentifierReference",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.crypto_wallet.chain.network_name",
+      "alias": "productDetailsCryptoWalletChainNetworkName",
+      "type": [
+        "string"
+      ]
+    },
+    {
+      "field": "transaction.product.product_details.crypto_wallet.chain.network_type",
+      "alias": "productDetailsCryptoWalletChainNetworkType",
+      "type": [
+        "string"
+      ]
+    }
+  ]
+}

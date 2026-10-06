@@ -1,0 +1,77 @@
+[
+  {
+    "id": "high_risk_country_01",
+    "name": "High and Medium Risk Country Transaction",
+    "description": "A transaction involving a country designated as high-risk, designed to trigger a country-specific rule.",
+    "industry": "Finance",
+    "tags": ["High Risk", "Country", "Sanctions", "LookupList"],
+    "data": {
+      "lookup_lists": ["Country Risk"],
+
+      "customers": [
+        {
+          "comet_identifier": "high_risk_country_01"
+        }
+      ],
+      "scenarios": [
+        {
+          "name": "Risk Country",
+          "specification": {
+            "value": {
+              "segments": [
+                {
+                  "name": "All customers",
+                  "values": { "11111111-1111-1111-1111-111111111111": "high" },
+                  "outcome": { "action": "HOLD", "alert_priority": 9 }
+                },
+                {
+                  "name": "All customers",
+                  "values": { "11111111-1111-1111-1111-111111111111": "medium" },
+                  "outcome": { "action": "HOLD", "alert_priority": 5 }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "transactions": [
+        {
+
+            "details": {
+              "details": {
+                "debtor": {
+                  "identifier": {
+                    "type": "CUSTOMER",
+                    "comet_identifier": "high_risk_country_01"
+                  }
+                },
+                "creditor": {
+                  "address": {
+                    "country": "IR"
+                  }
+                }
+              }
+            }
+
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": {
+                "identifier": {
+                  "type": "CUSTOMER",
+                  "comet_identifier": "high_risk_country_01"
+                }
+              },
+              "creditor": {
+                "address": {
+                  "country": "VN"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+]

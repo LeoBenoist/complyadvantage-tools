@@ -1,0 +1,64 @@
+{
+  "name": "High Value Cash Deposit",
+  "description": "A single deposit of {{Amount}} is greater than limit",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["CUSTOMER"]
+      },
+      "specification": {
+        "and": [
+          {
+            "equals": [
+              {
+                "type": "field",
+                "value": "transaction.monetary_details.payment_channel",
+                "default": "PAYMENT_CHANNEL_BRANCH",
+                "datatype": "string"
+              },
+              {
+                "type": "constant",
+                "value": "PAYMENT_CHANNEL_BRANCH",
+                "name": null,
+                "datatype": "string"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "type": "field",
+                "value": "transaction.monetary_details.direction",
+                "default": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                "datatype": "string"
+              },
+              {
+                "type": "constant",
+                "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                "name": null,
+                "datatype": "string"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "type": "field",
+                "value": "transaction.monetary_details.base_value.amount",
+                "default": "0",
+                "datatype": "float"
+              },
+              {
+                "type": "segment_parameter",
+                "value": "22222222-2222-2222-2222-222222222222",
+                "name": "Amount",
+                "format": "number"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

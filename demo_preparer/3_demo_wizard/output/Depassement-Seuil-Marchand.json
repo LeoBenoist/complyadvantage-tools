@@ -1,0 +1,60 @@
+[
+  {
+    "id": "depassement_seuil_marchand_01",
+    "name": "Dépassement de seuil marchand (transaction unique)",
+    "description": "Une transaction inbound unique vers un marchand dépasse le seuil absolu de 5 000 EUR, déclenchant une alerte sur la transaction.",
+    "industry": "Finance",
+    "tags": ["Seuil", "Marchand", "Transaction Unique", "Inbound", "High Value"],
+    "data": {
+      "customers": [
+        {
+          "comet_identifier": "depassement_seuil_marchand_01"
+        }
+      ],
+      "scenarios": [
+        {
+          "name": "Dépassement de seuil marchand (transaction unique)",
+          "specification": {
+            "value": {
+              "segments": [
+                {
+                  "name": "All customers",
+                  "values": { "Seuil_Transaction_Marchand": "5000" },
+                  "outcome": { "action": "HOLD", "alert_priority": 5 }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "transactions": [
+        {
+          "details": {
+            "details": {
+              "creditor": {
+                "identifier": {
+                  "comet_identifier": "depassement_seuil_marchand_01",
+                  "type": "CUSTOMER"
+                }
+              }
+            },
+            "base_value": { "amount": 7500 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "creditor": {
+                "identifier": {
+                  "comet_identifier": "depassement_seuil_marchand_01",
+                  "type": "CUSTOMER"
+                }
+              }
+            },
+            "base_value": { "amount": 9200 }
+          }
+        }
+      ]
+    }
+  }
+]

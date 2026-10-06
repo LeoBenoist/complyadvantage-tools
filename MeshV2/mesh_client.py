@@ -189,25 +189,25 @@ def get_open_case_workflows_url_string():
                     result.append(f"stage.identifier={stage['identifier']}")
     return "&".join(result)
 
-def get_all_cases():
-    consolidated_cases = []
+def iter_cases_by_month():
+    """Yields (year, month, cases_list) one month at a time to keep memory bounded."""
     open_stages = get_open_case_workflows_url_string()
     page_size = 100
-
     now = datetime.utcnow()
-    year, month = 2026, 8
+    year, month = 2016, 1
 
     while (year, month) <= (now.year, now.month):
+        # if year == 2025:
+        #     break
+
         first_day = date(year, month, 1)
         last_day = date(year, month, calendar.monthrange(year, month)[1])
         from_str = first_day.strftime("%Y-%m-%dT00:00:00.000Z")
         to_str = last_day.strftime("%Y-%m-%dT23:59:59.999Z")
 
-        # if year == 2024:
-        #     break
-
+        month_cases = []
         page_number = 1
-        print(f"Fetching cases for {year}-{month:02d}...")
+        print(f"\n\n\n\n\nFetching cases for {year}-{month:02d}...\n\n\n\n\n")
         while True:
             endpoint = (
                 f"{CASES_ENDPOINT}?page_number={page_number}&page_size={page_size}"
@@ -224,7 +224,7 @@ def get_all_cases():
                     continue
                 customer_identifier = case.get("customer", {}).get("identifier")
                 customer_detail = get_customer_details(customer_identifier) if customer_identifier else {}
-                consolidated_cases.append({
+                month_cases.append({
                     "case": case,
                     "alerts": get_case_alerts(case["identifier"]),
                     "customer_detail": customer_detail,
@@ -233,12 +233,12 @@ def get_all_cases():
             if len(cases) < page_size:
                 break
 
+        yield year, month, month_cases
+
         month += 1
         if month > 12:
             month = 1
             year += 1
-
-    return consolidated_cases
 
 
 # def get_input(prompt, default=None, is_password=False):
@@ -247,6 +247,7 @@ def get_all_cases():
 
 
 def write_to_excel(data, filename):
+    print(f"Starting to write results to '{filename}'")
     if not data:
         print("No data to write to Excel.")
         return
@@ -260,11 +261,14 @@ def write_to_excel(data, filename):
         print(f"Error writing to Excel file: {e}")
 
 
-def run_main(case_analyser_fn, output_filename):
-    cases = get_all_cases()
-    all_results = []
-    for case in cases:
-        result = case_analyser_fn(case)
-        if isinstance(result, list):
-            all_results.extend(result)
-    write_to_excel(all_results, output_filename)
+def run_main(case_analyser_fn, output_filename_base):
+    os.makedirs('./results', exist_ok=True)
+    for year, month, month_cases in iter_cases_by_month():
+        month_results = []
+        for case in month_cases:
+            result = case_analyser_fn(case)
+            if isinstance(result, list):
+                month_results.extend(result)
+        write_to_excel(month_results, f"{output_filename_base}_{year}_{month:02d}.xlsx")
+        del month_cases[:]
+        del month_results

@@ -1,0 +1,39 @@
+{
+  "name": "[P-1st] [RL_0020] First Transaction",
+  "description": "This was the customer's first transaction.",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["CUSTOMER"]
+      },
+      "specification": {
+        "equals": [
+          {
+            "value": {
+              "aggregate": "count",
+              "window": 730,
+              "window_unit": "calendar_day",
+              "target_field": null,
+              "include_current_record": true,
+              "exclude_current_day": false,
+              "show_context": true,
+              "filter_spec": null,
+              "grouping_fields": [
+                "transaction.customer_identifier.id"
+              ],
+              "type": "scalar"
+            },
+            "type": "aggregation"
+          },
+          {
+            "value": "1",
+            "datatype": "number",
+            "name": "Transaction_Count",
+            "type": "constant"
+          }
+        ]
+      }
+    }
+  }
+}

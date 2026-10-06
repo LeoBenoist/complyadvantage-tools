@@ -1,0 +1,56 @@
+[
+  {
+    "id": "dormant_account_01",
+    "name": "Dormant Account",
+    "description": "A customer transacts for the first time after a dormancy period of over 180 days, reactivating a previously inactive account.",
+    "industry": "Finance",
+    "tags": ["Dormant", "Account Anomaly", "Reactivation"],
+    "data": {
+      "customers": [{ "comet_identifier": "dormant_account_01" }],
+      "scenarios": [
+        {
+          "name": "Dormant Account",
+          "specification": {
+            "value": {
+              "segments": [
+                {
+                  "name": "All customers",
+                  "values": {},
+                  "outcome": { "action": "HOLD", "alert_priority": 6 }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "transactions": [
+        {
+          "comet_occurred_at_offset": { "value": 200, "unit": "days" },
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "dormant_account_01" } }
+            },
+            "base_value": { "amount": 1500 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 200, "unit": "days" },
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "dormant_account_01" } }
+            },
+            "base_value": { "amount": 1600 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "dormant_account_01" } }
+            },
+            "base_value": { "amount": 2300 }
+          }
+        }
+      ]
+    }
+  }
+]

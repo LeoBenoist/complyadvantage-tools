@@ -1,0 +1,64 @@
+{
+  "name": "[HRCOU] [RL_0035] High-Risk Country",
+  "description": "The counterparty country was classified as a {{Country_Risk_Level}} risk country. [Applicable since the transaction of {{Minimum_Transaction_Amount}} {{Base_Currency}} was at least the set minimum amount. The counterparty country code was classified against the \"Country Risk\" lookup list.]",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["TRANSACTION"]
+      },
+      "specification": {
+        "and": [
+          {
+            "not_equals": [
+              {
+                "value": "transaction.monetary_details.base_value.iso_3_currency_code",
+                "default": "CURRENCY_CODE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "CURRENCY_CODE",
+                "datatype": "string",
+                "name": "Base_Currency",
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "value": "transaction.enrichments.counterparty_country_risk.string_value",
+                "default": "low",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "Country_Risk_Level",
+                "name": "Country_Risk_Level",
+                "format": "string",
+                "type": "segment_parameter"
+              }
+            ]
+          },
+          {
+            "greater_than_or_equals": [
+              {
+                "value": "transaction.monetary_details.base_value.amount",
+                "default": "0",
+                "datatype": "number",
+                "type": "field"
+              },
+              {
+                "value": "Minimum_Transaction_Amount",
+                "name": "Minimum_Transaction_Amount",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

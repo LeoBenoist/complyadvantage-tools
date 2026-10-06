@@ -1,0 +1,280 @@
+{
+  "name": "[OLD] [IN>%OUT] Similar Amounts - Inbound",
+  "description": "This customer's {{Inbound_Sum}} {{Base_Currency}} sum of inbound transactions over the last 30 days was between the set percentage limits of their {{OUTBOUND_SUM}} {{Base_Currency}} sum of outbound transactions over the same 30 days.",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["CUSTOMER"]
+      },
+      "specification": {
+        "and": [
+          {
+            "not_equals": [
+              {
+                "type": "field",
+                "datatype": "string",
+                "default": "CURRENCY_CODE",
+                "value": "transaction.monetary_details.base_value.iso_3_currency_code"
+              },
+              {
+                "value": "CURRENCY_CODE",
+                "datatype": "string",
+                "name": "Base_Currency",
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "aggregate": "sum",
+                  "window": 30,
+                  "window_unit": "calendar_day",
+                  "target_field": "transaction.monetary_details.base_value.amount",
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "show_context": false,
+                  "filter_spec": {
+                    "equals": [
+                      {
+                        "type": "field",
+                        "datatype": "string",
+                        "default": "NO_VALUE",
+                        "value": "transaction.monetary_details.direction"
+                      },
+                      {
+                        "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                        "datatype": "string",
+                        "name": null,
+                        "type": "constant"
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "Inbound_Sum",
+                "name": "Inbound_Sum",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          },
+          {
+            "greater_than_or_equals": [
+              {
+                "value": {
+                  "aggregate": "sum",
+                  "window": 30,
+                  "window_unit": "calendar_day",
+                  "target_field": "transaction.monetary_details.base_value.amount",
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "show_context": true,
+                  "filter_spec": {
+                    "equals": [
+                      {
+                        "type": "field",
+                        "datatype": "string",
+                        "default": "NO_VALUE",
+                        "value": "transaction.monetary_details.direction"
+                      },
+                      {
+                        "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                        "datatype": "string",
+                        "name": null,
+                        "type": "constant"
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "multiply": [
+                  {
+                    "value": {
+                      "aggregate": "sum",
+                      "window": 30,
+                      "window_unit": "calendar_day",
+                      "target_field": "transaction.monetary_details.base_value.amount",
+                      "include_current_record": true,
+                      "exclude_current_day": false,
+                      "show_context": false,
+                      "filter_spec": {
+                        "equals": [
+                          {
+                            "type": "field",
+                            "datatype": "string",
+                            "default": "NO_VALUE",
+                            "value": "transaction.monetary_details.direction"
+                          },
+                          {
+                            "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      },
+                      "grouping_fields": ["transaction.customer_identifier.id"],
+                      "type": "scalar"
+                    },
+                    "type": "aggregation"
+                  },
+                  {
+                    "divide": [
+                      {
+                        "value": "Percentage_Low",
+                        "name": "Percentage_Low",
+                        "format": "number",
+                        "type": "segment_parameter"
+                      },
+                      {
+                        "value": "100",
+                        "datatype": "number",
+                        "name": null,
+                        "type": "constant"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "less_than_or_equals": [
+              {
+                "value": {
+                  "aggregate": "sum",
+                  "window": 30,
+                  "window_unit": "calendar_day",
+                  "target_field": "transaction.monetary_details.base_value.amount",
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "show_context": true,
+                  "filter_spec": {
+                    "equals": [
+                      {
+                        "type": "field",
+                        "datatype": "string",
+                        "default": "NO_VALUE",
+                        "value": "transaction.monetary_details.direction"
+                      },
+                      {
+                        "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                        "datatype": "string",
+                        "name": null,
+                        "type": "constant"
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "multiply": [
+                  {
+                    "value": {
+                      "aggregate": "sum",
+                      "window": 30,
+                      "window_unit": "calendar_day",
+                      "target_field": "transaction.monetary_details.base_value.amount",
+                      "include_current_record": true,
+                      "exclude_current_day": false,
+                      "show_context": false,
+                      "filter_spec": {
+                        "equals": [
+                          {
+                            "type": "field",
+                            "datatype": "string",
+                            "default": "NO_VALUE",
+                            "value": "transaction.monetary_details.direction"
+                          },
+                          {
+                            "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                            "datatype": "string",
+                            "name": null,
+                            "type": "constant"
+                          }
+                        ]
+                      },
+                      "grouping_fields": ["transaction.customer_identifier.id"],
+                      "type": "scalar"
+                    },
+                    "type": "aggregation"
+                  },
+                  {
+                    "divide": [
+                      {
+                        "value": "Percentage_High",
+                        "name": "Percentage_High",
+                        "format": "number",
+                        "type": "segment_parameter"
+                      },
+                      {
+                        "value": "100",
+                        "datatype": "number",
+                        "name": null,
+                        "type": "constant"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "aggregate": "sum",
+                  "window": 30,
+                  "window_unit": "calendar_day",
+                  "target_field": "transaction.monetary_details.base_value.amount",
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "show_context": false,
+                  "filter_spec": {
+                    "equals": [
+                      {
+                        "type": "field",
+                        "datatype": "string",
+                        "default": "NO_VALUE",
+                        "value": "transaction.monetary_details.direction"
+                      },
+                      {
+                        "value": "MONETARY_TRANSACTION_DIRECTION_OUTBOUND",
+                        "datatype": "string",
+                        "name": null,
+                        "type": "constant"
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "0",
+                "datatype": "number",
+                "name": "OUTBOUND_SUM",
+                "type": "constant"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,94 @@
+[
+  {
+    "id": "meme_payeur_multiples_cagnottes_01",
+    "name": "Même payeur sur multiples cagnottes",
+    "description": "Un même payeur effectue des transactions inbound vers 3 cagnottes/marchands distincts sur 30 jours, dépassant le seuil de 2 cagnottes uniques — la contrepartie est signalée.",
+    "industry": "Finance",
+    "tags": ["Réseau", "Cagnottes", "Payeur Commun", "Counterparty", "Inbound"],
+    "data": {
+      "customers": [
+        { "comet_identifier": "meme_payeur_01a" },
+        { "comet_identifier": "meme_payeur_01b" },
+        { "comet_identifier": "meme_payeur_01c" }
+      ],
+      "scenarios": [
+        {
+          "name": "Même payeur sur multiples cagnottes",
+          "specification": {
+            "value": {
+              "segments": [
+                {
+                  "name": "All customers",
+                  "values": { "Cagnottes_par_Payeur": "2" },
+                  "outcome": { "action": "HOLD", "alert_priority": 7 }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "transactions": [
+        {
+          "details": {
+            "details": {
+              "creditor": {
+                "identifier": {
+                  "type": "CUSTOMER",
+                  "comet_identifier": "meme_payeur_01a"
+                }
+              },
+              "debtor": {
+                "name": "Jean Dupont",
+                "identifier": {
+                  "external_identifier": "payer-cagnotte-001",
+                  "type": "COUNTERPARTY"
+                }
+              }
+            },
+            "base_value": { "amount": 300 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "creditor": {
+                "identifier": {
+                  "type": "CUSTOMER",
+                  "comet_identifier": "meme_payeur_01b"
+                }
+              },
+              "debtor": {
+                "name": "Jean Dupont",
+                "identifier": {
+                  "external_identifier": "payer-cagnotte-001",
+                  "type": "COUNTERPARTY"
+                }
+              }
+            },
+            "base_value": { "amount": 250 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "creditor": {
+                "identifier": {
+                  "type": "CUSTOMER",
+                  "comet_identifier": "meme_payeur_01c"
+                }
+              },
+              "debtor": {
+                "name": "Jean Dupont",
+                "identifier": {
+                  "external_identifier": "payer-cagnotte-001",
+                  "type": "COUNTERPARTY"
+                }
+              }
+            },
+            "base_value": { "amount": 200 }
+          }
+        }
+      ]
+    }
+  }
+]

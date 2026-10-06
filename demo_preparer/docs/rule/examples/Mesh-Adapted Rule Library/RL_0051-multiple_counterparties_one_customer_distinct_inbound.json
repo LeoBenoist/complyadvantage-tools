@@ -1,0 +1,123 @@
+{
+  "name": "[OCMCI_1] [RL_0051] Multiple Counterparties, One Customer | Inbound",
+  "description": "The customer received inbound transactions from {{Counterparties_per_Customer_Limit}} different counterparties within the last 30 days, which exceeded the set limit. [The raised alert includes the contributing transactions from each distinct counterparty once more than the set number of counterparties has been reached.]",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["CUSTOMER"]
+      },
+      "specification": {
+        "and": [
+          {
+            "equals": [
+              {
+                "value": "transaction.monetary_details.direction",
+                "default": "NO_VALUE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                "datatype": "string",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "unique_count",
+                  "window": 30,
+                  "show_context": true,
+                  "window_unit": "calendar_day",
+                  "target_field": {
+                    "value": "counterparty-id",
+                    "type": "block"
+                  },
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "filter_spec": {
+                    "equals": [
+                      {
+                        "value": "transaction.monetary_details.direction",
+                        "default": "NO_VALUE",
+                        "datatype": "string",
+                        "type": "field"
+                      },
+                      {
+                        "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                        "datatype": "string",
+                        "name": null,
+                        "type": "constant"
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "hll"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "Counterparties_per_Customer_Limit",
+                "name": "Counterparties_per_Customer_Limit",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "count",
+                  "window": 30,
+                  "show_context": true,
+                  "window_unit": "calendar_day",
+                  "target_field": null,
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "filter_spec": {
+                    "equals": [
+                      {
+                        "value": "transaction.monetary_details.direction",
+                        "default": "NO_VALUE",
+                        "datatype": "string",
+                        "type": "field"
+                      },
+                      {
+                        "value": "MONETARY_TRANSACTION_DIRECTION_INBOUND",
+                        "datatype": "string",
+                        "name": null,
+                        "type": "constant"
+                      }
+                    ]
+                  },
+                  "grouping_fields": [
+                    "transaction.customer_identifier.id",
+                    {
+                      "value": "counterparty-id",
+                      "type": "block"
+                    }
+                  ],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "1",
+                "datatype": "number",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

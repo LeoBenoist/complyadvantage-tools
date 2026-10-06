@@ -1,0 +1,51 @@
+[
+  {
+    "id": "high_value_cash_deposit_01",
+    "name": "High Value Cash Deposit",
+    "description": "A transaction representing a significant cash deposit into an account, designed to trigger a high-value deposit rule.",
+    "industry": "Finance",
+    "tags": ["Cash", "Deposit", "High Value"],
+    "data": {
+      "customers": [
+        {
+          "comet_identifier": "high_value_cash_deposit_01"
+        }
+      ],
+      "scenarios": [
+        {
+          "name": "High Value Cash Deposit",
+          "specification": {
+            "value": {
+              "segments": [
+                {
+                  "name": "All customers",
+                  "values": { "22222222-2222-2222-2222-222222222222": "15000" },
+                  "outcome": { "action": "HOLD", "alert_priority": 8 }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "transactions": [
+        {
+          "details": {
+            "details": {
+              "creditor": {
+                "identifier": {
+                  "type": "CUSTOMER",
+                  "comet_identifier": "high_value_cash_deposit_01"
+                }
+              },
+              "payment_scheme": "OTHER"
+            },
+            "payment_channel": "BRANCH",
+            "value": {
+              "amount": 20000
+            }
+          }
+        }
+      ]
+    }
+  }
+]

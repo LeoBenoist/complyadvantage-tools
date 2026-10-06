@@ -1,0 +1,218 @@
+[
+  {
+    "name": "High Value Cash Deposit",
+    "description": "A single deposit of {{Amount}} is greater than limit",
+    "name_fr": "Dépôt d'espèces de grande valeur",
+    "description_fr": "Un dépôt unique de {{Amount}} est supérieur à la limite"
+  },
+  {
+    "name": "High Value Cash Withdrawal",
+    "description": "A single cash withdrawal of {{Amount}} is greater than a limit.",
+    "name_fr": "Retrait d'espèces de grande valeur",
+    "description_fr": "Un retrait d'espèces unique de {{Amount}} est supérieur à une limite."
+  },
+  {
+    "name": "Payment Limit - Outbound",
+    "description": "Outgoing transaction of {{Amount}} is greater than a limit.",
+    "name_fr": "Limite de paiement - Sortant",
+    "description_fr": "La transaction sortante de {{Amount}} est supérieure à une limite."
+  },
+  {
+    "name": "Payment Limit - Inbound",
+    "description": "Incoming transaction of {{Amount}} is greater than a limit.",
+    "name_fr": "Limite de paiement - Entrant",
+    "description_fr": "La transaction entrante de {{Amount}} est supérieure à une limite."
+  },
+  {
+    "name": "High-Risk Currency",
+    "description": "Transaction in a currency that is designated as high risk.",
+    "name_fr": "Devise à haut risque",
+    "description_fr": "Transaction dans une devise désignée comme à haut risque."
+  },
+  {
+    "name": "Risk Currency",
+    "description": "Transaction in a {{risk}} risk currency.",
+    "name_fr": "Devise à risque",
+    "description_fr": "Transaction dans une devise désignée comme {{risk}} risque."
+  },
+  {
+    "name": "Risk Country",
+    "description": "Transaction in a {{risk}} risk country.",
+    "name_fr": "Pays à risque",
+    "description_fr": "Transaction dans un pays désigné comme {{risk}} risque."
+  },
+  {
+    "name": "Sensitive Merchant Category",
+    "description": "Transaction in a {{risk}} risk MCC.",
+    "name_fr": "Catégorie de marchand à risque",
+    "description_fr": "Transaction dans un MCC désigné comme {{risk}} risque."
+  },
+  {
+    "name": "High Account Balance",
+    "description": "Account balance of  at the end of a transaction is greater than a limit.",
+    "name_fr": "Solde de compte élevé",
+    "description_fr": "Le solde du compte à la fin d'une transaction est supérieur à une limite."
+  },
+  {
+    "name": "High Cumulative Amount - Outbound",
+    "description": "Outgoing transaction sum of {{Amount}} over the last 7 days has exceeded the limit.",
+    "name_fr": "Montant cumulé élevé - Sortant",
+    "description_fr": "La somme des transactions sortantes de {{Amount}} au cours des 7 derniers jours a dépassé la limite."
+  },
+  {
+    "name": "High Velocity - Outbound",
+    "description": "Number of outgoing transactions over a set period of time is greater than the limit, {{Amount}}",
+    "name_fr": "Vélocité élevée - Sortant",
+    "description_fr": "Le nombre de transactions sortantes sur une période donnée est supérieur à la limite, {{Amount}}"
+  },
+  {
+    "name": "High Velocity - Outbound - Counterparty",
+    "description": "The customer had more than {{Number}} outbound transactions to this counteraprty in 1 day.",
+    "name_fr": "Vélocité élevée - Sortant - Contrepartie",
+    "description_fr": "Le client a effectué plus de {{Number}} transactions sortantes vers cette contrepartie en 1 jour."
+  },
+  {
+    "name": "Multiple Counterparties, One Customer - Inbound (Distinct)",
+    "description": "{{Counterparties}} unique counterparties have sent transactions to this Customer in 30 days",
+    "name_fr": "Multiples contreparties, un client - Entrant (Distinct)",
+    "description_fr": "{{Counterparties}} contreparties uniques ont envoyé des transactions à ce client en 30 jours"
+  },
+  {
+    "name": "Transaction Limit - Historic Average - Outbound",
+    "description": "This Outbound transaction (for {{Amount}}) was greater than a Factor times their historical average ({{Factor}}, made up of the preceding {{Number}} Outbound transactions) ",
+    "name_fr": "Limite de transaction - Moyenne historique - Sortant",
+    "description_fr": "Cette transaction sortante (pour {{Amount}}) était supérieure à un facteur fois leur moyenne historique ({{Factor}}, constituée des {{Number}} transactions sortantes précédentes)"
+  },
+  {
+    "name": "High Velocity - Outbound - High Value Transactions (7 days)",
+    "description": "This Customer has made {{Number_of_Transactions}} Outbound transactions greater than a limit in the last week.",
+    "name_fr": "Vélocité élevée - Sortant - Transactions de grande valeur (7 jours)",
+    "description_fr": "Ce client a effectué {{Number_of_Transactions}} transactions sortantes supérieures à une limite au cours de la semaine dernière."
+  },
+  {
+    "name": "Outbound Transaction Above Average",
+    "description": "This Customer has made a transaction for {{Current_Transaction_Amount}}, which was more than a set factor times their average of {{Average_Excluding_Current_Transaction}} (excluding the current transaction).",
+    "name_fr": "Transaction sortante supérieure à la moyenne",
+    "description_fr": "Ce client a effectué une transaction de {{Current_Transaction_Amount}}, ce qui était plus qu'un facteur défini fois leur moyenne de {{Average_Excluding_Current_Transaction}} (en excluant la transaction actuelle)."
+  },
+  {
+    "name": "Monthly Outbound Count Above Average",
+    "description": "This Customer's count of Outbound transactions in the last month was {{Number_of_Transactions}}, which was greater than a Factor above their average from the preceding 2 months (which was {{Factor}}).",
+    "name_fr": "Nombre de transactions sortantes mensuelles supérieur à la moyenne",
+    "description_fr": "Le nombre de transactions sortantes de ce client le mois dernier était de {{Number_of_Transactions}}, ce qui était supérieur à un facteur au-dessus de leur moyenne des 2 mois précédents (qui était de {{Factor}})."
+  },
+  {
+    "name": "Monthly Outbound Sum Above Average",
+    "description": "This Customer's sum of Outbound transactions in the last month was {{Sum}}, which was greater than a Factor above their average from the preceding 2 months (which was {{Factor}}).",
+    "name_fr": "Somme des transactions sortantes mensuelles supérieure à la moyenne",
+    "description_fr": "La somme des transactions sortantes de ce client le mois dernier était de {{Sum}}, ce qui était supérieur à un facteur au-dessus de leur moyenne des 2 mois précédents (qui était de {{Factor}})."
+  },
+  {
+    "name": "Many Customers, One Address",
+    "description": "This Customer is one of {{Number}} Customers to have made Outbound payments relating to a single address (this is their first Outbound payment relating to this address).",
+    "name_fr": "Plusieurs clients, une adresse",
+    "description_fr": "Ce client est l'un des {{Number}} clients à avoir effectué des paiements sortants relatifs à une seule adresse (c'est leur premier paiement sortant relatif à cette adresse)."
+  },
+  {
+    "name": "Similar Amounts - 1 Hour",
+    "description": "The Customer's sum of Inbound transactions in the last hour was {{Amount}}, which was within set percentages of the Outbound sum within the same time ({{Outbound_amount}}).",
+    "name_fr": "Montants similaires - 1 heure",
+    "description_fr": "La somme des transactions entrantes du client au cours de la dernière heure était de {{Amount}}, ce qui était dans des pourcentages définis de la somme sortante dans le même temps ({{Outbound_amount}})."
+  },
+  {
+    "name": "Rent Payment Above Expectation",
+    "description": "This Customer's Outbound payment of {{Amount}} USD was greater than a set percentage of the property value of {{Property_value}} (only flags on the Customer's first transaction of this value).",
+    "name_fr": "Paiement de loyer supérieur aux attentes",
+    "description_fr": "Le paiement sortant de ce client de {{Amount}} USD était supérieur à un pourcentage défini de la valeur de la propriété de {{Property_value}} (ne signale que lors de la première transaction du client de cette valeur)."
+  },
+  {
+    "name": "High Outbound Sum - Multiple Destinations - 5 Days",
+    "description": "The customer's {{Outbound_Sum_5_Days_Limit}} sum of outbound transactions over the last 5 days exceeded the set limit, and the customer's sent these transactions to {{Number_of_Payees_5_Day_Limit}} different destination accounts, which also exceeded the set limit.",
+    "name_fr": "Somme sortante élevée - Destinations multiples - 5 jours",
+    "description_fr": "La somme des transactions sortantes du client de {{Outbound_Sum_5_Days_Limit}} au cours des 5 derniers jours a dépassé la limite définie, et le client a envoyé ces transactions à {{Number_of_Payees_5_Day_Limit}} comptes de destination différents, ce qui a également dépassé la limite définie."
+  },
+  {
+    "name": "Dormant Account",
+    "description": "The customer transacted for the first time after a dormancy period of at least 180 days.",
+    "name_fr": "Compte dormant",
+    "description_fr": "Le client a effectué une transaction pour la première fois après une période de dormance d'au moins 180 jours."
+  },
+  {
+    "name": "Percentage of Balance",
+    "description": "The customer's outbound transaction exceeded the set percentage of their account balance.",
+    "name_fr": "Pourcentage du solde",
+    "description_fr": "La transaction sortante du client a dépassé le pourcentage défini de leur solde de compte."
+  },
+  {
+    "name": "Potential Mule - High Activity - New Account",
+    "description": "This new customer had {{Min_Inbound_Number_30_Days_Limit}} inbound transactions and {{Min_Outbound_Number_30_Days_Limit}} outbound transactions within the last 30 days, exceeding the set inbound and outbound limits. [The customer was considered new for their first 30 days of transactional activity.]",
+    "name_fr": "Potentiel mule - Activité élevée - Nouveau compte",
+    "description_fr": "Ce nouveau client a effectué {{Min_Inbound_Number_30_Days_Limit}} transactions entrantes et {{Min_Outbound_Number_30_Days_Limit}} transactions sortantes au cours des 30 derniers jours, dépassant les limites entrantes et sortantes définies. [Le client était considéré comme nouveau pendant ses 30 premiers jours d'activité transactionnelle.]"
+  },
+  {
+    "name": "Similar Amounts - Outbound",
+    "description": "The 30-day outbound transaction volume ({{Outbound_Sum}}) has reached the required percentage threshold relative to the inbound volume ({{INBOUND_SUM}}).",
+    "name_fr": "Montants similaires - Sortant",
+    "description_fr": "Le volume des transactions sortantes sur 30 jours ({{Outbound_Sum}}) a atteint le seuil de pourcentage requis par rapport au volume entrant ({{INBOUND_SUM}})."
+  },
+  {
+    "name": "Multiple Counterparties, One Customer - Distinct",
+    "description": "The customer transacted with {{Counterparties_per_Customer_Limit}} different counterparties within the last 30 days, which exceeded the set limit.",
+    "name_fr": "Multiples contreparties, un client - Distinct",
+    "description_fr": "Le client a effectué des transactions avec {{Counterparties_per_Customer_Limit}} contreparties différentes au cours des 30 derniers jours, ce qui a dépassé la limite définie."
+  },
+  {
+    "name": "Multiple Customers, One Counterparty - Distinct",
+    "description": "The counterparty transacted with {{Customers_per_Counterparty_Limit}} different customers within the last 30 days, which exceeded the set limit.",
+    "name_fr": "Plusieurs clients, une contrepartie - Distinct",
+    "description_fr": "La contrepartie a effectué des transactions avec {{Customers_per_Counterparty_Limit}} clients différents au cours des 30 derniers jours, ce qui a dépassé la limite définie."
+  },
+  {
+    "name": "Structuring - Inbound",
+    "description": "The customer received {{Number}} inbound transactions with values of at least 9,950.00 but not greater than 10,000 within the last 7 days, which exceeded the set limit.",
+    "name_fr": "Fractionnement - Entrant",
+    "description_fr": "Le client a reçu {{Number}} transactions entrantes d'une valeur d'au moins 9 950,00 mais pas supérieure à 10 000 au cours des 7 derniers jours, ce qui a dépassé la limite définie."
+  },
+  {
+    "name": "Structuring - Outbound",
+    "description": "The customer sent {{Number}} outbound transactions with values of at least 9,950.00 but not greater than 10,000 within the last 7 days, which exceeded the set limit.",
+    "name_fr": "Fractionnement - Sortant",
+    "description_fr": "Le client a envoyé {{Number}} transactions sortantes d'une valeur d'au moins 9 950,00 mais pas supérieure à 10 000 au cours des 7 derniers jours, ce qui a dépassé la limite définie."
+  },
+  {
+    "name": "High Sum - Inbound - 7 Days",
+    "description": "The customer has reached or surpassed their 7-day inbound transaction limit of {{Limit}}.",
+    "name_fr": "Somme élevée - Entrant - 7 jours",
+    "description_fr": "Le client a atteint ou dépassé sa limite de transactions entrantes sur 7 jours de {{Limit}}."
+  },
+  {
+    "name": "High Sum - Inbound - Counterparty",
+    "description": "The {{Amount_Limit}} sum of inbound transactions the customer received from this counterparty over the last 14 days has exceeded the set limit.",
+    "name_fr": "Somme élevée - Entrant - Contrepartie",
+    "description_fr": "La somme de {{Amount_Limit}} des transactions entrantes que le client a reçues de cette contrepartie au cours des 14 derniers jours a dépassé la limite définie."
+  },
+  {
+    "name": "High Sum - Outbound - 7 Days",
+    "description": "The customer has reached or surpassed their 7-day outbound transaction limit of {{Limit}}.",
+    "name_fr": "Somme élevée - Sortant - 7 jours",
+    "description_fr": "Le client a atteint ou dépassé sa limite de transactions sortantes sur 7 jours de {{Limit}}."
+  },
+  {
+    "name": "High Velocity - Inbound - 7 Days",
+    "description": "The customer received {{Number}} inbound transactions in the last 7 days, exceeding the set limit.",
+    "name_fr": "Vélocité élevée - Entrant - 7 jours",
+    "description_fr": "Le client a reçu {{Number}} transactions entrantes au cours des 7 derniers jours, dépassant la limite définie."
+  },
+  {
+    "name": "High Velocity - Inbound - Counterparty",
+    "description": "The Counterparty sent {{Inbound_Limit}} inbound transactions to the customer in the last 14 days, exceeding the set limit. [Alerts on the first transaction exceeding the limit per calendar day.]",
+    "name_fr": "Vélocité élevée - Entrant - Contrepartie",
+    "description_fr": "La contrepartie a envoyé {{Inbound_Limit}} transactions entrantes au client au cours des 14 derniers jours, dépassant la limite définie. [Alerte sur la première transaction dépassant la limite par jour calendaire.]"
+  },
+  {
+    "name": "High Velocity - Outbound - 7 Days",
+    "description": "The customer sent {{Number}} outbound transactions in the last 7 days, exceeding the set limit.",
+    "name_fr": "Vélocité élevée - Sortant - 7 jours",
+    "description_fr": "Le client a envoyé {{Number}} transactions sortantes au cours des 7 derniers jours, dépassant la limite définie."
+  }
+]

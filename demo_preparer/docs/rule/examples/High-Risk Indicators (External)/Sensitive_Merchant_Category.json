@@ -1,0 +1,48 @@
+{
+  "name": "Sensitive Merchant Category",
+  "description": "Transaction in a {{risk}} risk MCC.",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["CUSTOMER"]
+      },
+      "specification": {
+        "or": [
+          {
+            "equals": [
+              {
+                "value": "transaction.enrichments.sub_merchant_mcc_risk.string_value",
+                "default": "low",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "11111111-1111-1111-1111-111111111111",
+                "name": "risk",
+                "format": "string",
+                "type": "segment_parameter"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "value": "transaction.enrichments.merchant_mcc_risk.string_value",
+                "default": "low",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "11111111-1111-1111-1111-111111111111",
+                "name": "risk",
+                "format": "string",
+                "type": "segment_parameter"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

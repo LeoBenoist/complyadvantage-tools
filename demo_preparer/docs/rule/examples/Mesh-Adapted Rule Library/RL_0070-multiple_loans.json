@@ -1,0 +1,117 @@
+{
+  "name": "[MANYLOAN] [RL_0070] Multiple Loans | 180 Days",
+  "description": "The customer was associated with {{Distinct_Loans_Limit}} different loans within the last 180 days, exceeding the set limit. [Applicable to transactions on a loan product; loans are counted by distinct loan reference (product external identifier).]",
+  "specification": {
+    "value": {
+      "segments": [],
+      "parameters": {
+        "risk_subject_groupings": ["CUSTOMER"]
+      },
+      "specification": {
+        "and": [
+          {
+            "not_equals": [
+              {
+                "value": "transaction.product.product_details.loan.loan_type",
+                "default": "LOAN_TYPE",
+                "datatype": "string",
+                "type": "field"
+              },
+              {
+                "value": "LOAN_TYPE",
+                "datatype": "string",
+                "name": "Loan_Type",
+                "type": "constant"
+              }
+            ]
+          },
+          {
+            "greater_than": [
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "unique_count",
+                  "window": 180,
+                  "show_context": true,
+                  "window_unit": "calendar_day",
+                  "target_field": "transaction.product.external_identifier",
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "filter_spec": {
+                    "not_equals": [
+                      {
+                        "value": "transaction.product.product_details.loan.loan_type",
+                        "default": "LOAN_TYPE",
+                        "datatype": "string",
+                        "type": "field"
+                      },
+                      {
+                        "value": "LOAN_TYPE",
+                        "datatype": "string",
+                        "name": "Loan_Type",
+                        "type": "constant"
+                      }
+                    ]
+                  },
+                  "grouping_fields": ["transaction.customer_identifier.id"],
+                  "type": "hll"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "Distinct_Loans_Limit",
+                "name": "Distinct_Loans_Limit",
+                "format": "number",
+                "type": "segment_parameter"
+              }
+            ]
+          },
+          {
+            "equals": [
+              {
+                "value": {
+                  "uuid": null,
+                  "aggregate": "count",
+                  "window": 180,
+                  "show_context": false,
+                  "window_unit": "calendar_day",
+                  "target_field": null,
+                  "include_current_record": true,
+                  "exclude_current_day": false,
+                  "filter_spec": {
+                    "not_equals": [
+                      {
+                        "value": "transaction.product.product_details.loan.loan_type",
+                        "default": "LOAN_TYPE",
+                        "datatype": "string",
+                        "type": "field"
+                      },
+                      {
+                        "value": "LOAN_TYPE",
+                        "datatype": "string",
+                        "name": "Loan_Type",
+                        "type": "constant"
+                      }
+                    ]
+                  },
+                  "grouping_fields": [
+                    "transaction.product.external_identifier",
+                    "transaction.customer_identifier.id"
+                  ],
+                  "type": "scalar"
+                },
+                "type": "aggregation"
+              },
+              {
+                "value": "1",
+                "datatype": "number",
+                "name": null,
+                "type": "constant"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

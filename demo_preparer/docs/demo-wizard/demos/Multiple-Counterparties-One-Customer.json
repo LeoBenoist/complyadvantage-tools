@@ -1,0 +1,75 @@
+[
+  {
+    "id": "multi_cp_one_cust_01",
+    "name": "Multiple Counterparties, One Customer - Distinct",
+    "description": "A customer transacts with more than 4 distinct counterparties within 30 days, each counterparty appearing exactly once.",
+    "industry": "Finance",
+    "tags": ["Network", "Counterparty", "Distinct"],
+    "data": {
+      "customers": [{ "comet_identifier": "multi_cp_one_cust_01" }],
+      "scenarios": [
+        {
+          "name": "Multiple Counterparties, One Customer - Distinct",
+          "specification": {
+            "value": {
+              "segments": [
+                {
+                  "name": "All customers",
+                  "values": { "6fc19e78-50fc-4fdd-a08d-c9897f5b716b": "3" },
+                  "outcome": { "action": "HOLD", "alert_priority": 6 }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "transactions": [
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "multi_cp_one_cust_01" } },
+              "creditor": { "identifier": { "external_identifier": "counterparty-mcoc-001", "type": "COUNTERPARTY" } }
+            },
+            "base_value": { "amount": 3400 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "multi_cp_one_cust_01" } },
+              "creditor": { "identifier": { "external_identifier": "counterparty-mcoc-002", "type": "COUNTERPARTY" } }
+            },
+            "base_value": { "amount": 2800 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "multi_cp_one_cust_01" } },
+              "creditor": { "identifier": { "external_identifier": "counterparty-mcoc-003", "type": "COUNTERPARTY" } }
+            },
+            "base_value": { "amount": 5100 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "multi_cp_one_cust_01" } },
+              "creditor": { "identifier": { "external_identifier": "counterparty-mcoc-004", "type": "COUNTERPARTY" } }
+            },
+            "base_value": { "amount": 1950 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "multi_cp_one_cust_01" } },
+              "creditor": { "identifier": { "external_identifier": "counterparty-mcoc-005", "type": "COUNTERPARTY" } }
+            },
+            "base_value": { "amount": 4200 }
+          }
+        }
+      ]
+    }
+  }
+]

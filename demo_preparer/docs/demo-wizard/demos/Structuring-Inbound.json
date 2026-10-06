@@ -1,0 +1,78 @@
+[
+  {
+    "id": "structuring_inbound_01",
+    "name": "Structuring - Inbound",
+    "description": "A customer receives more than 2 inbound transactions with amounts between 9,950 and 10,000 within 7 days, a classic structuring evasion pattern.",
+    "industry": "Finance",
+    "tags": ["Structuring", "Inbound", "Evasion"],
+    "data": {
+      "customers": [{ "comet_identifier": "structuring_inbound_01" }],
+      "scenarios": [
+        {
+          "name": "Structuring - Inbound",
+          "specification": {
+            "value": {
+              "segments": [
+                {
+                  "name": "All customers",
+                  "values": { "cfa26318-4050-40eb-b7ca-e8a3c7e57b29": "2" },
+                  "outcome": { "action": "HOLD", "alert_priority": 8 }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "transactions": [
+        {
+          "details": {
+            "details": {
+              "creditor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "structuring_inbound_01" } }
+            },
+            "base_value": { "amount": 9961 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "creditor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "structuring_inbound_01" } }
+            },
+            "base_value": { "amount": 9975 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "creditor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "structuring_inbound_01" } }
+            },
+            "base_value": { "amount": 9988 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "creditor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "structuring_inbound_01" } }
+            },
+            "base_value": { "amount": 9988 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "creditor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "structuring_inbound_01" } }
+            },
+            "base_value": { "amount": 9997 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "creditor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "structuring_inbound_01" } }
+            },
+            "base_value": { "amount": 9990 }
+          }
+        }
+      ]
+    }
+  }
+]

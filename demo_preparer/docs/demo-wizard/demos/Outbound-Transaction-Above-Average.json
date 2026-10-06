@@ -1,0 +1,96 @@
+[
+  {
+    "id": "outbound_tx_above_avg_01",
+    "name": "Outbound Transaction Above Average",
+    "description": "A customer makes an outbound transaction exceeding 5,000 that is more than 3× their historical average, given at least 5 prior transactions on record.",
+    "industry": "Finance",
+    "tags": ["Outbound", "Above Average", "Anomaly", "Transaction"],
+    "data": {
+      "customers": [{ "comet_identifier": "outbound_tx_above_avg_01" }],
+      "scenarios": [
+        {
+          "name": "Outbound Transaction Above Average",
+          "specification": {
+            "value": {
+              "segments": [
+                {
+                  "name": "All customers",
+                  "values": {
+                    "248c3342-69c8-44dc-b525-2a30b97687d3": "5000",
+                    "2fdc719d-9541-4c2c-b1a7-6a0d52b9f658": "5",
+                    "b31cac14-205f-454a-9524-56c6b9f1794f": "3"
+                  },
+                  "outcome": { "action": "HOLD", "alert_priority": 6 }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "transactions": [
+        {
+          "comet_occurred_at_offset": { "value": 60, "unit": "days" },
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "outbound_tx_above_avg_01" } }
+            },
+            "base_value": { "amount": 980 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 50, "unit": "days" },
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "outbound_tx_above_avg_01" } }
+            },
+            "base_value": { "amount": 1150 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 40, "unit": "days" },
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "outbound_tx_above_avg_01" } }
+            },
+            "base_value": { "amount": 870 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 30, "unit": "days" },
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "outbound_tx_above_avg_01" } }
+            },
+            "base_value": { "amount": 1200 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 20, "unit": "days" },
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "outbound_tx_above_avg_01" } }
+            },
+            "base_value": { "amount": 950 }
+          }
+        },
+        {
+          "comet_occurred_at_offset": { "value": 10, "unit": "days" },
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "outbound_tx_above_avg_01" } }
+            },
+            "base_value": { "amount": 1050 }
+          }
+        },
+        {
+          "details": {
+            "details": {
+              "debtor": { "identifier": { "type": "CUSTOMER", "comet_identifier": "outbound_tx_above_avg_01" } }
+            },
+            "base_value": { "amount": 6800 }
+          }
+        }
+      ]
+    }
+  }
+]
